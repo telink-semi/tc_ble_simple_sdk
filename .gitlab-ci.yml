@@ -137,39 +137,41 @@ fossid:
     - "./b80_ble_sdk"
     - "./README.md"
     - "./doc"
+    - "./telink_b80_ble_single_connection_sdk_v3.4.1.2_Patch"
+    - "./patch_note"
   when: manual
 
 release_sdk_S1:
   <<: *release_sdk_template
   variables:
-    PACK_NAME: "telink_b80_ble_single_connection_sdk_V3.4.1.2_Patch0001_S1"
+    PACK_NAME: "telink_b80_ble_single_connection_sdk_V3.4.1.2_patch_0001_S1"
 
 release_sdk_S2:
   <<: *release_sdk_template
   variables:
-    PACK_NAME: "telink_b80_ble_single_connection_sdk_V3.4.1.2_Patch0001_S2"
+    PACK_NAME: "telink_b80_ble_single_connection_sdk_V3.4.1.2_patch_0001_S2"
 
 release_sdk_S3:
   <<: *release_sdk_template
   variables:
-    PACK_NAME: "telink_b80_ble_single_connection_sdk_V3.4.1.2_Patch0001_S3"
+    PACK_NAME: "telink_b80_ble_single_connection_sdk_V3.4.1.2_patch_0001_S3"
 
 release_sdk_custom_made_S0:
   <<: *release_sdk_template
   variables:
-    PACK_NAME: "telink_b80_ble_single_connection_sdk_V3.4.1.2_Patch0001_custom_made_S0"
+    PACK_NAME: "telink_b80_ble_single_connection_sdk_V3.4.1.2_patch_0001_custom_made_S0"
 
 release_sdk_custom_made_S1:
   <<: *release_sdk_template
   variables:
-    PACK_NAME: "telink_b80_ble_single_connection_sdk_V3.4.1.2_Patch0001_custom_made_S1"
+    PACK_NAME: "telink_b80_ble_single_connection_sdk_V3.4.1.2_patch_0001_custom_made_S1"
 
 release_sdk_custom_made_S2:
   <<: *release_sdk_template
   variables:
-    PACK_NAME: "telink_b80_ble_single_connection_sdk_V3.4.1.2_Patch0001_custom_made_S2"
+    PACK_NAME: "telink_b80_ble_single_connection_sdk_V3.4.1.2_patch_0001_custom_made_S2"
 
 release_sdk_custom_made_S3:
   <<: *release_sdk_template
   variables:
-    PACK_NAME: "telink_b80_ble_single_connection_sdk_V3.4.1.2_Patch0001_custom_made_S3"
+    PACK_NAME: "telink_b80_ble_single_connection_sdk_V3.4.1.2_patch_0001_custom_made_S3"
