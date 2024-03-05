@@ -138,7 +138,7 @@ fossid:
     - "./README.md"
     - "./doc"
     - "./telink_b80_ble_single_connection_sdk_v3.4.1.2_Patch"
-    - "./patch_note"
+    - "./patch_note.md"
   when: manual
 
 release_sdk_S1:
