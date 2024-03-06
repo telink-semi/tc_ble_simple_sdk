@@ -1,5 +1,5 @@
 [release_sdk_S1]
-
+CI_FUNC             V1.0
 TAG_NAME            V3.4.1.2_Patch_0001
 PACKAGE_NAME        telink_b80_ble_single_connection_sdk_V3.4.1.2_Patch_0001_S1
 SRC_GIT_URL         http://192.168.48.36/src/ble/telink_b80_ble_single_connection_src.git
@@ -20,7 +20,7 @@ REPLACED_LIB_PATH   ./telink_b80_ble_single_connection_sdk_v3.4.1.2_Patch/patch_
 [release_sdk_S1_end]
 
 [release_sdk_S2]
-
+CI_FUNC             V1.0
 TAG_NAME            V3.4.1.2_Patch_0001
 PACKAGE_NAME        telink_b80_ble_single_connection_sdk_V3.4.1.2_Patch_0001_S2
 SRC_GIT_URL         http://192.168.48.36/src/ble/telink_b80_ble_single_connection_src.git
@@ -41,7 +41,7 @@ REPLACED_LIB_PATH   ./telink_b80_ble_single_connection_sdk_v3.4.1.2_Patch/patch_
 [release_sdk_S2_end]
 
 [release_sdk_S3]
-
+CI_FUNC             V1.0
 TAG_NAME            V3.4.1.2_Patch_0001
 PACKAGE_NAME        telink_b80_ble_single_connection_sdk_V3.4.1.2_Patch_0001_S3
 SRC_GIT_URL         http://192.168.48.36/src/ble/telink_b80_ble_single_connection_src.git
@@ -62,7 +62,7 @@ REPLACED_LIB_PATH   ./telink_b80_ble_single_connection_sdk_v3.4.1.2_Patch/patch_
 [release_sdk_S3_end]
 
 [release_sdk_custom_made_S0]
-
+CI_FUNC             V1.0
 TAG_NAME            V3.4.1.2_Patch_0001
 PACKAGE_NAME        telink_b80_ble_single_connection_sdk_V3.4.1.2_Patch_0001_custom_made_S0
 SRC_GIT_URL         http://192.168.48.36/src/ble/telink_b80_ble_single_connection_src.git
@@ -84,7 +84,7 @@ REPLACED_LIB_PATH   ./telink_b80_ble_single_connection_sdk_v3.4.1.2_Patch/patch_
 [release_sdk_custom_made_S0_end]
 
 [release_sdk_custom_made_S1]
-
+CI_FUNC             V1.0
 TAG_NAME            V3.4.1.2_Patch_0001
 PACKAGE_NAME        telink_b80_ble_single_connection_sdk_V3.4.1.2_Patch_0001_custom_made_S1
 SRC_GIT_URL         http://192.168.48.36/src/ble/telink_b80_ble_single_connection_src.git
@@ -106,7 +106,7 @@ REPLACED_LIB_PATH   ./telink_b80_ble_single_connection_sdk_v3.4.1.2_Patch/patch_
 [release_sdk_custom_made_S1_end]
 
 [release_sdk_custom_made_S2]
-
+CI_FUNC             V1.0
 TAG_NAME            V3.4.1.2_Patch_0001
 PACKAGE_NAME        telink_b80_ble_single_connection_sdk_V3.4.1.2_Patch_0001_custom_made_S2
 SRC_GIT_URL         http://192.168.48.36/src/ble/telink_b80_ble_single_connection_src.git
@@ -128,7 +128,7 @@ REPLACED_LIB_PATH   ./telink_b80_ble_single_connection_sdk_v3.4.1.2_Patch/patch_
 [release_sdk_custom_made_S2_end]
 
 [release_sdk_custom_made_S3]
-
+CI_FUNC             V1.0
 TAG_NAME            V3.4.1.2_Patch_0001
 PACKAGE_NAME        telink_b80_ble_single_connection_sdk_V3.4.1.2_Patch_0001_custom_made_S3
 SRC_GIT_URL         http://192.168.48.36/src/ble/telink_b80_ble_single_connection_src.git
