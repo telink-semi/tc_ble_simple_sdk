@@ -1,3 +1,25 @@
+## V3.4.1.2_Patch_0002
+
+### Features
+* N/A.
+
+### Bug Fixes
+* Fix an issue: SMP pairing may fail when the exchanged effective MTU size greater than default MTU size 23.
+
+### BREAKING CHANGES
+* N/A.
+
+
+### Features
+* N/A.
+
+### Bug Fixes
+* 修复: 当有效MTU值大于默认MTU值23时，可能导致SMP配对失败。
+
+### BREAKING CHANGES
+* N/A.
+
+
 ## V3.4.1.2_Patch_0001
 
 ### Features
