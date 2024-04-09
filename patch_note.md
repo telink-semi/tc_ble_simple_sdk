@@ -4,7 +4,7 @@
 * N/A.
 
 ### Bug Fixes
-* Fix an issue: SMP pairing may fail when the exchanged effective MTU size greater than default MTU size 23.
+* Fix an issue: ATT TX Buffer could overflow when the exchanged effective MTU size is greater than default MTU size 23.
 
 ### BREAKING CHANGES
 * N/A.
@@ -14,7 +14,7 @@
 * N/A.
 
 ### Bug Fixes
-* 修复: 当有效MTU值大于默认MTU值23时，可能导致SMP配对失败。
+* 修复: 当有效MTU值大于默认MTU值23时，ATT TX Buffer会溢出。
 
 ### BREAKING CHANGES
 * N/A.
