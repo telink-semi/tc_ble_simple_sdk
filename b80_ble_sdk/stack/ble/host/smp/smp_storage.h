@@ -1,10 +1,10 @@
 /********************************************************************************************************
- * @file     smp_storage.h
+ * @file    smp_storage.h
  *
- * @brief    This is the header file for BLE SDK
+ * @brief   This is the header file for BLE SDK
  *
- * @author	 BLE GROUP
- * @date         12,2021
+ * @author  BLE GROUP
+ * @date    12,2021
  *
  * @par     Copyright (c) 2021, Telink Semiconductor (Shanghai) Co., Ltd. ("TELINK")
  *
@@ -19,6 +19,7 @@
  *          WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  *          See the License for the specific language governing permissions and
  *          limitations under the License.
+ *
  *******************************************************************************************************/
 #ifndef SMP_STORAGE_H_
 #define SMP_STORAGE_H_
@@ -30,16 +31,18 @@
 
 
 
-
+/**
+ * @brief      data structure of index update method.
+ */
 typedef enum {
 	Index_Update_by_Pairing_Order = 0,     //default value
 	Index_Update_by_Connect_Order = 1,
 } index_updateMethod_t;
 
 
-/*
- * smp parameter need save to flash.
- * */
+/**
+ * @brief	smp parameter need save to flash.
+ */
 
 #define DEVICE_IDX_MASK				0x03
 
@@ -52,7 +55,10 @@ typedef union {
 }comb_flg_t;  //combine flag type
 
 
-typedef struct {  //82
+/**
+ * @brief      data structure of ACL slave role saving SMP parameter.
+ */
+typedef struct {
 	u8		flag;
 	u8		peer_addr_type;  //address used in link layer connection
 	u8		peer_addr[6];
@@ -68,28 +74,11 @@ typedef struct {  //82
 
 }smp_param_save_t;
 
-#if	LL_FEATURE_ENABLE_LL_PRIVACY
-/*
- * smp parameter need save to flash.
- * */
-typedef struct {  //82
-	u8 bond_mark;
-	u8 adr_type;
-	u8 address[6];
 
-	u8 rand[8];
-
-	u16 ediv;
-	u8 rsv[14];
-
-	u8 ltk[16];
-	u8 peer_irk[16];
-	u8 local_irk[16];
-}smp_master_param_save_t;
-#endif
 
 /**
  * @brief      This function is used to get the number of currently bound devices.
+ * 			   attention: only used for Peripheral(Slave)
  * @param[in]  none.
  * @return     The number of currently bound devices.
  */
@@ -98,14 +87,17 @@ u8			blc_smp_param_getCurrentBondingDeviceNumber(void);
 
 /**
  * @brief      This function is used to configure the bonding storage address.
+ * 			   attention: If this API is used, must be called before "blc smp_peripheral_init" when initialization !!!
+ * 			   attention: only used for Peripheral(Slave)
  * @param[in]  addr - SMP bonding storage start address.
  * @return     none.
  */
-void 		bls_smp_configpairingSecurityInfoStorageAddr (int addr);
+void 		bls_smp_configPairingSecurityInfoStorageAddr (int addr);
 
 
 /**
  * @brief      This function is used to obtain device binding information based on Index.
+ * 			   attention: only used for Peripheral(Slave)
  * @param[in]  index - Device bonding index number.
  * @param[out] smp_param_load - The value can refer to the structure 'smp_param_save_t'.
  * @return     0: Failed to load binding information;
@@ -116,6 +108,7 @@ u32 		bls_smp_param_loadByIndex(u8 index, smp_param_save_t* smp_param_load);
 
 /**
  * @brief      This function is used to obtain binding information according to the master address and address type.
+ * 		       attention: only used for Peripheral(Slave)
  * @param[in]  device_num - Set the maximum number of devices that can be bound.
  * @param[in]  adr_type - Address type.
  * @param[in]  addr - Address.
@@ -128,6 +121,7 @@ u32			bls_smp_param_loadByAddr(u8 addr_type, u8* addr, smp_param_save_t* smp_par
 
 /**
  * @brief      This function is used to configure the storage order of binding information.
+ *             attention: only used for Peripheral(Slave)
  * @param[in]  method - The storage order of binding info method value can refer to the structure 'index_updateMethod_t'.
  *                      0: Index update by pairing order;
  *                      1: Index update by connect order.
@@ -138,25 +132,16 @@ void		bls_smp_setIndexUpdateMethod(index_updateMethod_t method);
 
 /**
  * @brief      This function is used for the slave device to clear all binding information stored in the local FLASH.
+ *             attention: only used for Peripheral(Slave)
  * @param[in]  none.
  * @return     none.
  */
-void		bls_smp_eraseAllpairingInformation(void);
+void		bls_smp_eraseAllPairingInformation(void);
 
 
 
 
-#if (LL_FEATURE_ENABLE_LL_PRIVACY)
-/*
- *  Address resolution is not supported by default. After pairing and binding, we need to obtain the central Address Resolution
- *  feature value of the opposite end to determine whether the opposite end supports the address resolution function, and write
- *  the result to smp_bonding_flg. Currently, we leave it to the user to obtain this feature.
- */
-#define 	IS_PEER_ADDR_RES_SUPPORT(peerAddrResSuppFlg)	(!(peerAddrResSuppFlg & BIT(7)))
 
-int			blc_smp_setPeerAddrResSupportFlg(u32 flash_addr, u8 support);
-
-#endif
 
 
 #endif /* SMP_STORAGE_H_ */

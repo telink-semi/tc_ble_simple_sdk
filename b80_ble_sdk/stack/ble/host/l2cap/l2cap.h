@@ -1,10 +1,10 @@
 /********************************************************************************************************
- * @file     l2cap.h
+ * @file    l2cap.h
  *
- * @brief    This is the header file for BLE SDK
+ * @brief   This is the header file for BLE SDK
  *
- * @author	 BLE GROUP
- * @date         12,2021
+ * @author  BLE GROUP
+ * @date    12,2021
  *
  * @par     Copyright (c) 2021, Telink Semiconductor (Shanghai) Co., Ltd. ("TELINK")
  *
@@ -19,14 +19,17 @@
  *          WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  *          See the License for the specific language governing permissions and
  *          limitations under the License.
+ *
  *******************************************************************************************************/
-
 #ifndef _L2CAP_H
 #define _L2CAP_H
 
 
 
 
+/**
+ * @brief	Connection parameter update response
+ */
 typedef enum{
 	CONN_PARAM_UPDATE_ACCEPT = 0x0000,
 	CONN_PARAM_UPDATE_REJECT = 0x0001,
@@ -44,11 +47,11 @@ typedef int (*l2cap_handler_t) (u16 conn, u8 * p);
  * @param	timeout - connect timeout
  * @return	none.
  */
-void		bls_l2cap_requestConnParamUpdate (u16 min_interval, u16 max_interval, u16 latency, u16 timeout);  //Slave
+void		bls_l2cap_requestConnParamUpdate (u16 min_interval, u16 max_interval, u16 latency, u16 timeout);
 
 
 /**
- * @brief	This function is used to set the minimal time for send connect parameter update request after connect created
+ * @brief	This function is used to set the minimal time for sending connect parameter update request after connect being created
  * @param	time_ms - the unit is millisecond
  * @return	none.
  */
@@ -65,7 +68,7 @@ void        blc_l2cap_register_customize_handler(l2cap_handler_t p);
 
 /**
  * @brief	This function is used to register the function for handler L2CAP data
- * @param	*p - the pointer direct to blc_l2cap_handler
+ * @param	p - the pointer direct to blc_l2cap_handler
  * @return	none.
  */
 void		blc_l2cap_register_handler (void *p);
@@ -74,7 +77,7 @@ void		blc_l2cap_register_handler (void *p);
 /**
  * @brief	This function is used to handler L2CAP data
  * @param	connHandle - connection handle
- * @param	*p - the pointer of l2cap data
+ * @param	p - the pointer of l2cap data
  * @return	0
  */
 int 		blc_l2cap_packet_receive (u16 connHandle, u8 * p);
@@ -82,12 +85,10 @@ int 		blc_l2cap_packet_receive (u16 connHandle, u8 * p);
 
 /**
  * @brief	This function is used to register the function to process L2CAP SIG CHANNEL packet
- * @param	*p - the pointer of l2cap data
+ * @param	p - the pointer of l2cap data
  * @return	none.
  */
-void 		blc_l2cap_reg_att_sig_hander(void *p);//signaling pkt proc
-
-
+void 		blc_l2cap_reg_att_sig_handler(void *p);
 
 
 /**
@@ -96,8 +97,16 @@ void 		blc_l2cap_reg_att_sig_hander(void *p);//signaling pkt proc
  * @param[in]	l2cap_rx_size   - the size of of rx buffer
  * @return		none.
  */
-void blc_l2cap_initRxDataBuffer(u8 *pL2cap_rx_buff, u16 l2cap_rx_size);
+void 		blc_l2cap_initRxDataBuffer(u8 *pL2cap_rx_buff, u16 l2cap_rx_size);
+
+/**
+ * @brief	This function is used to send connect parameter update response
+ * @param	connHandle - connection handle
+ * @param	req_id - Request packet identifier
+ * @param	result - connect parameter update result
+ * @return	none.
+ */
+void  		blc_l2cap_SendConnParamUpdateResponse(u16 connHandle, u8 req_id, conn_para_up_rsp result);
 
 
 #endif
-//Master

@@ -1,10 +1,10 @@
 /********************************************************************************************************
- * @file     tl_common.h
+ * @file    tl_common.h
  *
- * @brief    This is the header file for BLE SDK
+ * @brief   This is the header file for BLE SDK
  *
- * @author	 BLE GROUP
- * @date         12,2021
+ * @author  BLE GROUP
+ * @date    12,2021
  *
  * @par     Copyright (c) 2021, Telink Semiconductor (Shanghai) Co., Ltd. ("TELINK")
  *
@@ -19,8 +19,8 @@
  *          WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  *          See the License for the specific language governing permissions and
  *          limitations under the License.
+ *
  *******************************************************************************************************/
-
 #pragma once
 
 
@@ -29,6 +29,7 @@
 #include "common/utility.h"
 #include "common/static_assert.h"
 #include "common/assert.h"
+#include "common/sdk_version.h"
 
 #include "vendor/common/user_config.h"
 #include "config.h"
@@ -36,4 +37,13 @@
 
 
 #include "vendor/common/app_common.h"
+#include "vendor/common/ble_flash.h"
+#include "vendor/common/blt_fw_sign.h"
+#include "vendor/common/blt_led.h"
+#include "vendor/common/blt_soft_timer.h"
+#include "vendor/common/flash_fw_check.h"
+#include "vendor/common/flash_prot.h"
+#include "vendor/common/simple_sdp.h"
+#include "vendor/common/custom_pair.h"
+
 #include "application/application.h"

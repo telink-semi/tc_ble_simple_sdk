@@ -1,10 +1,10 @@
 /********************************************************************************************************
- * @file     ll_slave.h
+ * @file    ll_slave.h
  *
- * @brief    This is the header file for BLE SDK
+ * @brief   This is the header file for BLE SDK
  *
- * @author	 BLE GROUP
- * @date         12,2021
+ * @author  BLE GROUP
+ * @date    12,2021
  *
  * @par     Copyright (c) 2021, Telink Semiconductor (Shanghai) Co., Ltd. ("TELINK")
  *
@@ -19,8 +19,8 @@
  *          WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  *          See the License for the specific language governing permissions and
  *          limitations under the License.
+ *
  *******************************************************************************************************/
-
 #ifndef LL_SLAVE_H_
 #define LL_SLAVE_H_
 
@@ -32,7 +32,7 @@
 
 
 /**
- * @brief      for user to initialize ACL connection slave role.
+ * @brief      for user to initialize ACL connection in slave role.
  * @param	   none
  * @return     none
  */
@@ -40,7 +40,7 @@ void 		blc_ll_initSlaveRole_module(void);
 
 
 /**
- * @brief      for user to terminate an existing connection slave role.
+ * @brief      for user to terminate an existing connection in slave role.
  * @param[in]  reason - indicates the reason for ending the connection
  * @return     status, 0x00:  succeed
  * 			           other: failed
@@ -49,7 +49,7 @@ ble_sts_t  	bls_ll_terminateConnection (u8 reason);
 
 
 /**
- * @brief      for user to read current slave connection  interval
+ * @brief      for user to read current slave connection interval
  * @param	   none
  * @return     0    :  LinkLayer not in connection state
  * 			   other:  connection interval, unit: 1.25mS
@@ -77,24 +77,28 @@ u16			bls_ll_getConnectionTimeout(void);
 
 
 
+
+
 /**
-* @brief      register to disable brx event for flash operation.
-* @param	   none
-* @return     maximum time of disable brx event
-*/
+ * @brief      register to disable brx event for flash operation.
+ * @param	   none
+ * @return     maximum time of disable brx event
+ */
 int			bls_ll_requestConnBrxEventDisable(void);
 
-/**
-* @brief      diasble brx event.
-* @param	   none
-* @return     none
-*/
-void		bls_ll_disableConnBrxEvent(void);
 
 /**
-* @brief      recover brx event.
-* @param	   none
-* @return     none
+ * @brief      disable brx event.
+ * @param	   none
+ * @return     none
+ */
+void		bls_ll_disableConnBrxEvent(void);
+
+
+/**
+ * @brief      recover brx event.
+ * @param	   none
+ * @return     none
  */
 void		bls_ll_restoreConnBrxEvent(void);
 

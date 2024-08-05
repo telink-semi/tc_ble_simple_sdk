@@ -1,10 +1,10 @@
 /********************************************************************************************************
- * @file     bit.h
+ * @file    bit.h
  *
- * @brief    This is the header file for BLE SDK
+ * @brief   This is the header file for BLE SDK
  *
- * @author	 BLE GROUP
- * @date         12,2021
+ * @author  BLE GROUP
+ * @date    12,2021
  *
  * @par     Copyright (c) 2021, Telink Semiconductor (Shanghai) Co., Ltd. ("TELINK")
  *
@@ -19,8 +19,8 @@
  *          WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  *          See the License for the specific language governing permissions and
  *          limitations under the License.
+ *
  *******************************************************************************************************/
-
 #pragma once
 
 
@@ -64,7 +64,7 @@
 #define BIT_FLIP(x, n)   		((x) ^= BIT(n))
 #define BIT_SET_HIGH(x) 		((x) |=  BIT((sizeof((x))*8-1)))				// set the highest bit
 #define BIT_CLR_HIGH(x) 		((x) &= ~ BIT((sizeof((x))*8-1)))				// clr the highest bit
-#define BIT_IS_SET_HIGH(x) 		((x) & BIT((sizeof((x))*8-1)))				// check the higest bit
+#define BIT_IS_SET_HIGH(x) 		((x) & BIT((sizeof((x))*8-1)))				// check the highest bit
 
 #define BIT_MASK_LEN(len)       (BIT(len)-1)
 #define BIT_MASK(start, len)    (BIT_MASK_LEN(len) << (start) )
@@ -88,7 +88,7 @@
 #define BIT_PROPAGATE_1(x) ((x) |= ((x)-1))
 #define BIT_ISOLATE_0(x)   ((x) = ~(x) & ((x)+1))
 #define BIT_TURNON_0(x)    ((x) |= ((x)+1))
-#define CLAMP_TO_ONE(x)    (!!(x))				// compiler defined, not stardard.    0 --> 0,   1 --> 0xffffffff
+#define CLAMP_TO_ONE(x)    (!!(x))				// compiler defined, not standard.    0 --> 0,   1 --> 0xffffffff
 
 #define ONES(x)				BIT_MASK_LEN(x)
 #define ONES_32				0xffffffff
@@ -147,7 +147,7 @@
 #define SET_FLD_V(...) 					VARARG(SET_FLD_V, __VA_ARGS__)
 
 
-// һ겻һʾֱӸֵ
+
 #define SET_FLD_FULL_V3(x, m, v)											((x) = MASK_VAL2(m,v))
 #define SET_FLD_FULL_V5(x, m1, v1, m2, v2)  								((x) = MASK_VAL4(m1,v1,m2,v2))
 #define SET_FLD_FULL_V7(x, m1, v1, m2, v2, m3, v3)  						((x) = MASK_VAL6(m1,v1,m2,v2,m3,v3))

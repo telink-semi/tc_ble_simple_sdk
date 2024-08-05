@@ -1,10 +1,10 @@
 /********************************************************************************************************
- * @file     blt_soft_timer.c
+ * @file    blt_soft_timer.c
  *
- * @brief    This is the source file for BLE SDK
+ * @brief   This is the source file for BLE SDK
  *
- * @author	 BLE GROUP
- * @date         12,2021
+ * @author  BLE GROUP
+ * @date    12,2021
  *
  * @par     Copyright (c) 2021, Telink Semiconductor (Shanghai) Co., Ltd. ("TELINK")
  *
@@ -19,20 +19,23 @@
  *          WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  *          See the License for the specific language governing permissions and
  *          limitations under the License.
+ *
  *******************************************************************************************************/
-
-#include "tl_common.h"
-#include "drivers.h"
 #include "stack/ble/ble.h"
+#include "tl_common.h"
 #include "blt_soft_timer.h"
 
+
+
+#include "vendor/common/user_config.h"
 
 #if (BLT_SOFTWARE_TIMER_ENABLE)
 
 
 
 
-blt_soft_timer_t	blt_timer;
+_attribute_data_retention_	blt_soft_timer_t	blt_timer;
+
 
 /**
  * @brief		This function is used to Sort the timers according
@@ -44,7 +47,6 @@ blt_soft_timer_t	blt_timer;
 int  blt_soft_timer_sort(void)
 {
 	if(blt_timer.currentNum < 1 || blt_timer.currentNum > MAX_TIMER_NUM){
-		write_reg32(0x8000, 0x11111120); while(1); //debug ERR
 		return 0;
 	}
 	else{
@@ -69,6 +71,8 @@ int  blt_soft_timer_sort(void)
 
 	return 1;
 }
+
+
 
 /**
  * @brief		This function is used to add new software timer task
@@ -106,12 +110,12 @@ int blt_soft_timer_add(blt_timer_callback_t func, u32 interval_us)
  * 				and there is no need to reorder
  * @param[in]	index - the index for some software timer task
  * @return      0 - delete fail
- * 				other - delete successfully
+ * 				1 - delete successfully
  */
-void  blt_soft_timer_delete_by_index(u8 index)
+int  blt_soft_timer_delete_by_index(u8 index)
 {
 	if(index >= blt_timer.currentNum){
-		return;
+		return 0;
 	}
 
 
@@ -120,6 +124,8 @@ void  blt_soft_timer_delete_by_index(u8 index)
 	}
 
 	blt_timer.currentNum --;
+
+	return 1;
 }
 
 /**
@@ -134,17 +140,21 @@ int 	blt_soft_timer_delete(blt_timer_callback_t func)
 
 	for(int i=0; i<blt_timer.currentNum; i++){
 		if(blt_timer.timer[i].cb == func){
+
 			blt_soft_timer_delete_by_index(i);
 
-			if(i == 0){  //when delete the latest soft timer, need to update time
-
-				if( (u32)(blt_timer.timer[0].t - clock_time()) < 3000 *  SYSTEM_TIMER_TICK_1MS){
-					bls_pm_setAppWakeupLowPower(blt_timer.timer[0].t,  1);
+			if(blt_timer.currentNum){ //at least one timer exist
+				if(i == 0){  //The most recent timer is deleted, and the time needs to be updated
+					if( (u32)(blt_timer.timer[0].t - clock_time()) < 5000 *  SYSTEM_TIMER_TICK_1MS){
+						bls_pm_setAppWakeupLowPower(blt_timer.timer[0].t,  1);
+					}
+					else{
+						bls_pm_setAppWakeupLowPower(0, 0);  //disable
+					}
 				}
-				else{
-					bls_pm_setAppWakeupLowPower(0, 0);  //disable
-				}
-
+			}
+			else{
+				bls_pm_setAppWakeupLowPower(0, 0);  //disable
 			}
 
 			return 1;
@@ -153,6 +163,7 @@ int 	blt_soft_timer_delete(blt_timer_callback_t func)
 
 	return 0;
 }
+
 
 /**
  * @brief		This function is used to manage software timer tasks

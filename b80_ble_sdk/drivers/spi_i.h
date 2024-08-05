@@ -1,13 +1,12 @@
 /********************************************************************************************************
- * @file	spi_i.h
+ * @file    spi_i.h
  *
- * @brief	This is the header file for B80
+ * @brief   This is the header file for B80
  *
- * @author	Driver Group
- * @date	2021
+ * @author  Driver Group
+ * @date    2021
  *
  * @par     Copyright (c) 2021, Telink Semiconductor (Shanghai) Co., Ltd. ("TELINK")
- *          All rights reserved.
  *
  *          Licensed under the Apache License, Version 2.0 (the "License");
  *          you may not use this file except in compliance with the License.
@@ -22,6 +21,9 @@
  *          limitations under the License.
  *
  *******************************************************************************************************/
+#ifndef __SPI_I_H__
+#define __SPI_I_H__
+
 #include "register.h"
 
  /**
@@ -90,7 +92,7 @@ _attribute_ram_code_sec_ static inline unsigned char mspi_read(void){
 	return mspi_get();
 }
 
-
+#endif
 
 
 

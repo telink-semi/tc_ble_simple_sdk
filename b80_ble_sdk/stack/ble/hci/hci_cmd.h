@@ -1,10 +1,10 @@
 /********************************************************************************************************
- * @file     hci_cmd.h
+ * @file    hci_cmd.h
  *
- * @brief    This is the header file for BLE SDK
+ * @brief   This is the header file for BLE SDK
  *
- * @author	 BLE GROUP
- * @date         12,2021
+ * @author  BLE GROUP
+ * @date    12,2021
  *
  * @par     Copyright (c) 2021, Telink Semiconductor (Shanghai) Co., Ltd. ("TELINK")
  *
@@ -19,8 +19,8 @@
  *          WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  *          See the License for the specific language governing permissions and
  *          limitations under the License.
+ *
  *******************************************************************************************************/
-
 #ifndef HCI_CMD_H_
 #define HCI_CMD_H_
 
@@ -28,6 +28,16 @@
 #include "stack/ble/ble_format.h"
 
 
+/**
+ *  @brief  Bluetooth Core Specification version
+ */
+typedef enum{
+	BLUETOOTH_CORE_4_2			=	0x08,
+	BLUETOOTH_CORE_5_0			=	0x09,
+	BLUETOOTH_CORE_5_1			=	0x0A,
+	BLUETOOTH_CORE_5_2			=	0x0B,
+	BLUETOOTH_CORE_5_3			=	0x0C,
+}core_version_t;
 
 
 /**
@@ -38,6 +48,29 @@ typedef struct {
 	u8	reason;
 } hci_disconnect_cmdParam_t;
 
+/**
+ *  @brief  Return Parameters for "7.3.93 Read Authenticated Payload Timeout command"
+ */
+typedef struct{
+	u8		status;
+	u16		connHandle;
+	u16		auth_pdu_timeout;
+} hci_readAuthPduTimeout_retParam_t;
+
+/**
+ *  @brief  Command & Return Parameters for "7.3.94 HCI write authenticated payload timeout"
+ */
+typedef struct
+{
+	u16 connHandle; //The actual usage is 12bit
+	u16 timeout;   // unit: 10ms
+} hci_writeAuthPayloadTimeout_cmdParam_t;
+
+typedef struct
+{
+	u8 status;
+	u16 connHandle; //The actual usage is 12bit
+} hci_writeAuthPayloadTimeout_retParam_t;
 
 /**
  *  @brief  Return Parameters for "7.4.3 Read Local Supported Features command"
@@ -196,8 +229,8 @@ typedef enum {
 } scan_type_t;
 
 
-/* Scannning_Interval, Time = N * 0.625 ms,
- * Notice that these are just part of but not all Scannning_Interval value */
+/* Scanning_Interval, Time = N * 0.625 ms,
+ * Notice that these are just part of but not all Scanning_Interval value */
 typedef enum{
 	SCAN_INTERVAL_10MS              =            16,
 	SCAN_INTERVAL_20MS              =            32,
@@ -224,8 +257,8 @@ typedef enum{
 	SCAN_INTERVAL_1000MS            =            1600,
 }scan_inter_t;
 
-/* Scannning_Window, Time = N * 0.625 ms,
- * Notice that these are just part of but not all Scannning_Window value */
+/* Scanning_Window, Time = N * 0.625 ms,
+ * Notice that these are just part of but not all Scanning_Window value */
 typedef enum{
 	SCAN_WINDOW_10MS                =            16,
 	SCAN_WINDOW_20MS                =            32,
@@ -257,7 +290,7 @@ typedef enum {
 	SCAN_FP_ALLOW_ADV_ANY						=		0x00,  //except direct adv address not match
 	SCAN_FP_ALLOW_ADV_WL        				=		0x01,  //except direct adv address not match
 	SCAN_FP_ALLOW_UNDIRECT_ADV      			=		0x02,  //and direct adv address match initiator's resolvable private MAC
-	SCAN_FP_ALLOW_ADV_WL_DIRECT_ADV_MACTH		=		0x03,  //and direct adv address match initiator's resolvable private MAC
+	SCAN_FP_ALLOW_ADV_WL_DIRECT_ADV_MATCH		=		0x03,  //and direct adv address match initiator's resolvable private MAC
 
 } scan_fp_type_t;
 
@@ -606,7 +639,7 @@ typedef enum {
 	DATA_OPER_FIRST      	=	0x01,
 	DATA_OPER_LAST       	=	0x02,
 	DATA_OPER_COMPLETE   	=	0x03,
-	DATA_OPER_UNCHANGEED	=  	0x04,
+	DATA_OPER_UNCHANGED	=  	0x04,
 } data_oper_t;
 
 
@@ -1245,7 +1278,7 @@ typedef struct
 	u8   codec_id_assignNum;
 	u16  codec_id_compId;
 	u16  codec_id_venderDef;
-	u8   contro_delay[3];
+	u8   control_delay[3];
 	u8   codec_config_len;
 	u8	 codec_config[19]; /* Max buffer length 19Byte */
 }hci_le_setupIsoDataPathCmdParams_t;
@@ -1271,7 +1304,7 @@ typedef enum {
 /* Data_Path_ID */
 typedef enum {
 	Data_Path_HCI	 	= 0x00,
-	//x01 to 0xFE: Logical_Channel_Number. The meaning of the logical channel is vendorspecific.
+	//x01 to 0xFE: Logical_Channel_Number. The meaning of the logical channel is vendor specific.
 } dat_path_id_t;
 
 /**
@@ -1357,5 +1390,48 @@ typedef enum{
     PHY_TRX_NO_PREFER = (BIT(0) | BIT(1)), //has no preference among TX & RX PHYs
 } le_phy_prefer_mask_t;
 
+/**
+ *  @brief  Return Parameters for "7.8.74 LE Read Transmit Power command"
+ */
+typedef struct
+{
+    u8      status;
+    s8      minTxPwrLvl;
+    s8      maxTxPwrLvl;
+}hci_le_rdSuppTxPwrRetParams_t;
+
+/**
+ *  @brief  Return Parameters for "7.8.75 LE Read RF Path Compensation command"
+ */
+typedef struct __attribute__((packed))
+{
+    u8      status;
+    s16     txPathComp;
+    s16     rxPathComp;
+}hci_le_rdRfPathCompRetParams_t;
+
+/**
+ * @brief Command Parameters for "7.8.76 LE Write RF Path Compensation command"
+ */
+typedef struct
+{
+    s16     txPathComp;
+    s16     rxPathComp;
+}hci_le_writeRfPathCompCmdParams_t;
+
+typedef struct __attribute__((packed))
+{
+	u8 		status;
+	u16 	connHandle;
+	s8 		rssi;
+}hci_readRssi_retParam_t;
+
+/**
+ * @brief Command & Return Parameters for "7.5.4 Read RSSI command"
+ */
+typedef struct
+{
+	u16 	connHandle;
+}hci_readRssi_cmdParam_t;
 
 #endif /* HCI_CMD_H_ */

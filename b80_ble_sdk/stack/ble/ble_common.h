@@ -1,10 +1,10 @@
 /********************************************************************************************************
- * @file     ble_common.h
+ * @file    ble_common.h
  *
- * @brief    This is the header file for BLE SDK
+ * @brief   This is the header file for BLE SDK
  *
- * @author	 BLE GROUP
- * @date         12,2021
+ * @author  BLE GROUP
+ * @date    12,2021
  *
  * @par     Copyright (c) 2021, Telink Semiconductor (Shanghai) Co., Ltd. ("TELINK")
  *
@@ -19,8 +19,8 @@
  *          WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  *          See the License for the specific language governing permissions and
  *          limitations under the License.
+ *
  *******************************************************************************************************/
-
 #ifndef BLE_COMMON_H
 #define BLE_COMMON_H
 
@@ -31,7 +31,7 @@
 typedef enum {
     BLE_SUCCESS = 0,
 
-//// HCI Status, See the Core_v5.0(Vol 2/Part D/1.3 "list of Error Codes") for more information)
+//// HCI Status, refer to BLE Core Specification: Vol 1, Part F, "1.3 LIST OF ERROR CODES" for more information.
     HCI_ERR_UNKNOWN_HCI_CMD                                        = 0x01,
     HCI_ERR_UNKNOWN_CONN_ID                                        = 0x02,
     HCI_ERR_HW_FAILURE                                             = 0x03,
@@ -139,7 +139,7 @@ typedef enum {
 	//GATT status
 	GATT_ERR_INVALID_PARAMETER 									   = 0xB0,
 	GATT_ERR_PREVIOUS_INDICATE_DATA_HAS_NOT_CONFIRMED,
-	GATT_ERR_SERVICE_DISCOVERY_TIEMOUT,
+	GATT_ERR_SERVICE_DISCOVERY_TIMEOUT,
 	GATT_ERR_NOTIFY_INDICATION_NOT_PERMITTED,
 	GATT_ERR_DATA_PENDING_DUE_TO_SERVICE_DISCOVERY_BUSY,
 	GATT_ERR_DATA_LENGTH_EXCEED_MTU_SIZE,
@@ -163,6 +163,62 @@ typedef enum {
 
 } ble_sts_t;
 
+/**
+ *  @brief  error code for user initialization error
+ */
+typedef enum {
+    INIT_SUCCESS = 0,
+
+	////////////////////////// Controller //////////////////////////////
+
+    INIT_ERR_LL_ACL_RX_BUF_NO_INIT 						 = 0x1000,
+    INIT_ERR_LL_ACL_RX_BUF_PARAM_INVALID,
+    INIT_ERR_LL_ACL_RX_BUF_SIZE_NOT_MEET_MAX_RX_OCT,
+    INIT_ERR_LL_ACL_TX_BUF_NO_INIT,
+    INIT_ERR_LL_ACL_TX_BUF_PARAM_INVALID,
+    INIT_ERR_LL_ACL_TX_BUF_SIZE_NOT_MEET_MAX_TX_OCT,
+
+
+
+
+	///////////////////////////// Host ///////////////////////////////
+
+	////////////// GAP /////////////
+    INIT_ERR_GAP_PARAM_INVALID				= 0x2000,
+
+	//
+	////////////// L2CAP /////////////
+    INIT_ERR_L2CAP_PARAM_INVALID			= 0x2100,
+
+
+	////////////// ATT /////////////
+    INIT_ERR_ATT_PARAM_INVALID				= 0x2200,
+	INIT_ERR_ATT_MTU_SIZE_INVALID,
+	/* MTU buffer is not enough for MTU size, user need register new buffer with API "blc l2cap_initMtuBuffer" */
+	INIT_ERR_ATT_MTU_BUFF_NOT_MATCH_MTU_SIZE,
+
+
+
+
+
+
+	////////////// GATT /////////////
+    INIT_ERR_GATT_PARAM_INVALID				 = 0x2300,
+
+
+
+	////////////// SMP /////////////
+    INIT_ERR_SMP_PARAM_INVALID				 = 0x2400,
+	/* user set bonding maximum number exceed stack design limitation. If default maximum number can not meet user's requirement,
+	 * they should contact Telink for support */
+	INIT_ERR_SMP_BONDING_MAX_NUMBER_EXCEED,
+	INIT_ERR_SMP_MTU_SIZE_NOT_MATCH_SC,						 //MTU should equal to or greater than 65 for secure connection
+
+
+	////////////////// Service/Profile /////////////////////
+
+
+} init_err_t;
 
 
 
@@ -238,8 +294,48 @@ typedef enum {
 #define		MAC_MATCH16(md,ms)	(md[0]==ms[0] && md[1]==ms[1] && md[2]==ms[2])
 #define		MAC_MATCH32(md,ms)	(md[0]==ms[0] && md[1]==ms[1])
 
+/******************************************** L2CAP ***************************************************************/
+/**
+ *  @brief  Definition for L2CAP CID name space for the LE-U
+ */
+typedef enum{
+	L2CAP_CID_NULL				= 0x0000,
+	L2CAP_CID_ATTR_PROTOCOL		= 0x0004,
+	L2CAP_CID_SIG_CHANNEL		= 0x0005,
+	L2CAP_CID_SMP				= 0x0006,
+}l2cap_cid_type;
 
-
+/**
+ *  @brief  Definition for L2CAP signal packet formats
+ */
+typedef enum{
+	L2CAP_COMMAND_REJECT_RSP           		= 0x01,
+	L2CAP_CONNECTION_REQ                 	= 0x02,
+	L2CAP_CONNECTION_RSP                 	= 0x03,
+	L2CAP_CONFIGURATION_REQ                	= 0x04,
+	L2CAP_CONFIGURATION_RSP           		= 0x05,
+	L2CAP_DISCONNECTION_REQ           		= 0x06,
+	L2CAP_DISCONNECTION_RSP           		= 0x07,
+	L2CAP_ECHO_REQ          		 		= 0x08,
+	L2CAP_ECHO_RSP           				= 0x09,
+	L2CAP_INFORMATION_REQ           		= 0x0A,
+	L2CAP_INFORMATION_RSP           		= 0x0B,
+	L2CAP_CREATE_CHANNEL_REQ          		= 0x0C,
+	L2CAP_CREATE_CHANNEL_RSP           		= 0x0D,
+	L2CAP_MOVE_CHANNEL_REQ           		= 0x0E,
+	L2CAP_MOVE_CHANNEL_RSP           		= 0x0F,
+	L2CAP_MOVE_CHANNEL_CONFIRMATION_REQ		= 0x10,
+	L2CAP_MOVE_CHANNEL_CONFIRMATION_RSP     = 0x11,
+	L2CAP_CONNECTION_PARAMETER_UPDATE_REQ	= 0x12,		L2CAP_CMD_CONN_UPD_PARA_REQ		= 0x12,
+	L2CAP_CONNECTION_PARAMETER_UPDATE_RSP	= 0x13,		L2CAP_CMD_CONN_UPD_PARA_RESP 	= 0x13,
+	L2CAP_LE_CREDIT_BASED_CONNECTION_REQ 	= 0x14,
+	L2CAP_LE_CREDIT_BASED_CONNECTION_RSP 	= 0x15,
+	L2CAP_FLOW_CONTROL_CREDIT_IND 			= 0x16,
+	L2CAP_CREDIT_BASED_CONNECTION_REQ 		= 0x17,	//core_5.2
+	L2CAP_CREDIT_BASED_CONNECTION_RSP 		= 0x18,	//core_5.2
+	L2CAP_CREDIT_BASED_RECONFIGURE_REQ 		= 0x19,	//core_5.2
+	L2CAP_CREDIT_BASED_RECONFIGURE_RSP 		= 0x1A,	//core_5.2
+}l2cap_sig_pkt_format;
 
 /******************************************** ATT ***************************************************************/
 /**
@@ -291,7 +387,7 @@ typedef enum{
 
 typedef enum {
 	DT_FLAGS								= 0x01,		//	Flag
-	DT_INCOMPLT_LIST_16BIT_SERVICE_UUID		= 0x02,		//	Incomplete List of 16-bit Service Class UUIDs
+	DT_INCOMPLETE_LIST_16BIT_SERVICE_UUID		= 0x02,		//	Incomplete List of 16-bit Service Class UUIDs
 	DT_COMPLETE_LIST_16BIT_SERVICE_UUID	    = 0x03,		//	Complete List of 16-bit Service Class UUIDs
 	DT_INCOMPLT_LIST_32BIT_SERVICE_UUID    	= 0x04,		//	Incomplete List of 32-bit Service Class UUIDs
 	DT_COMPLETE_LIST_32BIT_SERVICE_UUID		= 0x05,		//	Complete List of 32-bit Service Class UUIDs

@@ -1,13 +1,12 @@
 /********************************************************************************************************
- * @file	spi.c
+ * @file    spi.c
  *
- * @brief	This is the source file for B80
+ * @brief   This is the source file for B80
  *
- * @author	Driver Group
- * @date	2021
+ * @author  Driver Group
+ * @date    2021
  *
  * @par     Copyright (c) 2021, Telink Semiconductor (Shanghai) Co., Ltd. ("TELINK")
- *          All rights reserved.
  *
  *          Licensed under the Apache License, Version 2.0 (the "License");
  *          you may not use this file except in compliance with the License.
@@ -498,8 +497,6 @@ void spi_master_write_dma( unsigned char *data, unsigned int data_len)
     reg_dma9_addrl =  (unsigned char)((unsigned int)data);
     reg_dma9_size = 0xff;
 
-    reg_dma_rdy0_h	 |= FLD_DMA_READY_9;
-
 	spi_tx_cnt(data_len);
 	spi_tx_dma_en();
 	spi_set_transmode(SPI_MODE_WRITE_ONLY);
@@ -524,7 +521,6 @@ void spi_master_write_read_dma( unsigned char *tx_data, unsigned int tx_len, uns
 	reg_dma9_addrl =  (unsigned char)((unsigned int)tx_data);
 	reg_dma9_size = 0xff;
 
-	reg_dma_rdy0_h	 |= FLD_DMA_READY_9;
 	spi_tx_cnt(tx_len);
 	spi_tx_dma_en();
 
@@ -540,6 +536,36 @@ void spi_master_write_read_dma( unsigned char *tx_data, unsigned int tx_len, uns
 	spi_master_set_cmd(0x00);
 }
 
+/**
+ * @brief     	This function serves to write and read data simultaneously by dma.
+ * @param[in] 	tx_data     - the pointer to the data for write.
+ * @param[in] 	rx_data 	- the pointer to the data for read.
+ * @param[in] 	len 	    - data length.
+ * @return  	none
+ */
+void spi_master_write_read_dma_full_duplex(unsigned char* tx_data,unsigned char* rx_data,unsigned int len)
+{
+	spi_rx_fifo_clr();
+	spi_tx_fifo_clr();
+	/*dma tx*/
+	reg_dma9_addrhh = (unsigned char)((unsigned int)tx_data>>16);
+	reg_dma9_addrh  = (unsigned char)((unsigned int)tx_data>>8);
+	reg_dma9_addrl =  (unsigned char)((unsigned int)tx_data);
+	reg_dma9_size = 0xff;
+	spi_tx_cnt(len);
+	spi_tx_dma_en();
+
+	/*dma   rx*/
+	reg_dma8_addrhh = (unsigned char)((unsigned int)rx_data>>16);
+	reg_dma8_addrh  = (unsigned char)((unsigned int)rx_data>>8);
+	reg_dma8_addrl =  (unsigned char)((unsigned int)rx_data);
+	reg_dma8_mode=FLD_DMA_WR_MEM;
+
+	spi_rx_cnt(len);
+	spi_rx_dma_en();
+	spi_set_transmode(SPI_MODE_WRITE_AND_READ);
+	spi_master_set_cmd(0x00);
+}
 
 /**
  * @brief      	This function serves to single/dual/quad  write to the SPI slave by dma.
@@ -558,7 +584,6 @@ void spi_master_write_dma_plus( unsigned char cmd, unsigned int addr, unsigned c
     reg_dma9_addrl =  (unsigned char)((unsigned int)data);
 
     reg_dma9_size = 0xff;
-    reg_dma_rdy0_h |= FLD_DMA_READY_9;
     if(addr)
   	{
   		spi_set_address(addr);

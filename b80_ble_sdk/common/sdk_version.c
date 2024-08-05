@@ -1,13 +1,12 @@
 /********************************************************************************************************
- * @file	sdk_version.c
+ * @file    sdk_version.c
  *
- * @brief	This is the header file for BLE SDK
+ * @brief   This is the header file for BLE SDK
  *
- * @author	BLE GROUP
- * @date	2022
+ * @author  BLE GROUP
+ * @date    2022
  *
  * @par     Copyright (c) 2022, Telink Semiconductor (Shanghai) Co., Ltd. ("TELINK")
- *          All rights reserved.
  *
  *          Licensed under the Apache License, Version 2.0 (the "License");
  *          you may not use this file except in compliance with the License.
@@ -30,4 +29,10 @@
  */
 volatile __attribute__((section(".sdk_version"))) unsigned char sdk_version[] = {SDK_VERSION(SDK_VERSION_NUM)};
 
+#if(PATCH_NUM)
+volatile __attribute__((section(".sdk_version"))) unsigned char patch_version[] = {PATCH_VERSION(PATCH_NUM)};
+#endif
 
+#if(CUSTOM_MAJOR_VERSION||CUSTOM_MINOR_VERSION)
+volatile __attribute__((section(".sdk_version"))) unsigned char custom_version[] = {CUSTOM_VERSION(CUSTOM_VERSION_NUM)};
+#endif

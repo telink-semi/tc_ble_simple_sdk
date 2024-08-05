@@ -1,10 +1,10 @@
 /********************************************************************************************************
- * @file     utility.h
+ * @file    utility.h
  *
- * @brief    This is the header file for BLE SDK
+ * @brief   This is the header file for BLE SDK
  *
- * @author	 BLE GROUP
- * @date         12,2021
+ * @author  BLE GROUP
+ * @date    12,2021
  *
  * @par     Copyright (c) 2021, Telink Semiconductor (Shanghai) Co., Ltd. ("TELINK")
  *
@@ -19,8 +19,8 @@
  *          WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  *          See the License for the specific language governing permissions and
  *          limitations under the License.
+ *
  *******************************************************************************************************/
-
 #pragma once
 #include "types.h"
 
@@ -37,6 +37,10 @@
 
 #ifndef min3
 #define min3(a,b,c)	min2(min2(a, b), c)
+#endif
+
+#ifndef max
+#define max(a,b)	((a) > (b) ? (a): (b))
 #endif
 
 #ifndef max2
@@ -85,6 +89,12 @@
 
 #define IS_POWER_OF_2(x)		(!(x & (x-1)))
 #define IS_LITTLE_ENDIAN 		(*(unsigned short*)"\0\xff" > 0x100) 
+#define IS_4BYTE_ALIGN(x) 		(!(x & 3))
+#define IS_16BYTE_ALIGN(x) 		(!(x & 15))
+
+#define	DATA_LENGTH_ALIGN4(n)	(((n) + 3) / 4 * 4)
+#define	DATA_LENGTH_ALIGN16(n)	(((n) + 15) / 16 * 16)
+
 
 #define IMPLIES(x, y) 			(!(x) || (y))
 
@@ -98,7 +108,7 @@
 
 #define foreach(i, n) 			for(int i = 0; i < (n); ++i)
 #define foreach_range(i, s, e) 	for(int i = (s); i < (e); ++i)
-#define foreach_arr(i, arr) 	for(int i = 0; i < ARRAY_SIZE(arr); ++i)
+#define foreach_arr(i, arr) 	for(unsigned int i = 0; i < ARRAY_SIZE(arr); ++i)
 
 #define ARRAY_SIZE(a) 			(sizeof(a) / sizeof(*a))
 
@@ -113,6 +123,34 @@
 #define U32_BYTE3(a) (((a) >> 24) & 0xFF)
 
 
+#define U16_TO_BYTES(n)			((u8) (n)), ((u8)((n) >> 8))
+#define U24_TO_BYTES(n)			((u8) (n)),	((u8)((n) >> 8)), ((u8)((n) >> 16))
+#define U32_TO_BYTES(n)			((u8) (n)),	((u8)((n) >> 8)), ((u8)((n) >> 16)), ((u8)((n) >> 24))
+
+#define BYTE_TO_UINT16(n, p)	{n = ((u16)(p)[0] + ((u16)(p)[1]<<8));}
+#define BYTE_TO_UINT24(n, p)	{n = ((u32)(p)[0] + ((u32)(p)[1]<<8) + \
+									((u32)(p)[2]<<16));}
+#define BYTE_TO_UINT32(n, p)	{n = ((u32)(p)[0] + ((u32)(p)[1]<<8) + \
+									((u32)(p)[2]<<16) + ((u32)(p)[3]<<24));}
+
+#define STREAM_TO_U8(n, p)		{n = *(p); p++;}
+#define STREAM_TO_U16(n, p)		{BYTE_TO_UINT16(n,p); p+=2;}
+#define STREAM_TO_U24(n, p)		{BYTE_TO_UINT24(n,p); p+=3;}
+#define STREAM_TO_U32(n, p)		{BYTE_TO_UINT32(n,p); p+=4;}
+#define STREAM_TO_STR(n, p, l)	{memcpy(n, p, l); p+=l;}
+
+#define U8_TO_STREAM(p, n)		{*(p)++ = (u8)(n);}
+#define U16_TO_STREAM(p, n)		{*(p)++ = (u8)(n); *(p)++ = (u8)((n)>>8);}
+#define U24_TO_STREAM(p, n)		{*(p)++ = (u8)(n); *(p)++ = (u8)((n)>>8); \
+								*(p)++ = (u8)((n)>>16);}
+#define U32_TO_STREAM(p, n)		{*(p)++ = (u8)(n); *(p)++ = (u8)((n)>>8); \
+								*(p)++ = (u8)((n)>>16); *(p)++ = (u8)((n)>>24);}
+#define U40_TO_STREAM(p, n)		{*(p)++ = (u8)(n); *(p)++ = (u8)((n)>>8); \
+								*(p)++ = (u8)((n)>>16); *(p)++ = (u8)((n)>>24); \
+								*(p)++ = (u8)((n)>>32);}
+
+#define STR_TO_STREAM(p, n, l)	{memcpy(p, n, l); p+=l;}
+
 
 void swapN (unsigned char *p, int n);
 void swapX(const u8 *src, u8 *dst, int len);
@@ -125,7 +163,7 @@ void swap64(u8 dst[8], const u8 src[8]);
 void swap128(u8 dst[16], const u8 src[16]);
 
 
-typedef	struct {
+typedef	struct __attribute__((aligned(4))){
 	u32		size;
 	u16		num;
 	u8		wptr;
@@ -171,5 +209,5 @@ static inline u64 mul64_32x32(u32 u, u32 v)
 
 
 #define		MYFIFO_INIT(name,size,n)		u8 name##_b[(size) * (n)]={0};my_fifo_t name = {size,n,0,0, name##_b}
-#define		ATT_ALLIGN4_DMA_BUFF(n)			(((n + 10) + 3) / 4 * 4)
+#define		ATT_ALIGN4_DMA_BUFF(n)			(((n + 10) + 3) / 4 * 4)
 

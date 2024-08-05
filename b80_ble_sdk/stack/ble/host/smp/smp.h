@@ -1,10 +1,10 @@
 /********************************************************************************************************
- * @file     smp.h
+ * @file    smp.h
  *
- * @brief    This is the header file for BLE SDK
+ * @brief   This is the header file for BLE SDK
  *
- * @author	 BLE GROUP
- * @date         12,2021
+ * @author  BLE GROUP
+ * @date    12,2021
  *
  * @par     Copyright (c) 2021, Telink Semiconductor (Shanghai) Co., Ltd. ("TELINK")
  *
@@ -19,27 +19,26 @@
  *          WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  *          See the License for the specific language governing permissions and
  *          limitations under the License.
+ *
  *******************************************************************************************************/
-
 #ifndef BLE_SMP_H_
 #define BLE_SMP_H_
 
 #include "stack/ble/ble_common.h"
 
 
-
-
-
-/** @addtogroup SMP first pairing or connecting back definition
- * @{
+/**
+ * @brief  SMP type definition: first pairing or connecting back
  */
 #define SMP_STANDARD_PAIR   							0
 #define SMP_FAST_CONNECT   								1
-/** @} end of group SMP first pairing or connecting back */
 
 
-/** @addtogroup SMP pairing fail reason definition
- * @{
+
+
+
+/**
+ * @brief  SMP pairing fail reason definition
  */
 #define PAIRING_FAIL_REASON_PASSKEY_ENTRY			0x01
 #define PAIRING_FAIL_REASON_OOB_NOT_AVAILABLE		0x02
@@ -50,20 +49,20 @@
 #define PAIRING_FAIL_REASON_CMD_NOT_SUPPORT			0x07 //-- core 4.2
 #define PAIRING_FAIL_REASON_UNSPECIFIED_REASON		0x08
 #define PAIRING_FAIL_REASON_REPEATED_ATTEMPT		0x09
-#define PAIRING_FAIL_REASON_INVAILD_PARAMETER		0x0A
+#define PAIRING_FAIL_REASON_INVALID_PARAMETER		0x0A
 #define PAIRING_FAIL_REASON_DHKEY_CHECK_FAIL		0x0B
-#define PAIRING_FAIL_REASON_NUMUERIC_FAILED			0x0C
+#define PAIRING_FAIL_REASON_NUMERIC_FAILED			0x0C
 #define PAIRING_FAIL_REASON_BREDR_PAIRING			0x0D
 #define PAIRING_FAIL_REASON_CROSS_TRANSKEY_NOT_ALLOW	0x0E
-#define PAIRING_FAIL_REASON_PAIRING_TIEMOUT			0x80 //TLK defined
+#define PAIRING_FAIL_REASON_PAIRING_TIMEOUT			0x80 //TLK defined
 #define PAIRING_FAIL_REASON_CONN_DISCONNECT			0x81 //TLK defined
 #define PAIRING_FAIL_REASON_SUPPORT_NC_ONLY         0x82 //TLK defined
 
 
-/** @} end of group SMP pairing fail reason */
 
-
-// "SecReq" refer to "security request"
+/**
+ * @brief  security request configuration
+ */
 typedef enum {
 	SecReq_NOT_SEND = 0,   // do not send "security request" after link layer connection established
 	SecReq_IMM_SEND = BIT(0),   //"IMM" refer to immediate, send "security request" immediately after link layer connection established
@@ -71,41 +70,54 @@ typedef enum {
 }secReq_cfg;
 
 
-//See the Core_v5.0(Vol 3/Part C/10.2, Page 2067) for more information.
+/**
+ * @brief  security mode and level
+ * 		   See Spec Vol 3/Part C/10.2 for more information.
+ */
 typedef enum {
 	LE_Security_Mode_1_Level_1 = BIT(0),  No_Authentication_No_Encryption			= BIT(0), No_Security = BIT(0),
 	LE_Security_Mode_1_Level_2 = BIT(1),  Unauthenticated_Pairing_with_Encryption 	= BIT(1),
-	LE_Security_Mode_1_Level_3 = BIT(2),  Authenticated_pairing_with_Encryption 	    = BIT(2),
-	LE_Security_Mode_1_Level_4 = BIT(3),  Authenticated_LE_Secure_Connection_pairing_with_Encryption = BIT(3),
+	LE_Security_Mode_1_Level_3 = BIT(2),  Authenticated_Pairing_with_Encryption 	    = BIT(2),
+	LE_Security_Mode_1_Level_4 = BIT(3),  Authenticated_LE_Secure_Connection_Pairing_with_Encryption = BIT(3),
 
-	LE_Security_Mode_2_Level_1 = BIT(4),  Unauthenticated_pairing_with_Data_Signing 	= BIT(4),
-	LE_Security_Mode_2_Level_2 = BIT(5),  Authenticated_pairing_with_Data_Signing    = BIT(5),
+	LE_Security_Mode_2_Level_1 = BIT(4),  Unauthenticated_Pairing_with_Data_Signing 	= BIT(4),
+	LE_Security_Mode_2_Level_2 = BIT(5),  Authenticated_Pairing_with_Data_Signing    = BIT(5),
 
 	LE_Security_Mode_1 = (LE_Security_Mode_1_Level_1 | LE_Security_Mode_1_Level_2 | LE_Security_Mode_1_Level_3 | LE_Security_Mode_1_Level_4)
 }le_security_mode_level_t;
 
 
+/**
+ * @brief  ECDH keys mode
+ */
 typedef enum {
 	non_debug_mode 	= 0,  // ECDH distribute private/public key pairs
 	debug_mode 		= 1,  // ECDH use debug mode private/public key pairs
 } ecdh_keys_mode_t;
 
 
+/**
+ * @brief  bonding mode
+ */
 typedef enum {
 	Non_Bondable_Mode = 0,
 	Bondable_Mode     = 1,
 }bonding_mode_t;
 
 
-//pairing Methods select
-//See the Core_v5.0(Vol 3/Part H/2.3) for more information.
+/**
+ * @brief  security mode and level
+ * 		   See BLE SPEC: Vol 3, Part H, "2.3 PAIRING METHODS" for more information.
+ */
 typedef enum {
-	LE_Legacy_pairing     = 0,   // BLE 4.0/4.2
+	LE_Legacy_Pairing     = 0,   // BLE 4.0/4.2
 	LE_Secure_Connection = 1,   // BLE 4.2/5.0/5.1
 }pairing_methods_t;
 
 
-
+/**
+ * @brief  IO capability
+ */
 typedef enum {
 	IO_CAPABILITY_UNKNOWN 			= 0xff,
 	IO_CAPABILITY_DISPLAY_ONLY 		= 0,
@@ -117,12 +129,6 @@ typedef enum {
 
 
 
-/**
- * @brief      This function is used to set the maximum number of devices that can be bound.
- * @param[in]  device_num - Set the maximum number of devices that can be bound.
- * @return     none.
- */
-void 		blc_smp_param_setBondingDeviceMaxNumber ( int device_num);
 
 
 /**
@@ -149,8 +155,15 @@ void 		blc_smp_preMakeEcdhKeysEnable(u8 enable);
  *                      1: LE secure connection
  * @return     none.
  */
-void 		blc_smp_setpairingMethods (pairing_methods_t  method);       //select pairing methods
+void 		blc_smp_setPairingMethods (pairing_methods_t  method);
 
+/**
+ * @brief      This function is used to set if support Secure Connections.
+ * @param[in]  SC_en  - 0: not support Secure Connections;
+ *                      1: support Secure Connections.
+ * @return     none.
+ */
+void		blc_smp_enableSecureConnections(int SC_en); //replace API: blc_smp_setPairingMethods
 
 /**
  * @brief      This function is used to set whether the device uses the ECDH DEBUG key.
@@ -169,7 +182,7 @@ void 		blc_smp_setEcdhDebugMode(ecdh_keys_mode_t mode);
  *                    1: bondable mode.
  * @return     none.
  */
-void 		blc_smp_setBondingMode(bonding_mode_t mode);			   //set bonding_mode
+void 		blc_smp_setBondingMode(bonding_mode_t mode);
 
 
 /**
@@ -187,15 +200,15 @@ void 		blc_smp_enableAuthMITM (int MITM_en);
  *                      1: Enable OOB authentication.
  * @return     none.
  */
-void 		blc_smp_enableOobAuthentication (int OOB_en);    		   //enable OOB authentication
+void 		blc_smp_enableOobAuthentication (int OOB_en);
 
 
 /**
  * @brief      This function is used to set device's IO capability.
- * @param[in]  ioCapablility - The IO capability's value can refer to the structure 'io_capability_t'.
+ * @param[in]  ioCapability - The IO capability's value can refer to the structure 'io_capability_t'.
  * @return     none.
  */
-void 		blc_smp_setIoCapability (io_capability_t  ioCapablility);
+void 		blc_smp_setIoCapability (io_capability_t  ioCapability);
 
 
 /**
@@ -213,11 +226,11 @@ void 		blc_smp_enableKeypress (int keyPress_en);
  * @param[in]  MITM_en - 0: Disable MITM protection;  1: Enable MITM protection.
  * @param[in]  OOB_en - 0: Disable OOB authentication; 1: Enable OOB authentication.
  * @param[in]  keyPress_en - 0: Disable Keypress; 1: Enable Keypress.
- * @param[in]  ioCapablility - The IO capability's value can refer to the structure 'io_capability_t'.
+ * @param[in]  ioCapability - The IO capability's value can refer to the structure 'io_capability_t'.
  * @return     none.
  */
 void 		blc_smp_setSecurityParameters (bonding_mode_t mode, int MITM_en, int OOB_en,
-										  int keyPress_en, io_capability_t ioCapablility);
+										  int keyPress_en, io_capability_t ioCapability);
 
 
 /**
@@ -269,7 +282,7 @@ void		blc_smp_setNumericComparisonResult(bool YES_or_NO);
  * 			   attention: 1. PinCode should be generated randomly each time, so this API is not standard usage for security,
  * 			              	 it is violation of security protocols.
  * 			              2. If you set manual pin code with this API in correct range(1~999999), you can neglect callback
- * 			                 event "GAP_EVT_MASK_SMP_TK_DISPALY", because the pin code displayed is the value you have set by this API.
+ * 			                 event "GAP_EVT_MASK_SMP_TK_DISPLAY", because the pin code displayed is the value you have set by this API.
  * 			              3. pinCodeInput value 0 here is used to exit manual set mode, but not a Pin Code.
  * @param[in]  connHandle - connection handle
  * @param[in]  pinCodeInput - 0           :  exit  manual set mode, generated Pin Code randomly by SDK library.
@@ -280,31 +293,6 @@ void		blc_smp_setNumericComparisonResult(bool YES_or_NO);
 void 		blc_smp_manualSetPinCode_for_debug(u16 connHandle, u32 pinCodeInput);
 
 
-//////////////////////////////////////////////////////////////////////////////////////
-#define pairing_FAIL_REASON_PASSKEY_ENTRY			PAIRING_FAIL_REASON_PASSKEY_ENTRY
-#define pairing_FAIL_REASON_OOB_NOT_AVAILABLE		PAIRING_FAIL_REASON_OOB_NOT_AVAILABLE
-#define pairing_FAIL_REASON_AUTH_REQUIRE				PAIRING_FAIL_REASON_AUTH_REQUIRE
-#define pairing_FAIL_REASON_CONFIRM_FAILED			PAIRING_FAIL_REASON_CONFIRM_FAILED
-#define pairing_FAIL_REASON_pairing_NOT_SUPPORTED		PAIRING_FAIL_REASON_PAIRING_NOT_SUPPORTED
-#define pairing_FAIL_REASON_ENCRYPT_KEY_SIZE			PAIRING_FAIL_REASON_ENCRYPT_KEY_SIZE
-#define pairing_FAIL_REASON_CMD_NOT_SUPPORT			PAIRING_FAIL_REASON_CMD_NOT_SUPPORT
-#define pairing_FAIL_REASON_UNSPECIFIED_REASON		PAIRING_FAIL_REASON_UNSPECIFIED_REASON
-#define pairing_FAIL_REASON_REPEATED_ATTEMPT			PAIRING_FAIL_REASON_REPEATED_ATTEMPT
-#define pairing_FAIL_REASON_INVAILD_PARAMETER		PAIRING_FAIL_REASON_INVAILD_PARAMETER
-#define pairing_FAIL_REASON_DHKEY_CHECK_FAIL			PAIRING_FAIL_REASON_DHKEY_CHECK_FAIL
-#define pairing_FAIL_REASON_NUMUERIC_FAILED			PAIRING_FAIL_REASON_NUMUERIC_FAILED
-#define pairing_FAIL_REASON_BREDR_pairing				PAIRING_FAIL_REASON_BREDR_PAIRING
-#define pairing_FAIL_REASON_CROSS_TRANSKEY_NOT_ALLOW	PAIRING_FAIL_REASON_CROSS_TRANSKEY_NOT_ALLOW
-#define pairing_FAIL_REASON_pairing_TIEMOUT			PAIRING_FAIL_REASON_PAIRING_TIEMOUT
-#define pairing_FAIL_REASON_CONN_DISCONNECT			PAIRING_FAIL_REASON_CONN_DISCONNECT
-#define pairing_FAIL_REASON_SUPPORT_NC_ONLY			PAIRING_FAIL_REASON_SUPPORT_NC_ONLY
 
-#define IO_CAPABLITY_DISPLAY_ONLY					0x00
-#define IO_CAPABLITY_DISPLAY_YESNO					0x01
-#define IO_CAPABLITY_KEYBOARD_ONLY					0x02
-#define IO_CAPABLITY_NO_IN_NO_OUT					0x03
-#define	IO_CAPABLITY_KEYBOARD_DISPLAY				0x04
-
-#define	blc_smp_setSecurityParamters				blc_smp_setSecurityParameters
 
 #endif /* BLE_SMP_H_ */

@@ -1,10 +1,10 @@
 /********************************************************************************************************
- * @file     cstartup_flash.S
+ * @file    cstartup_flash.S
  *
- * @brief    This is the boot file for BLE SDK
+ * @brief   This is the boot file for BLE SDK
  *
- * @author	 BLE GROUP
- * @date         12,2021
+ * @author  BLE GROUP
+ * @date    12,2021
  *
  * @par     Copyright (c) 2021, Telink Semiconductor (Shanghai) Co., Ltd. ("TELINK")
  *
@@ -19,17 +19,34 @@
  *          WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  *          See the License for the specific language governing permissions and
  *          limitations under the License.
+ *
  *******************************************************************************************************/
-
 #ifdef MCU_STARTUP_FLASH
 
+@********************************************************************************************************
+@                                   SRAM CONFIGURATION
+@********************************************************************************************************
+#define SRAM_BASE_ADDR		(0x840000)
+#define SRAM_16K      		(0x4000)	//16KSRAM
+#define SRAM_20K      		(0x5000)	//20KSRAM
 
+#if MCU_STARTUP_B80
+#define	SRAM_SIZE			(SRAM_BASE_ADDR + SRAM_16K)
+#elif MCU_STARTUP_B80B
+#define	SRAM_SIZE			(SRAM_BASE_ADDR + SRAM_20K)
+#endif
+
+@********************************************************************************************************
+@                                   BOOT FEATURE CONFIGURATION
+@********************************************************************************************************
 #define  FLL_STK_EN           			0
+#define  GPIO_DEBUG_EN           		0
 #define  ZERO_IC_TAG_EN		  			1
-#define  IC_TAG_CACEH_ADDR_EQU_EN    	0
-#define  FLASH_WAKEUP_EN                1
-#define  COPY_DATA_EN					1
-#define  MULTI_ADDRESS_START			1
+#define  IC_TAG_CACHE_ADDR_EQU_EN    	0
+@The design of the eaglet chip is to power off the flash when the chip goes to sleep,
+@and then power on the flash again after waking up, so there is no need to perform the flash wake-up action.
+#define  FLASH_WAKEUP_EN                0
+#define  WD_SET_AND_START_EN            0 /* default 0; 1: Set and Start the watchdog in advance. */
 
 #ifndef __LOAD_RAM_SIZE__
 #define	__LOAD_RAM_SIZE__		0xc
@@ -51,6 +68,7 @@
 	.equ __LOAD_FLASH, 	1
 	.equ __LOAD_DUT, 	0
 	.equ __LOAD_RAM, 	0
+	.equ __SRAM_SIZE,   SRAM_SIZE
 @********************************************************************************************************
 @                                            TC32 EXCEPTION VECTORS
 @********************************************************************************************************
@@ -62,6 +80,7 @@
 	.global		__LOAD_RAM
 	.global		__LOAD_DUT
 	.global		__LOAD_FLASH
+	.global		__SRAM_SIZE
 
 __start:					@ MUST,  referenced by boot.link
 
@@ -69,10 +88,8 @@ __start:					@ MUST,  referenced by boot.link
 
 	.extern firmwareVersion
 
-	.extern  _ramcode_size_div_16_
-	.extern  _ramcode_size_div_256_
-	.extern  _ramcode_size_div_16_align_256_
-	.extern  _ramcode_size_align_256_
+	.extern  _data_end_div_16_align_256_
+	.extern  _start_text_
 	.extern  _ictag_start_
 	.extern  _ictag_end_
 	.org 0x0
@@ -82,7 +99,7 @@ __start:					@ MUST,  referenced by boot.link
 	.word	(0x544c4e4b)
 	@Boot will write the value here to the digital register 0x602, mainly the difference of 0x602[4],
 	@write 1 to fetch instructions from otp, and write 0 to fetch instructions from flash;
-	.word	(0x00880000 + _ramcode_size_div_16_align_256_)
+	.word	(0x00880000 + _data_end_div_16_align_256_)
 
 
 	.org 0x10
@@ -176,19 +193,51 @@ __suspend_data:
 	.word   (0x80006f)
 
 __reset:
+#if WD_SET_AND_START_EN
+    @ reference wd_set_interval_ms
+    tloadr      r1, WD_REG_BASE    @0x800620
+    tloadr      r0, WD_REG_BASE+8  @  default 0x5b
+    tshftl      r0, r0,#1          @  (WD_REG_BASE+8)<<1
+    tstorerb    r0, [r1, #1]       @ *(unsigned char*)(0x800621)= (WD_REG_BASE+8)<<1
+    tshftr      r0, r0,#8          @  (WD_REG_BASE+8)>>8
+    tstorerb    r0, [r1, #2]       @ *(unsigned char*)(0x800622)=(WD_REG_BASE+8)>>8
 
-#if 0
-	@ add debug, PB4 output 1
-	tloadr     	r1, DEBUG_GPIO    @0x80058a  PB oen
-	tmov		r0, #139      @0b 11101111
-	tstorerb	r0, [r1, #0]
+    @ reference wd_start
+    tloadr      r1, WD_REG_BASE    @0x800620
+    tmov        r0, #0x40          @ 01000000
+    tstorerb    r0, [r1, #0]       @ *(unsigned char*)(0x800620)=0x60,reg_tmr_ctrl8[6]=1
 
-	tmov		r0, #16			@0b 00010000
-	tstorerb	r0, [r1, #1]	@0x800583  PB output
+    tloadr      r1, WD_REG_BASE+4  @0x800622
+    tloadrb     r2, [r1]
+    tmov        r0, #0x80          @ 10000000
+    tor         r0, r2
+    tstorerb    r0, [r1, #0]       @ reg_tmr_ctrl8 |=reg_tmr_ctrl8|0x80
 #endif
 
+#if (GPIO_DEBUG_EN)
+	#if (MCU_STARTUP_B80)
+		@ add debug, PB4 output 1
+		tloadr     	r1, DEBUG_GPIO    @0x80058a  PB oen
+		tmov		r0, #139      @0b 11101111
+		tstorerb	r0, [r1, #0]
 
+		tmov		r0, #16			@0b 00010000
+		tstorerb	r0, [r1, #1]	@0x800583  PB output
 
+	#elif (MCU_STARTUP_B80B)
+		@ add debug, PB4 output 1
+		tloadr     	r1, DEBUG_GPIO_OEN    @0x80050a  PB oen
+		tmov		r0, #239		@0b 11101111
+		tstorerb	r0, [r1, #0]
+
+		tloadr     	r1, DEBUG_GPIO_OUTPUT
+		tmov		r0, #16			@0b 00010000
+		tstorerb	r0, [r1, #0]	@0x8005c4  PB output set
+	#endif
+#endif
+
+	@B80_B is handled in the boot program.
+#if (MCU_STARTUP_B80)
 	@when running the flash program, let the otp enter the deep standby mode to reduce the power consumption of the chip.
 	tloadr		r3, OTP_CTRL	  @0x800010	otp ctrl
 	tloadrb		r1, [r3, #0]
@@ -200,12 +249,14 @@ __reset:
 	tmovs		r0, #207		  @0b 11001111 mc icct1
 	tand		r1, r0
  	tstorerb	r1, [r3, #1]	  @pdstb = 0  pldo = 0
+#endif
 
-
+@The design of the eaglet chip is to power off the flash when the chip goes to sleep,
+@and then power on the flash again after waking up, so there is no need to perform the flash wake-up action.
 #if FLASH_WAKEUP_EN
 
 FLASH_WAKEUP_BEGIN:
-	tloadr      r0,DATA_I+44
+	tloadr      r0,DATA_I+24			@Adjust number from 44 to 24, by BLE SUNWEI
 	tmov		r1,#0
 	tstorerb    r1,[r0,#1]
 	tmov        r1,#171						@Flash deep cmd: 0xAB
@@ -259,8 +310,8 @@ ZERO_TAG_END:
 
 SET_IC:
 	tloadr     	r1, DAT0 + 24				@ r1 = 0x80060c
-	tloadr      r0, DAT0 + 36				@ r0 = _ramcode_size_align_256_
-	tshftr      r0,r0,#8                    @ r0 = _ramcode_size_align_256_/256
+	tloadr      r0, DAT0 + 36				@ r0 = _start_text_
+	tshftr      r0,r0,#8                    @ r0 = _start_text_/256
 	tstorerb	r0, [r1, #0]				@ *(unsigned int*)(0x80060c) = r0
 #if IC_TAG_CACHE_ADDR_EQU_EN
 
@@ -293,8 +344,8 @@ SET_BOOT:
 	tstorerb	r1, [r0, #1]
 	tj			COPY_DATA_RELOAD
 
-WHILE:
-	tj	WHILE
+@WHILE:				@not be necessary, delete it, by BLE SUNWEI
+@	tj	WHILE			@not be necessary, delete it, by BLE SUNWEI
 
 SET_BOOT_END:
 @********************************************************************************************************
@@ -303,7 +354,7 @@ SET_BOOT_END:
 #if FLL_STK_EN
 
 	tloadr	r0, FLL_D						@r0 = 0xffffffff
-	tloadr	r1, FLL_D+4						@r1 = _start_data_
+	tloadr	r1, FLL_D+4						@r1 = _start_bss_
 	tloadr	r2, FLL_D+8						@r2 = 0x850000
 
 FLL_STK:
@@ -330,22 +381,6 @@ ZERO_BSS_BEGIN:
 	tj		ZERO_BSS_BEGIN					@jump to ZERO_BSS_BEGIN
 ZERO_BSS_END:
 
-@********************************************************************************************************
-@                                    DATA INITIALIZATION
-@********************************************************************************************************
-COPY_DATA:
-	tloadr		r1, DATA_I				@ r1 = _dstored_
-	tloadr		r2, DATA_I+4				@ r2 = _start_data_
-	tloadr		r3, DATA_I+8				@ r3 = _end_data_
-COPY_DATA_BEGIN:
-	tcmp		r2, r3						@
-	tjge		COPY_DATA_END				@ r2>=r3 jump to COPY_DATA_END
-	tloadr		r0, [r1, #0]				@ r0 = *(unsigned int*)(_dstored_)
-	tstorer 	r0, [r2, #0]				@ *(unsigned int*)(_start_data_) = r0
-	tadd    	r1, #4						@ r1 = r1 + 4
-	tadd		r2, #4						@ r2 = r2 + 4
-	tj			COPY_DATA_BEGIN				@ jump to COPY_DATA_BEGIN
-COPY_DATA_END:
 
 @********************************************************************************************************
 @                                    DATA INITIALIZATION
@@ -356,12 +391,12 @@ COPY_DATA_RELOAD:
 	tloadr		r3, DATA_I+20				@ r3 = _data_reload_end_
 COPY_DATA_RELOAD_BEGIN:
 	tcmp		r2, r3						@
-	tjge		COPY_DATA_RELOAD_END				@ r2>=r3 jump to COPY_DATA_RELOAD_END
-	tloadr		r0, [r1, #0]				@ r0 = *(unsigned int*)(_dstored_)
-	tstorer 	r0, [r2, #0]				@ *(unsigned int*)(_start_data_) = r0
+	tjge		COPY_DATA_RELOAD_END		@ r2>=r3 jump to COPY_DATA_RELOAD_END
+	tloadr		r0, [r1, #0]				@ r0 = *(unsigned int*)(_rstored_)
+	tstorer 	r0, [r2, #0]				@ *(unsigned int*)(_data_reload_start_) = r0
 	tadd    	r1, #4						@ r1 = r1 + 4
 	tadd		r2, #4						@ r2 = r2 + 4
-	tj			COPY_DATA_RELOAD_BEGIN				@ jump to COPY_DATA_BEGIN
+	tj			COPY_DATA_RELOAD_BEGIN		@ jump to COPY_DATA_RELOAD_BEGIN
 COPY_DATA_RELOAD_END:
 
 
@@ -375,7 +410,7 @@ DAT0:
 	.word	0x12			    		@0		IRQ
 	.word	0x13			    		@4		SVC
 	.word	(irq_stk + IRQ_STK_SIZE)	@8
-	.word	(0x844000)		    		@12  	stack end
+	.word	(SRAM_SIZE)		    		@12  	stack end
 	.word	(_start_bss_)               @16
 	.word	(_end_bss_)                 @20
 	.word	(0x80060c)                  @24
@@ -384,40 +419,57 @@ DAT0:
 #if IC_TAG_CACHE_ADDR_EQU_EN
 	.word	(0x00f000)    				@36
 #endif
-	.word	_ramcode_size_align_256_    @40
+	.word	_start_text_    			@40
 
 DATA_I:	
 	.word   (_dstored_)                 @0
 	.word	_start_data_				@4
 	.word	_end_data_					@8
 	.word   (_rstored_)                 @12
-	.word	_data_reload_start_		@16
+	.word	_data_reload_start_			@16
 	.word	_data_reload_end_			@20
-    .word	(0x0000007e)                @24
-	.word	(0x008000b8)                @28
-	.word	(0x00800060)                @32
-    .word	(0xff080000)                @36
-    .word	(0x000000f7)                @40
-	.word	(0x0080000c)                @44
+#if FLASH_WAKEUP_EN
+	.word	(0x0080000c)                @24 not @44
+#endif
 
+#if (GPIO_DEBUG_EN)
+#if (MCU_STARTUP_B80)
 DEBUG_GPIO:
 	.word	(0x80050a)                  @  PBx oen
+#elif (MCU_STARTUP_B80B)
+DEBUG_GPIO_OEN:
+	.word	(0x80050a)                  @  PBx oen
 
+DEBUG_GPIO_OUTPUT:
+	.word	(0x8005c4)                  @  PBx output set
+#endif
+#endif
+
+#if WD_SET_AND_START_EN
+WD_REG_BASE:
+    .word   (0x800620)                  @0  reg_tmr_ctrl
+    .word   (0x800622)                  @4  reg_wd_ctrl1
+@ capt tick=500ms=(12000000>>18)=0x2d, capt tick = 1s =(24000000>>18) =0x5b,
+@ capt tick=  2s =(48000000>>18)=0xb7, capt tick = 3s =(72000000>>18) =0x112,
+@ capt tick=  4s =(96000000>>18)=0x16e,capt tick = 5s =(120000000>>18)=0x1c9,
+    .word   (0x5b)                      @8  capt tick
+#endif
+
+#if (MCU_STARTUP_B80)
 OTP_CTRL:
 	.word	(0x800010)                  @  otp control
+#endif
 
-MC_ICCT1:
-	.word	(0x800603)                  @  mc icct1
-
-FLL_D:
+#if FLL_STK_EN
+FLL_D:				@Only be used when FLL_STK_EN is 1, by BLE SUNWEI
 	.word	0xffffffff                	@0
-	.word	(_start_data_)    			@4
-	.word	(0x844000)		    		@12  	stack end
-	.word   _ramcode_size_div_256_      @12
+	.word	(_start_bss_)    			@4
+	.word	(SRAM_SIZE)		    		@8  	stack end
+#endif
 
 BOOT_SEL_D:
 	.word	(0x80063e)
-	.word	(0x80063f)
+	@.word	(0x80063f)	//not be used, delete it, by BLE SUNWEI
 
 	.align 4
 __irq:

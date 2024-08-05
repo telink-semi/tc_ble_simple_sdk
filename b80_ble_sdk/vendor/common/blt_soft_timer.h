@@ -1,10 +1,10 @@
 /********************************************************************************************************
- * @file     blt_soft_timer.h
+ * @file    blt_soft_timer.h
  *
- * @brief    This is the header file for BLE SDK
+ * @brief   This is the header file for BLE SDK
  *
- * @author	 BLE GROUP
- * @date         12,2021
+ * @author  BLE GROUP
+ * @date    12,2021
  *
  * @par     Copyright (c) 2021, Telink Semiconductor (Shanghai) Co., Ltd. ("TELINK")
  *
@@ -19,8 +19,8 @@
  *          WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  *          See the License for the specific language governing permissions and
  *          limitations under the License.
+ *
  *******************************************************************************************************/
-
 #ifndef BLT_SOFT_TIMER_H_
 #define BLT_SOFT_TIMER_H_
 
@@ -29,14 +29,13 @@
 #include "vendor/common/user_config.h"
 
 //user define
-#ifndef 	BLT_SOFTWARE_TIMER_ENABLE
-#define		BLT_SOFTWARE_TIMER_ENABLE				0   //enable or disable
+#ifndef BLT_SOFTWARE_TIMER_ENABLE
+#define BLT_SOFTWARE_TIMER_ENABLE					0   //enable or disable
 #endif
 
 
-#ifndef     MAX_TIMER_NUM
 #define 	MAX_TIMER_NUM							4   //timer max number
-#endif
+
 
 #define		MAINLOOP_ENTRY							0
 #define 	CALLBACK_ENTRY							1
@@ -60,9 +59,10 @@
  * @return		0 - The current time isn't what the timer expects
  * 				1 - The current time is what the timer expects
  */
-static int inline blt_is_timer_expired(u32 t, u32 now) {
+static inline int blt_is_timer_expired(u32 t, u32 now) {
 	return ((u32)(now + BLT_TIMER_SAFE_MARGIN_PRE - t) < BLT_TIMER_SAFE_MARGIN_POST);
 }
+
 
 /**
  * @brief	callback function for software timer task
@@ -70,8 +70,9 @@ static int inline blt_is_timer_expired(u32 t, u32 now) {
 typedef int (*blt_timer_callback_t)(void);
 
 
-
-
+/**
+ * @brief	The structure of time event
+ */
 typedef struct blt_time_event_t {
 	blt_timer_callback_t    cb;
 	u32                     t;
@@ -79,10 +80,12 @@ typedef struct blt_time_event_t {
 } blt_time_event_t;
 
 
-// timer table management
+/**
+ * @brief	The structure of soft timer table management
+ */
 typedef struct blt_soft_timer_t {
 	blt_time_event_t	timer[MAX_TIMER_NUM];  //timer0 - timer3
-	u8					currentNum;  //total valid timer num
+	u8					currentNum;  //total valid timer number
 } blt_soft_timer_t;
 
 
@@ -118,7 +121,6 @@ int 	blt_soft_timer_delete(blt_timer_callback_t func);
  */
 void 	blt_soft_timer_init(void);
 
-
 /**
  * @brief		This function is used to manage software timer tasks
  * @param[in]	type - the type for trigger
@@ -134,14 +136,7 @@ void  	blt_soft_timer_process(int type);
  * @return      0 - delete fail
  * 				other - delete successfully
  */
-void 	blt_soft_timer_delete_by_index(u8 index);
-
-/**
- * @brief		This function is used to check the current time is what the timer expects or not
- * @param[in]	e - callback function for software timer task
- * @return		none
- */
-int is_timer_expired(blt_timer_callback_t *e);
+int 	blt_soft_timer_delete_by_index(u8 index);
 
 
 #endif /* BLT_SOFT_TIMER_H_ */

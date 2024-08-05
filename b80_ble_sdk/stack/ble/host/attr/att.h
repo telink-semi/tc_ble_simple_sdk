@@ -1,10 +1,10 @@
 /********************************************************************************************************
- * @file     att.h
+ * @file    att.h
  *
- * @brief    This is the header file for BLE SDK
+ * @brief   This is the header file for BLE SDK
  *
- * @author	 BLE GROUP
- * @date         12,2021
+ * @author  BLE GROUP
+ * @date    12,2021
  *
  * @par     Copyright (c) 2021, Telink Semiconductor (Shanghai) Co., Ltd. ("TELINK")
  *
@@ -19,16 +19,16 @@
  *          WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  *          See the License for the specific language governing permissions and
  *          limitations under the License.
+ *
  *******************************************************************************************************/
-
 #pragma once
 
 #include "tl_common.h"
 
 
-/** @defgroup ATT_PERMISSIONS_BITMAPS GAP ATT Attribute Access Permissions Bit Fields
- * @{
- * (See the Core_v5.0(Vol 3/Part C/10.3.1/Table 10.2) for more information)
+/**
+ * @brief		ATT_PERMISSIONS_BITMAPS GAP ATT Attribute Access Permissions Bit Fields
+ * refer to BLE SPEC: Vol 3,Part C,"10.3.1 Responding to a service request" for more information
  */
 #define ATT_PERMISSIONS_AUTHOR				 0x10 //Attribute access(Read & Write) requires Authorization
 #define ATT_PERMISSIONS_ENCRYPT				 0x20 //Attribute access(Read & Write) requires Encryption
@@ -61,14 +61,13 @@
 #define ATT_PERMISSIONS_AUTHOR_WRITE         (ATT_PERMISSIONS_WRITE | ATT_PERMISSIONS_AUTHEN) 		//!< Write requires Authorization
 #define ATT_PERMISSIONS_AUTHOR_RDWR          (ATT_PERMISSIONS_RDWR | ATT_PERMISSIONS_AUTHOR) 		//!< Read & Write requires Authorization
 
-
-/** @} End GAP_ATT_PERMISSIONS_BITMAPS */
-
+/** @End GAP_ATT_PERMISSIONS_BITMAPS */
 
 
 
-/** @addtogroup GATT_Characteristic_Property GATT characteristic properties
- * @{
+
+/**
+ * @brief		GATT_Characteristic_Property GATT characteristic properties
  */
 #define CHAR_PROP_BROADCAST              0x01 //!< permit broadcasts of the Characteristic Value
 #define CHAR_PROP_READ                   0x02 //!< permit reads of the Characteristic Value
@@ -78,41 +77,67 @@
 #define CHAR_PROP_INDICATE               0x20 //!< Permit indications of a Characteristic Value with acknowledgement
 #define CHAR_PROP_AUTHEN                 0x40 //!< permit signed writes to the Characteristic Value
 #define CHAR_PROP_EXTENDED               0x80 //!< additional characteristic properties are defined
-/** @} end of group GATT_Characteristic_Property */
+/** end of group GATT_Characteristic_Property */
 
 
 
-
-
-
-
-
-
-typedef int (*att_handleValueConfirm_callback_t)(void);
 typedef int (*att_readwrite_callback_t)(void* p);
-typedef void (*attRxMtuSizeExchangeCommpleteCb)(u16 connHandle, u16 remoteMtuSize, u16 effectMtuSize);
 
-typedef struct attribute
+
+typedef struct _attribute_aligned_(4) attribute
 {
-  u16 attNum;
-  u8  perm;
-  u8  uuidLen;
-  u32 attrLen;    //4 bytes aligned
+  u16  attNum;
+  u8   perm;
+  u8   uuidLen;
+  u32  attrLen;    //4 bytes aligned
   u8* uuid;
   u8* pAttrValue;
   att_readwrite_callback_t w;
   att_readwrite_callback_t r;
 } attribute_t;
 
+typedef struct {
+	unsigned char opcode;
+	unsigned char data[0];
+} attr_pkt_t;
 
+/**
+ * @brief	ATT multiple handle value notify structure
+ */
+typedef struct {
+	u16 handle;
+	u16 length;
+	u8* value;
+} atts_mulHandleNtf_t;
+
+/**
+ * @brief	This function is used to define ATT MTU size exchange callback
+ */
+typedef int (*att_mtuSizeExchange_callback_t)(u16, u16);
+
+/**
+ * @brief	This function is used to define ATT Handle value confirm callback
+ */
+typedef int (*att_handleValueConfirm_callback_t)(void);
+
+
+/**
+ * @brief		application custom ATT handle table element structure
+ * @attention	All att handles, including attHl_sdk and attHl_cus must be sorted in ascending order.
+ * @attention	The minimum attHl_cus must larger than att table size.
+ */
+typedef struct att_convert_t{
+  u16  attHl_sdk; //attribute handle value in attribute table
+  u16  attHl_cus; //attribute handle value for custom need
+} attHl_convert_t;
 
 
 /**
  * @brief	This function is used to set ATT table
- * @param	*p - the pointer of attribute table
+ * @param	p - the pointer of attribute table
  * @return	none.
  */
-void bls_att_setAttributeTable(u8 *p);
+void		bls_att_setAttributeTable(u8 *p);
 
 
 
@@ -120,12 +145,12 @@ void bls_att_setAttributeTable(u8 *p);
 
 /**
  * @brief	This function is used to set RX MTU size
- * @param	mtu_size - ATT MTU size
+ * 			if not call this API, default MTU size is 23; if user want to use greater MTU, this API must be called.
+ * @param	mtu_size - ATT MTU size, in range of 23 ~ 512
  * @return	0: success
  * 			other: fail
  */
-ble_sts_t blc_att_setRxMtuSize(u16 mtu_size);
-
+ble_sts_t	blc_att_setRxMtuSize(u16 mtu_size);
 
 
 /**
@@ -135,45 +160,107 @@ ble_sts_t blc_att_setRxMtuSize(u16 mtu_size);
  * @return	0: success
  * 			other: fail
  */
-//Attention: this API hide in stack, user no need use !!!
-ble_sts_t blc_att_requestMtuSizeExchange(u16 connHandle, u16 mtu_size);
+ble_sts_t	 blc_att_requestMtuSizeExchange (u16 connHandle, u16 mtu_size);
+
+
+
 
 /**
- * @brief      This function is used to register MTU size exchange callback
- * @param[in]  cb - callback function
- * @return     none
+ * @brief	This function is used to set effective ATT MTU size
+ * 			attention: only ACL Master use this API !!!
+ * 					   ACL Slave no need to use this API(SDK already do it in stack inside)
+ * @param	connHandle - connect handle
+ * @param	effective_mtu - bltAtt.effective_MTU
+ * @return	none.
  */
-void blc_att_registerMtuSizeExchangeCb(attRxMtuSizeExchangeCommpleteCb cb);
+void  		blc_att_setEffectiveMtuSize(u16 connHandle, u8 effective_mtu);
 
 /**
- * @brief      This function is used to register handle value confirm callback
- * @param[in]  cb - callback function
- * @return     none
+ * @brief	   This function is used to reset effective ATT MTU size
+ * 			   attention: only ACL Master use this API !!!
+ * 					   ACL Slave no need to use this API(SDK already do it in stack inside)
+ * @param[in]  connHandle - connect handle
+ * @return	   none.
  */
-void bls_att_registerHandleValueConfirmCb(att_handleValueConfirm_callback_t cb);
+void  		blc_att_resetEffectiveMtuSize(u16 connHandle);
 
 /**
  * @brief   This function is used to get effective MTU size.
  * @param	connHandle - connect handle
  * @return  effective MTU value.
  */
-u16  blc_att_getEffectiveMtuSize(void);
+u16  		blc_att_getEffectiveMtuSize(u16 connHandle);
+
+/**
+ * @brief      This function is used to response to MTU size exchange.
+ * 			   attention: only ACL Master use this API !!!
+ * 					   ACL Slave no need to use this API(SDK already do it in stack inside)
+ * @param[in]  connHandle - connect handle
+ * @param[in]  mtu_size - MTU size
+ * @return     success or fail
+ */
+ble_sts_t	blc_att_responseMtuSizeExchange (u16 connHandle, u16 mtu_size);
+
+/**
+ * @brief   This function is used to set the server data pending time when some client command triggered.
+ *          "ServerDataPendingTime" default value is 300mS, use can change this value with this API.
+ *
+ *          In big amount of Central device test, we find that a handle value notify or handle value indication command during
+ *          Central device service discovery process sometimes make the service discovery fail.
+ *          To solve this issue, we design a mechanism to optimize: to block these server command for a while when detected that
+ *          there maybe a service discovery is ongoing.
+ *          When server receives any of the 4 client command below:
+ *          (1) ATT_OP_READ_BY_GROUP_TYPE_REQ
+ *          (2) ATT_OP_FIND_BY_TYPE_VALUE_REQ
+ *          (3) ATT_OP_READ_BY_TYPE_REQ
+ *          (4) ATT_OP_FIND_INFO_REQ
+ *			stack internal will start a timer, the timeout value of this timer is "ServerDataPendingTime".
+ *			If this timer did not reach the timeout value, error "GATT_ERR_DATA_PENDING_DUE_TO_SERVICE_DISCOVERY_BUSY" will return
+ *			for these 3 GATT API below, server data not allowed to send.
+ *          (1) blc gatt_pushHandleValueNotify
+ *          (2) blc gatt_pushMultiHandleValueNotify
+ *          (3) blc gatt_pushHandleValueIndicate
+ *
+ *         Note that this design may bring some unexpected effect. For example, blc gatt_pushHandleValueNotify sometimes may fail due to
+ *         a ATT_OP_READ_BY_TYPE_REQ command received, but not in SDP process. User can set "ServerDataPendingTime" to 0 by this API to
+ *         avoid this kind of situation.
+ * @param	num_10ms - the pending time, step is 10ms.
+ * @return	none.
+ */
+void  blc_att_setServerDataPendingTime_upon_ClientCmd(u8 num_10ms);
+
+/**
+ * @brief	This function is used to set prepare write buffer
+ * @param	p - the pointer of buffer
+ * @param	len - the length of buffer
+ * @return	none.
+ */
+void  		blc_att_setPrepareWriteBuffer(u8 *p, u16 len);
 
 
 /**
- * @brief      set HID Report Map
- * @param[in]  p - the point of report map
- * @param[in]  len - the length of report map
- * @return     BLE_SUCCESS
+ * @brief      This function is used to set reject of write request. If enable, return of ATT write callback will take effect.  Error codes refer to Core Spec.
+ * @param[in]  WriteReqReject_en - 0: Disable;
+ *                           1: Enable.
+ * @return     none.
  */
-ble_sts_t bls_att_setHIDReportMap(u8* p,u32 len);
+void 		blc_att_enableWriteReqReject (u8 WriteReqReject_en);
 
 /**
- * @brief      reset HID Report Map
- * @param[in]  none
- * @return     Status - 0x00: command succeeded; 0x01-0xFF: command failed
+ * @brief      This function is used to set reject of read request. If enable, return of ATT read callback will take effect.  Error codes refer to Core Spec.
+ * @param[in]  ReadReqReject_en - 0: Disable;
+ *                           1: Enable.
+ * @return     none.
  */
-ble_sts_t bls_att_resetHIDReportMap();
+void 		blc_att_enableReadReqReject (u8 ReadReqReject_en);
 
 
 
+
+/**
+ * @brief      This function is used to set whether to hold the ATT Response PDU during the pairing phase 3.
+ * @param[in]  hold_enable - 1: enable, holding ATT Response PDU during in pairing phase
+ *                      0: disable, allowing ATT Response PDU during in pairing phase
+ * @return     none.
+ */
+void         blc_att_holdAttributeResponsePayloadDuringPairingPhase(u8 hold_enable);

@@ -1,10 +1,10 @@
 /********************************************************************************************************
- * @file     ota.h
+ * @file    ota.h
  *
- * @brief    This is the header file for BLE SDK
+ * @brief   This is the header file for BLE SDK
  *
- * @author	 BLE GROUP
- * @date         12,2021
+ * @author  BLE GROUP
+ * @date    12,2021
  *
  * @par     Copyright (c) 2021, Telink Semiconductor (Shanghai) Co., Ltd. ("TELINK")
  *
@@ -19,8 +19,8 @@
  *          WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  *          See the License for the specific language governing permissions and
  *          limitations under the License.
+ *
  *******************************************************************************************************/
-
 #ifndef BLE_LL_OTA_H_
 #define BLE_LL_OTA_H_
 
@@ -77,7 +77,8 @@ typedef void (*ota_resIndicateCb_t)(int result);
 
 
 
-
+extern unsigned int	ota_program_bootAddr;
+extern unsigned int	ota_program_offset;
 
 
 
@@ -99,6 +100,13 @@ void blc_ota_initOtaServer_module(void);
  */
 ble_sts_t blc_ota_setFirmwareSizeAndBootAddress(int firmware_size_k, multi_boot_addr_e new_fw_addr);
 
+/**
+ * @brief      This function is used to read current used multiple boot address.
+ * 			   return value is set by API "blc ota_setFirmwareSizeAndBootAddress"
+ * @param[in]  none
+ * @return     multiple boot address
+ */
+u32			blc_ota_getCurrentUsedMultipleBootAddress(void);
 
 
 /**
@@ -151,22 +159,26 @@ int	otaWrite(void * p);
 
 
 
+/**
+ * @brief      ota crc32 related function.
+ * @param[in]  crc: initial crc value.
+ * @param[in]  input: input data.
+ * @param[in]  table: crc calculate table.
+ * @param[in]  len: data length.
+ * @return     crc result.
+ */
+unsigned long crc32_half_cal(unsigned long crc, unsigned char* input, unsigned long* table, int len);
 
 
 
-/* some API name compatible with other versions of SDK */
 
-#define bls_ota_setFirmwareSizeAndOffset					blc_ota_setFirmwareSizeAndBootAddress
+/**
+ * @brief      ota crc16 related function.
+ * @param[in]  pD: input data.
+ * @param[in]  len: data length.
+ * @return     crc result.
+ */
+unsigned short crc16 (unsigned char *pD, int len);
 
-#define bls_ota_clearNewFwDataArea							blc_ota_initOtaServer_module
-
-#define bls_ota_registerStartCmdCb							blc_ota_registerOtaStartCmdCb
-
-#define bls_ota_registerResultIndicateCb					blc_ota_registerOtaResultIndicationCb
-
-#define bls_ota_registerVersionReqCb						blc_ota_registerOtaFirmwareVersionReqCb
-
-
-#define bls_ota_setTimeout(timeout_us)						blc_ota_setOtaProcessTimeout(timeout_us/1000000)
 
 #endif /* BLE_LL_OTA_H_ */

@@ -1,10 +1,10 @@
 /********************************************************************************************************
- * @file     battery_check.c
+ * @file    battery_check.c
  *
- * @brief    This is the source file for BLE SDK
+ * @brief   This is the source file for BLE SDK
  *
- * @author	 BLE GROUP
- * @date         12,2021
+ * @author  BLE GROUP
+ * @date    12,2021
  *
  * @par     Copyright (c) 2021, Telink Semiconductor (Shanghai) Co., Ltd. ("TELINK")
  *
@@ -19,13 +19,15 @@
  *          WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  *          See the License for the specific language governing permissions and
  *          limitations under the License.
+ *
  *******************************************************************************************************/
 #include "tl_common.h"
 #include "drivers.h"
-#include <stack/ble/ble.h>
-#include "../../common/config/user_config.h"
+#include "stack/ble/ble.h"
 #include "battery_check.h"
-#if (BATT_CHECK_ENABLE)
+
+
+#if (APP_BATT_CHECK_ENABLE)
 
 u8 		lowBattDet_enable = 1;
 _attribute_data_reload_ u8      adc_hw_initialized = 0;   //note: can not be retention variable
@@ -43,9 +45,9 @@ _attribute_data_reload_ u8      adc_hw_initialized = 0;   //note: can not be ret
 volatile unsigned int adc_dat_buf[ADC_SAMPLE_NUM];  //size must 16 byte aligned(16/32/64...)
 
 /**
- * @brief		set lowBattery detect enable
- * @param[in]	en - lowBattDet_enable value
- * @return      none
+ * @brief      This function is used to enable battery detect
+ * @param[in]  en - 1: enable;  0: disable.
+ * @return     none.
  */
 void battery_set_detect_enable (int en)
 {
@@ -58,9 +60,9 @@ void battery_set_detect_enable (int en)
 }
 
 /**
- * @brief		get the value of lowBattDet_enable
- * @param[in]	none
- * @return      the value of lowBattDet_enable
+ * @brief      This function is used to get enable state of battery detect
+ * @param[in]  none.
+ * @return     0: Battery detect is disable 	 1:Battery detect is enable.
  */
 int battery_get_detect_enable (void)
 {
@@ -68,12 +70,12 @@ int battery_get_detect_enable (void)
 }
 
 /**
- * @brief		This is battery check function
- * @param[in]	alram_vol_mv - input battery calue
- * @return      0 fail 1 success
+ * @brief	   This is battery check function
+ * @param[in]  alram_vol_mv - input battery value
+ * @return     0: fail, 1: success
  */
 //_attribute_ram_code_ 
-int app_battery_power_check(u16 alram_vol_mv)
+int app_battery_power_check(u16 alarm_vol_mv)
 {
 	u16 temp;
 	int i,j;
@@ -177,12 +179,10 @@ int app_battery_power_check(u16 alram_vol_mv)
 	extern signed char g_adc_vref_offset;
 	batt_vol_mv  = ((adc_vbat_divider*adc_result*adc_pre_scale*g_adc_vref)>>13) + g_adc_vref_offset;
 
-	if(batt_vol_mv < alram_vol_mv){
+	if(batt_vol_mv < alarm_vol_mv){
 		return 0;
 	}
-	else{ // batt level > alarm level
-		return 1;
-	}
+	return 1;
 }
 
 #endif

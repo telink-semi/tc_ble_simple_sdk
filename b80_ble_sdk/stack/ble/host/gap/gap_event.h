@@ -1,10 +1,10 @@
 /********************************************************************************************************
- * @file     gap_event.h
+ * @file    gap_event.h
  *
- * @brief    This is the header file for BLE SDK
+ * @brief   This is the header file for BLE SDK
  *
- * @author	 BLE GROUP
- * @date         12,2021
+ * @author  BLE GROUP
+ * @date    12,2021
  *
  * @par     Copyright (c) 2021, Telink Semiconductor (Shanghai) Co., Ltd. ("TELINK")
  *
@@ -19,6 +19,7 @@
  *          WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  *          See the License for the specific language governing permissions and
  *          limitations under the License.
+ *
  *******************************************************************************************************/
 #ifndef GAP_EVENT_H_
 #define GAP_EVENT_H_
@@ -135,14 +136,14 @@ Situation 2:   SMP Fast Connect																		|
 #define GAP_EVT_SMP_CONN_ENCRYPTION_DONE							 3	// Refer to SMP message sequence and event chart above
 #define GAP_EVT_SMP_SECURITY_PROCESS_DONE							 4	// Refer to SMP message sequence and event chart above
 
-#define GAP_EVT_SMP_TK_DISPALY			                             8
+#define GAP_EVT_SMP_TK_DISPLAY			                             8
 #define GAP_EVT_SMP_TK_REQUEST_PASSKEY								 9
 #define GAP_EVT_SMP_TK_REQUEST_OOB									 10
 #define GAP_EVT_SMP_TK_NUMERIC_COMPARE								 11
 
 
 #define GAP_EVT_ATT_EXCHANGE_MTU									 16
-#define GAP_EVT_GATT_HANDLE_VLAUE_CONFIRM							 17
+#define GAP_EVT_GATT_HANDLE_VALUE_CONFIRM							 17
 
 
 /**
@@ -156,16 +157,16 @@ Situation 2:   SMP Fast Connect																		|
 #define GAP_EVT_MASK_SMP_CONN_ENCRYPTION_DONE                     	 (1<<GAP_EVT_SMP_CONN_ENCRYPTION_DONE)
 #define GAP_EVT_MASK_SMP_SECURITY_PROCESS_DONE                     	 (1<<GAP_EVT_SMP_SECURITY_PROCESS_DONE)
 
-#define GAP_EVT_MASK_SMP_TK_DISPALY                  				 (1<<GAP_EVT_SMP_TK_DISPALY)
+#define GAP_EVT_MASK_SMP_TK_DISPLAY                  				 (1<<GAP_EVT_SMP_TK_DISPLAY)
 #define GAP_EVT_MASK_SMP_TK_REQUEST_PASSKEY                  		 (1<<GAP_EVT_SMP_TK_REQUEST_PASSKEY)
 #define GAP_EVT_MASK_SMP_TK_REQUEST_OOB	                     		 (1<<GAP_EVT_SMP_TK_REQUEST_OOB)
 #define GAP_EVT_MASK_SMP_TK_NUMERIC_COMPARE                     	 (1<<GAP_EVT_SMP_TK_NUMERIC_COMPARE)
 
 #define GAP_EVT_MASK_ATT_EXCHANGE_MTU                     	 		 (1<<GAP_EVT_ATT_EXCHANGE_MTU)
-#define GAP_EVT_MASK_GATT_HANDLE_VLAUE_CONFIRM                     	 (1<<GAP_EVT_GATT_HANDLE_VLAUE_CONFIRM)
+#define GAP_EVT_MASK_GATT_HANDLE_VALUE_CONFIRM                     	 (1<<GAP_EVT_GATT_HANDLE_VALUE_CONFIRM)
 
 
-#define GAP_EVT_MASK_DEFAULT										( GAP_EVT_MASK_SMP_TK_DISPALY 			| \
+#define GAP_EVT_MASK_DEFAULT										( GAP_EVT_MASK_SMP_TK_DISPLAY 			| \
 																	  GAP_EVT_MASK_SMP_TK_REQUEST_PASSKEY   | \
 																	  GAP_EVT_MASK_SMP_TK_REQUEST_OOB		| \
 																	  GAP_EVT_MASK_ATT_EXCHANGE_MTU )
@@ -173,7 +174,7 @@ Situation 2:   SMP Fast Connect																		|
 
 
 /**
- * @brief      data structure of GAP event callback data
+ * @brief      data structure of GAP_EVT_SMP_PAIRING_BEGIN event parameters
  */
 typedef struct {
 	u16	connHandle;
@@ -182,38 +183,43 @@ typedef struct {
 } gap_smp_pairingBeginEvt_t;
 
 
+/**
+ * @brief      data structure of GAP_EVT_SMP_PAIRING_SUCCESS event parameters
+ */
 typedef struct {
 	u16	connHandle;
 	u8	bonding;
 	u8	bonding_result;
 } gap_smp_pairingSuccessEvt_t;
 
+/**
+ * @brief      data structure of GAP_EVT_SMP_PAIRING_FAIL event parameters
+ */
 typedef struct {
 	u16	connHandle;
 	u8  reason;
 } gap_smp_pairingFailEvt_t;
 
+/**
+ * @brief      data structure of GAP_EVT_SMP_CONN_ENCRYPTION_DONE event parameters
+ */
 typedef struct {
 	u16	connHandle;
 	u8	re_connect;   //1: re_connect, encrypt with previous distributed LTK;   0: pairing , encrypt with STK
 } gap_smp_connEncDoneEvt_t;
 
+/**
+ * @brief      data structure of GAP_EVT_SMP_SECURITY_PROCESS_DONE event parameters
+ */
 typedef struct {
 	u16	connHandle;
 	u8	re_connect;   //1: re_connect, encrypt with previous distributed LTK;   0: pairing , encrypt with STK
 } gap_smp_securityProcessDoneEvt_t;
 
 
-
-typedef struct {
-	u16	connHandle;
-	u32	tk_pincode;
-} gap_smp_TkDisplayEvt_t;
-
-typedef struct {
-	u16	connHandle;
-} gap_smp_TkReqPassKeyEvt_t;
-
+/**
+ * @brief      data structure of GAP_EVT_ATT_EXCHANGE_MTU event parameters
+ */
 typedef struct {
 	u16	connHandle;
 	u16	peer_MTU;

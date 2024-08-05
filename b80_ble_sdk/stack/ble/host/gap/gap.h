@@ -1,10 +1,10 @@
 /********************************************************************************************************
- * @file     gap.h
+ * @file    gap.h
  *
- * @brief    This is the header file for BLE SDK
+ * @brief   This is the header file for BLE SDK
  *
- * @author	 BLE GROUP
- * @date         12,2021
+ * @author  BLE GROUP
+ * @date    12,2021
  *
  * @par     Copyright (c) 2021, Telink Semiconductor (Shanghai) Co., Ltd. ("TELINK")
  *
@@ -19,13 +19,13 @@
  *          WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  *          See the License for the specific language governing permissions and
  *          limitations under the License.
+ *
  *******************************************************************************************************/
-
 #pragma once
 
 
 
-#define GAP_APPEARE_UNKNOWN                     0x0000 //!< Unknown
+#define GAP_APPEAR_UNKNOWN                     0x0000 //!< Unknown
 
 
 /**
@@ -34,3 +34,19 @@
  * @return     none
  */
 void 		blc_gap_peripheral_init(void);
+
+/**
+ * @brief      this  function is used to initialize GAP central
+ * @param	   none
+ * @return     none
+ */
+void 		blc_gap_central_init(void);
+
+/**
+* @brief      this function is used to check if any host initialization incorrect.
+* 			  attention: this function must be called after all host Initialization finished.
+* @param	  none
+* @return     status - 0x00:  succeed, no error
+* 			  		   other: error code
+*/
+ init_err_t	blc_host_checkHostInitialization(void);

@@ -1,10 +1,10 @@
 /********************************************************************************************************
- * @file     default_config.h
+ * @file    default_config.h
  *
- * @brief    This is the header file for BLE SDK
+ * @brief   This is the header file for BLE SDK
  *
- * @author	 BLE GROUP
- * @date         12,2021
+ * @author  BLE GROUP
+ * @date    12,2021
  *
  * @par     Copyright (c) 2021, Telink Semiconductor (Shanghai) Co., Ltd. ("TELINK")
  *
@@ -19,8 +19,8 @@
  *          WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  *          See the License for the specific language governing permissions and
  *          limitations under the License.
+ *
  *******************************************************************************************************/
-
 #pragma once
 
 
@@ -35,8 +35,6 @@
 #ifndef DEBUG_GPIO_ENABLE
 #define DEBUG_GPIO_ENABLE  								0
 #endif
-
-
 
 #if (DEBUG_GPIO_ENABLE)
 	#ifdef GPIO_CHN0
@@ -248,11 +246,3 @@
 	#define DBG_CHN15_HIGH
 	#define DBG_CHN15_TOGGLE
 #endif
-
-
-
-
-
-
-
-

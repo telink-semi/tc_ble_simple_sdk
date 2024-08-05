@@ -1,13 +1,12 @@
 /********************************************************************************************************
- * @file	compiler.h
+ * @file    compiler.h
  *
- * @brief	This is the header file for B80
+ * @brief   This is the header file for B80
  *
- * @author	Driver Group
- * @date	2021
+ * @author  Driver Group
+ * @date    2021
  *
  * @par     Copyright (c) 2021, Telink Semiconductor (Shanghai) Co., Ltd. ("TELINK")
- *          All rights reserved.
  *
  *          Licensed under the Apache License, Version 2.0 (the "License");
  *          you may not use this file except in compliance with the License.
@@ -33,17 +32,20 @@
 #define _attribute_packed_					__attribute__((packed))
 #define _attribute_aligned_(s)				__attribute__((aligned(s)))
 #define _attribute_session_(s)				__attribute__((section(s)))
-#define _attribute_ram_code_sec_      		__attribute__((section(".ram_code")))
-#define _attribute_ram_code_sec_noinline_	__attribute__((section(".ram_code"))) __attribute__((noinline))
+#define _attribute_ram_code_  			_attribute_session_(".ram_code")
+#define _attribute_ram_code_noinline_	__attribute__((section(".ram_code"))) __attribute__((noinline))
 #define _attribute_text_sec_   				__attribute__((section(".text")))
 #define _attribute_custom_code_  			_attribute_session_(".custom") volatile
 #define _attribute_no_inline_   			__attribute__((noinline))
 #define _inline_ 							inline
 
+#define _attribute_ram_code_sec_      		__attribute__((section(".ram_code")))
+#define _attribute_ram_code_sec_noinline_	__attribute__((section(".ram_code"))) __attribute__((noinline))
 #ifndef	BLC_PM_DEEP_RETENTION_MODE_EN
 #define	BLC_PM_DEEP_RETENTION_MODE_EN		0
 #endif
 
 
 #define _attribute_data_retention_
+#define _attribute_ble_data_retention_
 #define _attribute_data_reload_         __attribute__((section(".data_reload")))

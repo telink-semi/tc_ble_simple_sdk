@@ -1,10 +1,10 @@
 /********************************************************************************************************
- * @file     div_mod.S
+ * @file    div_mod.S
  *
- * @brief    This is the boot file for BLE SDK
+ * @brief   This is the boot file for BLE SDK
  *
- * @author	 BLE GROUP
- * @date         12,2021
+ * @author  BLE GROUP
+ * @date    12,2021
  *
  * @par     Copyright (c) 2021, Telink Semiconductor (Shanghai) Co., Ltd. ("TELINK")
  *
@@ -19,8 +19,8 @@
  *          WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  *          See the License for the specific language governing permissions and
  *          limitations under the License.
+ *
  *******************************************************************************************************/
-
 #define 	UDIV		#0
 #define 	SDIV		#1
 #define 	UMOD		#2
@@ -115,7 +115,8 @@ div:
 	.word(0x800668)
 	.size	div, .-div
 
-#if 1
+//removed
+#if 0
 	.align	4
 	.global	mul32x32_64
 	.thumb_func
@@ -128,7 +129,7 @@ mul32x32_64:
     .word(0x008006fc)
 #endif
 
-#if 1
+#if 0
 	.align	4
 	.global	mz_mul1
 	.thumb_func
@@ -324,7 +325,7 @@ MZ_MUL2_END:
 
 
 
-#if 1
+#if 0
 
 ///////// asm crc24 function 2
 	.section	.ram_code,"ax" //in ram code

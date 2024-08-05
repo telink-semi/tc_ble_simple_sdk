@@ -1,10 +1,10 @@
 /********************************************************************************************************
- * @file     hci.h
+ * @file    hci.h
  *
- * @brief    This is the header file for BLE SDK
+ * @brief   This is the header file for BLE SDK
  *
- * @author	 BLE GROUP
- * @date         12,2021
+ * @author  BLE GROUP
+ * @date    12,2021
  *
  * @par     Copyright (c) 2021, Telink Semiconductor (Shanghai) Co., Ltd. ("TELINK")
  *
@@ -19,8 +19,8 @@
  *          WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  *          See the License for the specific language governing permissions and
  *          limitations under the License.
+ *
  *******************************************************************************************************/
-
 #pragma once
 
 
@@ -63,7 +63,12 @@ typedef enum{
  * @brief	this function is used to register HCI Event handler Callback function
  */
 typedef int (*hci_event_handler_t)(u32 h, u8 *para, int n);
-extern hci_event_handler_t blc_hci_event_handler;
+
+
+/**
+ * @brief	Controller data handler callback Declaration
+ */
+typedef int (*hci_data_handler_t) (u16 conn, u8 * p);
 
 
 
@@ -88,7 +93,12 @@ ble_sts_t	blc_hci_setEventMask_cmd(u32 evtMask);      //eventMask: BT/EDR
 ble_sts_t	blc_hci_le_setEventMask_cmd(u32 evtMask);   //eventMask: LE event  0~31
 
 
-
+/**
+ * @brief      this function is used to set HCI LE EVENT mask
+ * @param[in]  evtMask  -  HCI LE EVENT mask(BIT<32-63>)
+ * @return     0
+ */
+ble_sts_t 	blc_hci_le_setEventMask_2_cmd(u32 evtMask_2);   //eventMask: LE event 32~63
 
 
 
@@ -109,6 +119,14 @@ ble_sts_t 	bls_hci_mod_setEventMask_cmd(u32 evtMask); //eventMask: module specia
  */
 void 		blc_hci_registerControllerEventHandler(hci_event_handler_t handler);
 
+
+
+/**
+ * @brief      This function is used to register ACL data transmission to Host for processing callback function.
+ * @param[in]  handler - hci_data_handler_t
+ * @return     none.
+ */
+void 		blc_hci_registerControllerDataHandler (hci_data_handler_t handle);
 
 
 /**
