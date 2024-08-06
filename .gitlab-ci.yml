@@ -269,52 +269,73 @@ fossid:
     - "./doc"
   when: manual
 
-release_sdk_S1:
+release_sdk_P5_B80:
   <<: *release_sdk_template
   variables:
-    PACK_NAME: "tc_ble_simple_sdk_8208_test_alaph_0724_S1"
+    PACK_NAME: "tc_ble_simple_sdk_B80_V3.4.2.0_P5"
 
-release_sdk_S2:
+release_sdk_P10_B80:
   <<: *release_sdk_template
   variables:
-    PACK_NAME: "tc_ble_simple_sdk_8208_test_alaph_0724_S2"
+    PACK_NAME: "tc_ble_simple_sdk_B80_V3.4.2.0_P10"
 
-release_sdk_S3:
+release_sdk_P12_B80:
   <<: *release_sdk_template
   variables:
-    PACK_NAME: "tc_ble_simple_sdk_8208_test_alaph_0724_S3"
+    PACK_NAME: "tc_ble_simple_sdk_B80_V3.4.2.0_P12"
 
-release_sdk_custom_made_S0:
+release_sdk_custom_made_P0_B80:
   <<: *release_sdk_template
   variables:
-    PACK_NAME: "tc_ble_simple_sdk_8208_test_alaph_0724_custom_made_S0"
+    PACK_NAME: "tc_ble_simple_sdk_B80_V3.4.2.0_custom_made_P0"
 
-release_sdk_custom_made_S1:
+release_sdk_custom_made_P5_B80:
   <<: *release_sdk_template
   variables:
-    PACK_NAME: "tc_ble_simple_sdk_8208_test_alaph_0724_custom_made_S1"
+    PACK_NAME: "tc_ble_simple_sdk_B80_V3.4.2.0_custom_made_P5"
 
-release_sdk_custom_made_S2:
+release_sdk_custom_made_P10_B80:
   <<: *release_sdk_template
   variables:
-    PACK_NAME: "tc_ble_simple_sdk_8208_test_alaph_0724_custom_made_S2"
+    PACK_NAME: "tc_ble_simple_sdk_B80_V3.4.2.0_custom_made_P10"
 
-release_sdk_custom_made_S3:
+release_sdk_custom_made_P12_B80:
   <<: *release_sdk_template
   variables:
-    PACK_NAME: "tc_ble_simple_sdk_8208_test_alaph_0724_custom_made_S3"
+    PACK_NAME: "tc_ble_simple_sdk_B80_V3.4.2.0_custom_made_P12"
 
-release_b80b_sdk_S1:
+release_sdk_P5_B80B:
   <<: *release_sdk_template
   variables:
-    PACK_NAME: "telink_b80b_ble_single_connection_sdk_test_alaph_0724_S1"
+    PACK_NAME: "tc_ble_simple_sdk_B80B_V3.4.2.0_P5"
 
-release_b80b_sdk_S2:
+release_sdk_P10_B80B:
   <<: *release_sdk_template
   variables:
-    PACK_NAME: "telink_b80b_ble_single_connection_sdk_test_alaph_0724_S2"
+    PACK_NAME: "tc_ble_simple_sdk_B80B_V3.4.2.0_P10"
 
-release_b80b_sdk_S3:
+release_sdk_P12_B80B:
   <<: *release_sdk_template
   variables:
-    PACK_NAME: "telink_b80b_ble_single_connection_sdk_test_alaph_0724_S3"
+    PACK_NAME: "tc_ble_simple_sdk_B80B_V3.4.2.0_P12"
+
+release_sdk_custom_made_P0_B80B:
+  <<: *release_sdk_template
+  variables:
+    PACK_NAME: "tc_ble_simple_sdk_B80B_V3.4.2.0_custom_made_P0"
+
+release_sdk_custom_made_P5_B80B:
+  <<: *release_sdk_template
+  variables:
+    PACK_NAME: "tc_ble_simple_sdk_B80B_V3.4.2.0_custom_made_P5"
+
+release_sdk_custom_made_P10_B80B:
+  <<: *release_sdk_template
+  variables:
+    PACK_NAME: "tc_ble_simple_sdk_B80B_V3.4.2.0_custom_made_P10"
+
+release_sdk_custom_made_P12_B80B:
+  <<: *release_sdk_template
+  variables:
+    PACK_NAME: "tc_ble_simple_sdk_B80B_V3.4.2.0_custom_made_P12"
+

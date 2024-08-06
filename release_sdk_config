@@ -1,7 +1,7 @@
-[release_sdk_S1]
+[release_sdk_P5_B80]
 
-TAG_NAME            test_alaph_0724
-PACKAGE_NAME        telink_b80_ble_single_connection_sdk_test_alaph_0724_S1
+TAG_NAME            V3.4.2.0
+PACKAGE_NAME        tc_ble_simple_sdk_B80_V3.4.2.0_P5
 SRC_GIT_URL         http://192.168.48.36/src/ble/telink_b80_ble_single_connection_src.git
 
 #                   .cproject                                project_name                    			module
@@ -9,7 +9,27 @@ CPROJECT            ./ble_lt_b80/.cproject        			 telink_b80_ble_single_conn
 MAKE_WITHOUT_DRIVER_LIB                                      1
 
 #                   path                                     	macro                             macro_val
-MACRO               ./ble_lt_b80/stack/ble/ble_config.h    OTP_PROTECTION_CODE_SELECT        OTP_PROTECTION_CODE_S1
+MACRO               ./ble_lt_b80/stack/ble/ble_config.h    OTP_PROTECTION_CODE_SELECT        OTP_PROTECTION_CODE_P5
+
+LIB_OBJ             ./ble_lt_b80/8208_ble_sample/drivers/lib
+LIB_OBJ             ./ble_lt_b80/8208_ble_sample/drivers/driver_ext/driver_lib
+LIB_OBJ             ./ble_lt_b80/8208_ble_sample/stack
+LIB_OBJ             ./ble_lt_b80/8208_ble_sample/algorithm
+REPLACED_LIB_PATH   ./b80_ble_sdk/proj_lib/liblt_8208.a
+[release_sdk_P5_B80_end]
+
+[release_sdk_P10_B80]
+
+TAG_NAME            V3.4.2.0
+PACKAGE_NAME        tc_ble_simple_sdk_B80_V3.4.2.0_P10
+SRC_GIT_URL         http://192.168.48.36/src/ble/telink_b80_ble_single_connection_src.git
+
+#                   .cproject                                project_name                    			module
+CPROJECT            ./ble_lt_b80/.cproject        			 telink_b80_ble_single_connection_src       8208_ble_sample            
+MAKE_WITHOUT_DRIVER_LIB                                      1
+
+#                   path                                     	macro                             macro_val
+MACRO               ./ble_lt_b80/stack/ble/ble_config.h    OTP_PROTECTION_CODE_SELECT        OTP_PROTECTION_CODE_P10
 
 LIB_OBJ             ./ble_lt_b80/8208_ble_sample/drivers/lib
 LIB_OBJ             ./ble_lt_b80/8208_ble_sample/drivers/driver_ext/driver_lib
@@ -17,12 +37,12 @@ LIB_OBJ             ./ble_lt_b80/8208_ble_sample/stack
 LIB_OBJ             ./ble_lt_b80/8208_ble_sample/algorithm
 REPLACED_LIB_PATH   ./b80_ble_sdk/proj_lib/liblt_8208.a
 
-[release_sdk_S1_end]
+[release_sdk_P10_B80_end]
 
-[release_sdk_S2]
+[release_sdk_P12_B80]
 
-TAG_NAME            test_alaph_0724
-PACKAGE_NAME        telink_b80_ble_single_connection_sdk_test_alaph_0724_S2
+TAG_NAME            V3.4.2.0
+PACKAGE_NAME        tc_ble_simple_sdk_B80_V3.4.2.0_P12
 SRC_GIT_URL         http://192.168.48.36/src/ble/telink_b80_ble_single_connection_src.git
 
 #                   .cproject                                project_name                    			module
@@ -30,7 +50,7 @@ CPROJECT            ./ble_lt_b80/.cproject        			 telink_b80_ble_single_conn
 MAKE_WITHOUT_DRIVER_LIB                                      1
 
 #                   path                                     	macro                             macro_val
-MACRO               ./ble_lt_b80/stack/ble/ble_config.h    OTP_PROTECTION_CODE_SELECT        OTP_PROTECTION_CODE_S2
+MACRO               ./ble_lt_b80/stack/ble/ble_config.h    OTP_PROTECTION_CODE_SELECT        OTP_PROTECTION_CODE_P12
 
 LIB_OBJ             ./ble_lt_b80/8208_ble_sample/drivers/lib
 LIB_OBJ             ./ble_lt_b80/8208_ble_sample/drivers/driver_ext/driver_lib
@@ -38,12 +58,12 @@ LIB_OBJ             ./ble_lt_b80/8208_ble_sample/stack
 LIB_OBJ             ./ble_lt_b80/8208_ble_sample/algorithm
 REPLACED_LIB_PATH   ./b80_ble_sdk/proj_lib/liblt_8208.a
 
-[release_sdk_S2_end]
+[release_sdk_P12_B80_end]
 
-[release_sdk_S3]
+[release_sdk_custom_made_P0_B80]
 
-TAG_NAME            test_alaph_0724
-PACKAGE_NAME        telink_b80_ble_single_connection_sdk_test_alaph_0724_S3
+TAG_NAME            V3.4.2.0
+PACKAGE_NAME        tc_ble_simple_sdk_B80_V3.4.2.0_custom_made_P0
 SRC_GIT_URL         http://192.168.48.36/src/ble/telink_b80_ble_single_connection_src.git
 
 #                   .cproject                                project_name                    			module
@@ -51,28 +71,7 @@ CPROJECT            ./ble_lt_b80/.cproject        			 telink_b80_ble_single_conn
 MAKE_WITHOUT_DRIVER_LIB                                      1
 
 #                   path                                     	macro                             macro_val
-MACRO               ./ble_lt_b80/stack/ble/ble_config.h    OTP_PROTECTION_CODE_SELECT        OTP_PROTECTION_CODE_S3
-
-LIB_OBJ             ./ble_lt_b80/8208_ble_sample/drivers/lib
-LIB_OBJ             ./ble_lt_b80/8208_ble_sample/drivers/driver_ext/driver_lib
-LIB_OBJ             ./ble_lt_b80/8208_ble_sample/stack
-LIB_OBJ             ./ble_lt_b80/8208_ble_sample/algorithm
-REPLACED_LIB_PATH   ./b80_ble_sdk/proj_lib/liblt_8208.a
-
-[release_sdk_S3_end]
-
-[release_sdk_custom_made_S0]
-
-TAG_NAME            test_alaph_0724
-PACKAGE_NAME        telink_b80_ble_single_connection_sdk_test_alaph_0724_custom_made_S0
-SRC_GIT_URL         http://192.168.48.36/src/ble/telink_b80_ble_single_connection_src.git
-
-#                   .cproject                                project_name                    			module
-CPROJECT            ./ble_lt_b80/.cproject        			 telink_b80_ble_single_connection_src       8208_ble_sample            
-MAKE_WITHOUT_DRIVER_LIB                                      1
-
-#                   path                                     	macro                             macro_val
-MACRO               ./ble_lt_b80/stack/ble/ble_config.h    OTP_PROTECTION_CODE_SELECT        OTP_PROTECTION_CODE_S0
+MACRO               ./ble_lt_b80/stack/ble/ble_config.h    OTP_PROTECTION_CODE_SELECT        OTP_PROTECTION_CODE_P0
 MACRO               ./ble_lt_b80/stack/ble/ble_config.h			KEYBOARD_MOUSE_APPLICATION		  1
 
 LIB_OBJ             ./ble_lt_b80/8208_ble_sample/drivers/lib
@@ -81,12 +80,12 @@ LIB_OBJ             ./ble_lt_b80/8208_ble_sample/stack
 LIB_OBJ             ./ble_lt_b80/8208_ble_sample/algorithm
 REPLACED_LIB_PATH   ./b80_ble_sdk/proj_lib/liblt_8208.a
 
-[release_sdk_custom_made_S0_end]
+[release_sdk_custom_made_P0_B80_end]
 
-[release_sdk_custom_made_S1]
+[release_sdk_custom_made_P5_B80]
 
-TAG_NAME            test_alaph_0724
-PACKAGE_NAME        telink_b80_ble_single_connection_sdk_test_alaph_0724_custom_made_S1
+TAG_NAME            V3.4.2.0
+PACKAGE_NAME        tc_ble_simple_sdk_B80_V3.4.2.0_custom_made_P5
 SRC_GIT_URL         http://192.168.48.36/src/ble/telink_b80_ble_single_connection_src.git
 
 #                   .cproject                                project_name                    			module
@@ -94,7 +93,7 @@ CPROJECT            ./ble_lt_b80/.cproject        			 telink_b80_ble_single_conn
 MAKE_WITHOUT_DRIVER_LIB                                      1
 
 #                   path                                     	macro                             macro_val
-MACRO               ./ble_lt_b80/stack/ble/ble_config.h    OTP_PROTECTION_CODE_SELECT        OTP_PROTECTION_CODE_S1
+MACRO               ./ble_lt_b80/stack/ble/ble_config.h    OTP_PROTECTION_CODE_SELECT        OTP_PROTECTION_CODE_P5
 MACRO               ./ble_lt_b80/stack/ble/ble_config.h			KEYBOARD_MOUSE_APPLICATION		  1
 
 LIB_OBJ             ./ble_lt_b80/8208_ble_sample/drivers/lib
@@ -103,12 +102,12 @@ LIB_OBJ             ./ble_lt_b80/8208_ble_sample/stack
 LIB_OBJ             ./ble_lt_b80/8208_ble_sample/algorithm
 REPLACED_LIB_PATH   ./b80_ble_sdk/proj_lib/liblt_8208.a
 
-[release_sdk_custom_made_S1_end]
+[release_sdk_custom_made_P5_B80_end]
 
-[release_sdk_custom_made_S2]
+[release_sdk_custom_made_P10_B80]
 
-TAG_NAME            test_alaph_0724
-PACKAGE_NAME        telink_b80_ble_single_connection_sdk_test_alaph_0724_custom_made_S2
+TAG_NAME            V3.4.2.0
+PACKAGE_NAME        tc_ble_simple_sdk_B80_V3.4.2.0_custom_made_P10
 SRC_GIT_URL         http://192.168.48.36/src/ble/telink_b80_ble_single_connection_src.git
 
 #                   .cproject                                project_name                    			module
@@ -116,7 +115,7 @@ CPROJECT            ./ble_lt_b80/.cproject        			 telink_b80_ble_single_conn
 MAKE_WITHOUT_DRIVER_LIB                                      1
 
 #                   path                                     	macro                             macro_val
-MACRO               ./ble_lt_b80/stack/ble/ble_config.h    OTP_PROTECTION_CODE_SELECT        OTP_PROTECTION_CODE_S2
+MACRO               ./ble_lt_b80/stack/ble/ble_config.h    OTP_PROTECTION_CODE_SELECT        OTP_PROTECTION_CODE_P10
 MACRO               ./ble_lt_b80/stack/ble/ble_config.h			KEYBOARD_MOUSE_APPLICATION		  1
 
 LIB_OBJ             ./ble_lt_b80/8208_ble_sample/drivers/lib
@@ -125,12 +124,12 @@ LIB_OBJ             ./ble_lt_b80/8208_ble_sample/stack
 LIB_OBJ             ./ble_lt_b80/8208_ble_sample/algorithm
 REPLACED_LIB_PATH   ./b80_ble_sdk/proj_lib/liblt_8208.a
 
-[release_sdk_custom_made_S2_end]
+[release_sdk_custom_made_P10_B80_end]
 
-[release_sdk_custom_made_S3]
+[release_sdk_custom_made_P12_B80]
 
-TAG_NAME            test_alaph_0724
-PACKAGE_NAME        telink_b80_ble_single_connection_sdk_test_alaph_0724_custom_made_S3
+TAG_NAME            V3.4.2.0
+PACKAGE_NAME        tc_ble_simple_sdk_B80_V3.4.2.0_custom_made_P12
 SRC_GIT_URL         http://192.168.48.36/src/ble/telink_b80_ble_single_connection_src.git
 
 #                   .cproject                                project_name                    			module
@@ -138,7 +137,7 @@ CPROJECT            ./ble_lt_b80/.cproject        			 telink_b80_ble_single_conn
 MAKE_WITHOUT_DRIVER_LIB                                      1
 
 #                   path                                     	macro                             macro_val
-MACRO               ./ble_lt_b80/stack/ble/ble_config.h    OTP_PROTECTION_CODE_SELECT        OTP_PROTECTION_CODE_S3
+MACRO               ./ble_lt_b80/stack/ble/ble_config.h    OTP_PROTECTION_CODE_SELECT        OTP_PROTECTION_CODE_P12
 MACRO               ./ble_lt_b80/stack/ble/ble_config.h			KEYBOARD_MOUSE_APPLICATION		  1
 
 LIB_OBJ             ./ble_lt_b80/8208_ble_sample/drivers/lib
@@ -147,12 +146,14 @@ LIB_OBJ             ./ble_lt_b80/8208_ble_sample/stack
 LIB_OBJ             ./ble_lt_b80/8208_ble_sample/algorithm
 REPLACED_LIB_PATH   ./b80_ble_sdk/proj_lib/liblt_8208.a
 
-[release_sdk_custom_made_S3_end]
+[release_sdk_custom_made_P12_B80_end]
 
-[release_b80b_sdk_S1]
 
-TAG_NAME            test_alaph_0724
-PACKAGE_NAME        telink_b80b_ble_single_connection_sdk_test_alaph_0724_S1
+
+[release_sdk_P5_B80B]
+
+TAG_NAME            V3.4.2.0
+PACKAGE_NAME        tc_ble_simple_sdk_B80B_V3.4.2.0_P5
 SRC_GIT_URL         http://192.168.48.36/src/ble/telink_b80_ble_single_connection_src.git
 
 #                   .cproject                                project_name                    			module
@@ -160,7 +161,7 @@ CPROJECT            ./ble_lt_b80/.cproject        			 telink_b80_ble_single_conn
 MAKE_WITHOUT_DRIVER_LIB                                      1
 
 #                   path                                     	macro                             macro_val
-MACRO               ./ble_lt_b80/stack/ble/ble_config.h    OTP_PROTECTION_CODE_SELECT        OTP_PROTECTION_CODE_S1
+MACRO               ./ble_lt_b80/stack/ble/ble_config.h    OTP_PROTECTION_CODE_SELECT        OTP_PROTECTION_CODE_P5
 
 LIB_OBJ             ./ble_lt_b80/8208B_ble_sample/drivers/lib
 LIB_OBJ             ./ble_lt_b80/8208B_ble_sample/drivers/driver_ext/driver_lib
@@ -168,12 +169,13 @@ LIB_OBJ             ./ble_lt_b80/8208B_ble_sample/stack
 LIB_OBJ             ./ble_lt_b80/8208B_ble_sample/algorithm
 REPLACED_LIB_PATH   ./b80_ble_sdk/proj_lib/liblt_8208B.a
 
-[release_b80b_sdk_S1_end]
 
-[release_b80b_sdk_S2]
+[release_sdk_P5_B80B_end]
 
-TAG_NAME            test_alaph_0724
-PACKAGE_NAME        telink_b80b_ble_single_connection_sdk_test_alaph_0724_S2
+[release_sdk_P10_B80B]
+
+TAG_NAME            V3.4.2.0
+PACKAGE_NAME        tc_ble_simple_sdk_B80B_V3.4.2.0_P10
 SRC_GIT_URL         http://192.168.48.36/src/ble/telink_b80_ble_single_connection_src.git
 
 #                   .cproject                                project_name                    			module
@@ -181,7 +183,7 @@ CPROJECT            ./ble_lt_b80/.cproject        			 telink_b80_ble_single_conn
 MAKE_WITHOUT_DRIVER_LIB                                      1
 
 #                   path                                     	macro                             macro_val
-MACRO               ./ble_lt_b80/stack/ble/ble_config.h    OTP_PROTECTION_CODE_SELECT        OTP_PROTECTION_CODE_S2
+MACRO               ./ble_lt_b80/stack/ble/ble_config.h    OTP_PROTECTION_CODE_SELECT        OTP_PROTECTION_CODE_P10
 
 LIB_OBJ             ./ble_lt_b80/8208B_ble_sample/drivers/lib
 LIB_OBJ             ./ble_lt_b80/8208B_ble_sample/drivers/driver_ext/driver_lib
@@ -189,12 +191,12 @@ LIB_OBJ             ./ble_lt_b80/8208B_ble_sample/stack
 LIB_OBJ             ./ble_lt_b80/8208B_ble_sample/algorithm
 REPLACED_LIB_PATH   ./b80_ble_sdk/proj_lib/liblt_8208B.a
 
-[release_b80b_sdk_S2_end]
+[release_sdk_P10_B80B_end]
 
-[release_b80b_sdk_S3]
+[release_sdk_P12_B80B]
 
-TAG_NAME            test_alaph_0724
-PACKAGE_NAME        telink_b80b_ble_single_connection_sdk_test_alaph_0724_S3
+TAG_NAME            V3.4.2.0
+PACKAGE_NAME        tc_ble_simple_sdk_B80B_V3.4.2.0_P12
 SRC_GIT_URL         http://192.168.48.36/src/ble/telink_b80_ble_single_connection_src.git
 
 #                   .cproject                                project_name                    			module
@@ -202,7 +204,7 @@ CPROJECT            ./ble_lt_b80/.cproject        			 telink_b80_ble_single_conn
 MAKE_WITHOUT_DRIVER_LIB                                      1
 
 #                   path                                     	macro                             macro_val
-MACRO               ./ble_lt_b80/stack/ble/ble_config.h    OTP_PROTECTION_CODE_SELECT        OTP_PROTECTION_CODE_S3
+MACRO               ./ble_lt_b80/stack/ble/ble_config.h    OTP_PROTECTION_CODE_SELECT        OTP_PROTECTION_CODE_P12
 
 LIB_OBJ             ./ble_lt_b80/8208B_ble_sample/drivers/lib
 LIB_OBJ             ./ble_lt_b80/8208B_ble_sample/drivers/driver_ext/driver_lib
@@ -210,4 +212,91 @@ LIB_OBJ             ./ble_lt_b80/8208B_ble_sample/stack
 LIB_OBJ             ./ble_lt_b80/8208B_ble_sample/algorithm
 REPLACED_LIB_PATH   ./b80_ble_sdk/proj_lib/liblt_8208B.a
 
-[release_b80b_sdk_S3_end]
+[release_sdk_P12_B80B_end]
+
+[release_sdk_custom_made_P0_B80B]
+
+TAG_NAME            V3.4.2.0
+PACKAGE_NAME        tc_ble_simple_sdk_B80B_V3.4.2.0_custom_made_P0
+SRC_GIT_URL         http://192.168.48.36/src/ble/telink_b80_ble_single_connection_src.git
+
+#                   .cproject                                project_name                    			module
+CPROJECT            ./ble_lt_b80/.cproject        			 telink_b80_ble_single_connection_src       8208B_ble_sample            
+MAKE_WITHOUT_DRIVER_LIB                                      1
+
+#                   path                                     	macro                             macro_val
+MACRO               ./ble_lt_b80/stack/ble/ble_config.h    OTP_PROTECTION_CODE_SELECT        OTP_PROTECTION_CODE_P0
+MACRO               ./ble_lt_b80/stack/ble/ble_config.h			KEYBOARD_MOUSE_APPLICATION		  1
+LIB_OBJ             ./ble_lt_b80/8208B_ble_sample/drivers/lib
+LIB_OBJ             ./ble_lt_b80/8208B_ble_sample/drivers/driver_ext/driver_lib
+LIB_OBJ             ./ble_lt_b80/8208B_ble_sample/stack
+LIB_OBJ             ./ble_lt_b80/8208B_ble_sample/algorithm
+REPLACED_LIB_PATH   ./b80_ble_sdk/proj_lib/liblt_8208B.a
+
+[release_sdk_custom_made_P0_B80B_end]
+
+[release_sdk_custom_made_P5_B80B]
+
+TAG_NAME            V3.4.2.0
+PACKAGE_NAME        tc_ble_simple_sdk_B80B_V3.4.2.0_custom_made_P5
+SRC_GIT_URL         http://192.168.48.36/src/ble/telink_b80_ble_single_connection_src.git
+
+#                   .cproject                                project_name                    			module
+CPROJECT            ./ble_lt_b80/.cproject        			 telink_b80_ble_single_connection_src       8208B_ble_sample            
+MAKE_WITHOUT_DRIVER_LIB                                      1
+
+#                   path                                     	macro                             macro_val
+MACRO               ./ble_lt_b80/stack/ble/ble_config.h    OTP_PROTECTION_CODE_SELECT        OTP_PROTECTION_CODE_P5
+MACRO               ./ble_lt_b80/stack/ble/ble_config.h			KEYBOARD_MOUSE_APPLICATION		  1
+
+LIB_OBJ             ./ble_lt_b80/8208B_ble_sample/drivers/lib
+LIB_OBJ             ./ble_lt_b80/8208B_ble_sample/drivers/driver_ext/driver_lib
+LIB_OBJ             ./ble_lt_b80/8208B_ble_sample/stack
+LIB_OBJ             ./ble_lt_b80/8208B_ble_sample/algorithm
+REPLACED_LIB_PATH   ./b80_ble_sdk/proj_lib/liblt_8208B.a
+
+[release_sdk_custom_made_P5_B80B_end]
+
+[release_sdk_custom_made_P10_B80B]
+
+TAG_NAME            V3.4.2.0
+PACKAGE_NAME        tc_ble_simple_sdk_B80B_V3.4.2.0_custom_made_P10
+SRC_GIT_URL         http://192.168.48.36/src/ble/telink_b80_ble_single_connection_src.git
+
+#                   .cproject                                project_name                    			module
+CPROJECT            ./ble_lt_b80/.cproject        			 telink_b80_ble_single_connection_src       8208B_ble_sample            
+MAKE_WITHOUT_DRIVER_LIB                                      1
+
+#                   path                                     	macro                             macro_val
+MACRO               ./ble_lt_b80/stack/ble/ble_config.h    OTP_PROTECTION_CODE_SELECT        OTP_PROTECTION_CODE_P10
+MACRO               ./ble_lt_b80/stack/ble/ble_config.h			KEYBOARD_MOUSE_APPLICATION		  1
+
+LIB_OBJ             ./ble_lt_b80/8208B_ble_sample/drivers/lib
+LIB_OBJ             ./ble_lt_b80/8208B_ble_sample/drivers/driver_ext/driver_lib
+LIB_OBJ             ./ble_lt_b80/8208B_ble_sample/stack
+LIB_OBJ             ./ble_lt_b80/8208B_ble_sample/algorithm
+REPLACED_LIB_PATH   ./b80_ble_sdk/proj_lib/liblt_8208B.a
+
+[release_sdk_custom_made_P10_B80B_end]
+
+[release_sdk_custom_made_P12_B80B]
+
+TAG_NAME            V3.4.2.0
+PACKAGE_NAME        tc_ble_simple_sdk_B80B_V3.4.2.0_custom_made_P12
+SRC_GIT_URL         http://192.168.48.36/src/ble/telink_b80_ble_single_connection_src.git
+
+#                   .cproject                                project_name                    			module
+CPROJECT            ./ble_lt_b80/.cproject        			 telink_b80_ble_single_connection_src       8208B_ble_sample            
+MAKE_WITHOUT_DRIVER_LIB                                      1
+
+#                   path                                     	macro                             macro_val
+MACRO               ./ble_lt_b80/stack/ble/ble_config.h    OTP_PROTECTION_CODE_SELECT        OTP_PROTECTION_CODE_P12
+MACRO               ./ble_lt_b80/stack/ble/ble_config.h			KEYBOARD_MOUSE_APPLICATION		  1
+
+LIB_OBJ             ./ble_lt_b80/8208B_ble_sample/drivers/lib
+LIB_OBJ             ./ble_lt_b80/8208B_ble_sample/drivers/driver_ext/driver_lib
+LIB_OBJ             ./ble_lt_b80/8208B_ble_sample/stack
+LIB_OBJ             ./ble_lt_b80/8208B_ble_sample/algorithm
+REPLACED_LIB_PATH   ./b80_ble_sdk/proj_lib/liblt_8208B.a
+
+[release_sdk_custom_made_P12_B80B_end]
