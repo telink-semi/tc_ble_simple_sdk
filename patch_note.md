@@ -1,3 +1,25 @@
+## V3.4.1.2_Patch_0003
+### Features
+* N/A.
+
+### Bug Fixes
+* Fixed: When enabling the macro "SAVE_RAM_CODE_ENABLE", the MCU may not wake up properly with a very low probability at the end of sleep time.
+
+### BREAKING CHANGES
+* N/A.
+
+
+### Features
+* N/A.
+
+### Bug Fixes
+* 修复：当使能宏“SAVE_RAM_CODE_ENABLE”时，在睡眠时间结束时，极低概率下MCU可能不能正常唤醒。
+
+### BREAKING CHANGES
+* N/A.
+
+
+
 ## V3.4.1.2_Patch_0002
 
 ### Features
