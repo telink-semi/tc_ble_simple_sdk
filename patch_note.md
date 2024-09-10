@@ -3,7 +3,7 @@
 * N/A.
 
 ### Bug Fixes
-* Fixed: When the local device receives "LL_PHY_REQ" from the peer device, the data field of "LL_PHY_RSP" may be incorrect.
+* Fixed: When the local device enables 2M PHY and the peer device sends "LL_PHY_REQ", the data field of "LL_PHY_RSP" response from the local device is incorrect, which may cause the PHY update to fail.
 
 ### BREAKING CHANGES
 * N/A.
@@ -13,7 +13,7 @@
 * N/A.
 
 ### Bug Fixes
-* 修复：当本端设备收到来自对端设备的“LL_PHY_REQ”请求时，所回复的“LL_PHY_RSP”中的data字段可能是错误的。
+* 修复：当本端设备支持2M PHY，且对端设备发送“LL_PHY_REQ”时，本端设备回复的“LL_PHY_RSP”的data字段是错误的，这可能导致PHY更新失败。
 
 ### BREAKING CHANGES
 * N/A.
