@@ -3,7 +3,7 @@
 * N/A.
 
 ### Bug Fixes
-* Fixed: When the local device receives "PHY_REQ" from peer device, the "PHY_RSP" data field responded by the local device is incorrect.
+* Fixed: When the local device receives "LL_PHY_REQ" from the peer device, the data field of "LL_PHY_RSP" may be incorrect.
 
 ### BREAKING CHANGES
 * N/A.
@@ -13,7 +13,7 @@
 * N/A.
 
 ### Bug Fixes
-* 修复：当本端设备收到来自对端设备的“PHY_REQ”请求时，本端设备回复的“PHY_RSP”中的data字段是错误的。
+* 修复：当本端设备收到来自对端设备的“LL_PHY_REQ”请求时，所回复的“LL_PHY_RSP”中的data字段可能是错误的。
 
 ### BREAKING CHANGES
 * N/A.
