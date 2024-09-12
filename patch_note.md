@@ -3,7 +3,7 @@
 * N/A.
 
 ### Bug Fixes
-* Fixed: When the local device enables 2M PHY and the peer device sends "LL_PHY_REQ", the data field of "LL_PHY_RSP" response from the local device is incorrect, which may cause the PHY update to fail.
+* Fixed: When 2M PHY feature is enabled and the peer device sends "LL_PHY_REQ", the data field of "LL_PHY_RSP" response from the local device is incorrect, which will lead to PHY update failure or even ACL disconnection.
 
 ### BREAKING CHANGES
 * N/A.
@@ -13,7 +13,7 @@
 * N/A.
 
 ### Bug Fixes
-* 修复：当本端设备支持2M PHY，且对端设备发送“LL_PHY_REQ”时，本端设备回复的“LL_PHY_RSP”的data字段是错误的，这可能导致PHY更新失败。
+* 修复：当使能2M PHY，且对端设备发送“LL_PHY_REQ”时，本端设备回复的“LL_PHY_RSP”的data字段是错误的，这会导致PHY更新失败，甚至ACL断连。
 
 ### BREAKING CHANGES
 * N/A.
