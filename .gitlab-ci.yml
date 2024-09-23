@@ -145,8 +145,7 @@ fossid:
     - cp ci_common_shell/sdk_release_customize-2.0.sh ./
     - ls
   script:
-    - chmod +x ./sdk_release_customize-2.0.sh
-    - ./sdk_release_customize-2.0.sh ./release_sdk_config
+    - sdk_release_customize.sh ./release_sdk_config
   artifacts:
     name: "$PACK_NAME"
     expire_in: '3 yrs'
