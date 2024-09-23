@@ -122,9 +122,6 @@ fossid:
     - fossid*.txt
   when: manual
 
-stages:
-  - release_customize_sdk
-
 .release_sdk_template: &release_sdk_template
   variables:
     PACK_NAME: "release_sdk_template"
