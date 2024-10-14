@@ -82,7 +82,7 @@ void otp_set_auto_pce_tcs(SYS_CLK_TypeDef SYS_CLK);
  * @endverbatim
  * @return none.
  */
-_attribute_ram_code_sec_noinline_ void otp_set_auto_mode_clk(SYS_CLK_TypeDef SYS_CLK);
+void otp_set_auto_mode_clk(SYS_CLK_TypeDef SYS_CLK);
 #endif
 
 #if (MCU_CORE_B80)
@@ -126,7 +126,7 @@ _attribute_ram_code_sec_ static inline void otp_wait_done(void)
  * |   24M_RC        |     0x00          |      12M      |
  * @return	  none.
  */
-_attribute_ram_code_sec_noinline_ void otp_set_clk(SYS_CLK_TypeDef SYS_CLK);
+void otp_set_clk(SYS_CLK_TypeDef SYS_CLK);
 
 /**
  * @brief      This function serves to read data from OTP memory, all OTP read operations call this interface.
@@ -137,7 +137,7 @@ _attribute_ram_code_sec_noinline_ void otp_set_clk(SYS_CLK_TypeDef SYS_CLK);
  * @note
  *             - This interface is internal, please do not call this function directly.
  */
-_attribute_ram_code_sec_noinline_ void otp_read_data(unsigned int addr, unsigned int word_len, unsigned int *buff);
+void otp_read_data(unsigned int addr, unsigned int word_len, unsigned int *buff);
 #endif
 
 #endif /* OTP_BASE_H_ */

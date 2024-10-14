@@ -206,7 +206,7 @@ void user_init_normal(void)
 void host_pair_unpair_proc(void)
 {
 
-#if (!BLE_HOST_SMP_ENABLE)
+#if (!BLE_HOST_SMP_ENABLE && ACL_CENTRAL_CUSTOM_PAIR_ENABLE)
     if(blm_manPair.manual_pair && clock_time_exceed(blm_manPair.pair_tick, 2000000)){  //@@
     	blm_manPair.manual_pair = 0;
     }
@@ -223,7 +223,7 @@ void host_pair_unpair_proc(void)
 
 				#if (BLE_HOST_SMP_ENABLE)
 					tbl_bond_slave_unpair_proc(cur_conn_device.mac_adrType, cur_conn_device.mac_addr); //by telink stack host smp
-				#else
+				#elif (ACL_CENTRAL_CUSTOM_PAIR_ENABLE)
 					user_tbl_salve_mac_unpair_proc();
 				#endif
 			}

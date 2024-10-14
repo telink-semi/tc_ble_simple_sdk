@@ -26,11 +26,6 @@
 #include "stack/ble/ble.h"
 
 
-/* connection device information, for Central(master) project only
- * No need to be placed in retention SRAM area, will not be compiled to Peripheral(Slave) project */
-dev_info_t 	cur_conn_device;
-
-
 /**
  * @brief		this function is used to Check if any Stack(Controller & Host) Initialization error after all BLE initialization done.
  * 			    attention that code will stuck in "while(1)" if any error detected in initialization, user need to find what error happens and then fix it.

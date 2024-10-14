@@ -62,8 +62,8 @@ build_sample:
     - which tc32-elf-gcc
     - chmod +x b80_ble_sdk/*.sh
     - date
-    - $TC32_ECLIPSE_BUILD  -data ${CI_PIPELINE_ID}_WS  -import ./b80_ble_sdk/  -cleanBuild tc_ble_simple_sdk_8208/8208_ble_sample
-    - $TC32_ECLIPSE_BUILD  -data ${CI_PIPELINE_ID}_WS  -import ./b80_ble_sdk/  -cleanBuild tc_ble_simple_sdk_8208/8208B_ble_sample
+    - $TELINK_IDE_BUILD  -data ${CI_PIPELINE_ID}_WS  -import ./b80_ble_sdk/  -cleanBuild tc_ble_simple_sdk_8208/8208_ble_sample
+    - $TELINK_IDE_BUILD  -data ${CI_PIPELINE_ID}_WS  -import ./b80_ble_sdk/  -cleanBuild tc_ble_simple_sdk_8208/8208B_ble_sample
     - date
 
 build_module:
@@ -76,8 +76,8 @@ build_module:
     - which tc32-elf-gcc
     - chmod +x b80_ble_sdk/*.sh
     - date
-    - $TC32_ECLIPSE_BUILD  -data ${CI_PIPELINE_ID}_WS  -import ./b80_ble_sdk/  -cleanBuild tc_ble_simple_sdk_8208/8208_module
-    - $TC32_ECLIPSE_BUILD  -data ${CI_PIPELINE_ID}_WS  -import ./b80_ble_sdk/  -cleanBuild tc_ble_simple_sdk_8208/8208B_module
+    - $TELINK_IDE_BUILD  -data ${CI_PIPELINE_ID}_WS  -import ./b80_ble_sdk/  -cleanBuild tc_ble_simple_sdk_8208/8208_module
+    - $TELINK_IDE_BUILD  -data ${CI_PIPELINE_ID}_WS  -import ./b80_ble_sdk/  -cleanBuild tc_ble_simple_sdk_8208/8208B_module
     - date
 
 build_master:
@@ -90,8 +90,8 @@ build_master:
     - which tc32-elf-gcc
     - chmod +x b80_ble_sdk/*.sh
     - date
-    - $TC32_ECLIPSE_BUILD  -data ${CI_PIPELINE_ID}_WS  -import ./b80_ble_sdk/  -cleanBuild tc_ble_simple_sdk_8208/8208_master
-    - $TC32_ECLIPSE_BUILD  -data ${CI_PIPELINE_ID}_WS  -import ./b80_ble_sdk/  -cleanBuild tc_ble_simple_sdk_8208/8208B_master
+    - $TELINK_IDE_BUILD  -data ${CI_PIPELINE_ID}_WS  -import ./b80_ble_sdk/  -cleanBuild tc_ble_simple_sdk_8208/8208_master
+    - $TELINK_IDE_BUILD  -data ${CI_PIPELINE_ID}_WS  -import ./b80_ble_sdk/  -cleanBuild tc_ble_simple_sdk_8208/8208B_master
     - date
     
 build_feature:
@@ -107,80 +107,93 @@ build_feature:
     - MACRO='FEATURE_TEST_MODE'
     - MACRO_VAL='TEST_ADVERTISING_IN_CONN_SLAVE_ROLE'
     - MACRO_PATH='./b80_ble_sdk/vendor/feature_test/feature_config.h'
-    - $TC32_ECLIPSE_BUILD  -data ${CI_PIPELINE_ID}_WS  -import ./b80_ble_sdk/  -cleanBuild tc_ble_simple_sdk_8208/8208_feature_test
-    - $TC32_ECLIPSE_BUILD  -data ${CI_PIPELINE_ID}_WS  -import ./b80_ble_sdk/  -cleanBuild tc_ble_simple_sdk_8208/8208B_feature_test
+    - sed  -i "/#define\s\+${MACRO}/c#define ${MACRO}\t\t${MACRO_VAL}" $MACRO_PATH
+    - $TELINK_IDE_BUILD  -data ${CI_PIPELINE_ID}_WS  -import ./b80_ble_sdk/  -cleanBuild tc_ble_simple_sdk_8208/8208_feature_test
+    - $TELINK_IDE_BUILD  -data ${CI_PIPELINE_ID}_WS  -import ./b80_ble_sdk/  -cleanBuild tc_ble_simple_sdk_8208/8208B_feature_test
     
     - MACRO='FEATURE_TEST_MODE'
     - MACRO_VAL='TEST_SCANNING_IN_ADV_AND_CONN_SLAVE_ROLE'
     - MACRO_PATH='./b80_ble_sdk/vendor/feature_test/feature_config.h'
-    - $TC32_ECLIPSE_BUILD  -data ${CI_PIPELINE_ID}_WS  -import ./b80_ble_sdk/  -cleanBuild tc_ble_simple_sdk_8208/8208_feature_test
-    - $TC32_ECLIPSE_BUILD  -data ${CI_PIPELINE_ID}_WS  -import ./b80_ble_sdk/  -cleanBuild tc_ble_simple_sdk_8208/8208B_feature_test
+    - sed  -i "/#define\s\+${MACRO}/c#define ${MACRO}\t\t${MACRO_VAL}" $MACRO_PATH
+    - $TELINK_IDE_BUILD  -data ${CI_PIPELINE_ID}_WS  -import ./b80_ble_sdk/  -cleanBuild tc_ble_simple_sdk_8208/8208_feature_test
+    - $TELINK_IDE_BUILD  -data ${CI_PIPELINE_ID}_WS  -import ./b80_ble_sdk/  -cleanBuild tc_ble_simple_sdk_8208/8208B_feature_test
     
     - MACRO='FEATURE_TEST_MODE'
     - MACRO_VAL='TEST_POWER_ADV'
     - MACRO_PATH='./b80_ble_sdk/vendor/feature_test/feature_config.h'
-    - $TC32_ECLIPSE_BUILD  -data ${CI_PIPELINE_ID}_WS  -import ./b80_ble_sdk/  -cleanBuild tc_ble_simple_sdk_8208/8208_feature_test
-    - $TC32_ECLIPSE_BUILD  -data ${CI_PIPELINE_ID}_WS  -import ./b80_ble_sdk/  -cleanBuild tc_ble_simple_sdk_8208/8208B_feature_test
+    - sed  -i "/#define\s\+${MACRO}/c#define ${MACRO}\t\t${MACRO_VAL}" $MACRO_PATH
+    - $TELINK_IDE_BUILD  -data ${CI_PIPELINE_ID}_WS  -import ./b80_ble_sdk/  -cleanBuild tc_ble_simple_sdk_8208/8208_feature_test
+    - $TELINK_IDE_BUILD  -data ${CI_PIPELINE_ID}_WS  -import ./b80_ble_sdk/  -cleanBuild tc_ble_simple_sdk_8208/8208B_feature_test
     
     - MACRO='FEATURE_TEST_MODE'
     - MACRO_VAL='TEST_GATT_SECURITY'
     - MACRO_PATH='./b80_ble_sdk/vendor/feature_test/feature_config.h'
-    - $TC32_ECLIPSE_BUILD  -data ${CI_PIPELINE_ID}_WS  -import ./b80_ble_sdk/  -cleanBuild tc_ble_simple_sdk_8208/8208_feature_test
-    - $TC32_ECLIPSE_BUILD  -data ${CI_PIPELINE_ID}_WS  -import ./b80_ble_sdk/  -cleanBuild tc_ble_simple_sdk_8208/8208B_feature_test
+    - sed  -i "/#define\s\+${MACRO}/c#define ${MACRO}\t\t${MACRO_VAL}" $MACRO_PATH
+    - $TELINK_IDE_BUILD  -data ${CI_PIPELINE_ID}_WS  -import ./b80_ble_sdk/  -cleanBuild tc_ble_simple_sdk_8208/8208_feature_test
+    - $TELINK_IDE_BUILD  -data ${CI_PIPELINE_ID}_WS  -import ./b80_ble_sdk/  -cleanBuild tc_ble_simple_sdk_8208/8208B_feature_test
     
     - MACRO='FEATURE_TEST_MODE'
     - MACRO_VAL='TEST_LL_DATA_LENGTH_EXTENSION_SLAVE'
     - MACRO_PATH='./b80_ble_sdk/vendor/feature_test/feature_config.h'
-    - $TC32_ECLIPSE_BUILD  -data ${CI_PIPELINE_ID}_WS  -import ./b80_ble_sdk/  -cleanBuild tc_ble_simple_sdk_8208/8208_feature_test
-    - $TC32_ECLIPSE_BUILD  -data ${CI_PIPELINE_ID}_WS  -import ./b80_ble_sdk/  -cleanBuild tc_ble_simple_sdk_8208/8208B_feature_test
+    - sed  -i "/#define\s\+${MACRO}/c#define ${MACRO}\t\t${MACRO_VAL}" $MACRO_PATH
+    - $TELINK_IDE_BUILD  -data ${CI_PIPELINE_ID}_WS  -import ./b80_ble_sdk/  -cleanBuild tc_ble_simple_sdk_8208/8208_feature_test
+    - $TELINK_IDE_BUILD  -data ${CI_PIPELINE_ID}_WS  -import ./b80_ble_sdk/  -cleanBuild tc_ble_simple_sdk_8208/8208B_feature_test
     
     - MACRO='FEATURE_TEST_MODE'
     - MACRO_VAL='TEST_LL_DATA_LENGTH_EXTENSION_MASTER'
     - MACRO_PATH='./b80_ble_sdk/vendor/feature_test/feature_config.h'
-    - $TC32_ECLIPSE_BUILD  -data ${CI_PIPELINE_ID}_WS  -import ./b80_ble_sdk/  -cleanBuild tc_ble_simple_sdk_8208/8208_feature_test
-    - $TC32_ECLIPSE_BUILD  -data ${CI_PIPELINE_ID}_WS  -import ./b80_ble_sdk/  -cleanBuild tc_ble_simple_sdk_8208/8208B_feature_test
+    - sed  -i "/#define\s\+${MACRO}/c#define ${MACRO}\t\t${MACRO_VAL}" $MACRO_PATH
+    - $TELINK_IDE_BUILD  -data ${CI_PIPELINE_ID}_WS  -import ./b80_ble_sdk/  -cleanBuild tc_ble_simple_sdk_8208/8208_feature_test
+    - $TELINK_IDE_BUILD  -data ${CI_PIPELINE_ID}_WS  -import ./b80_ble_sdk/  -cleanBuild tc_ble_simple_sdk_8208/8208B_feature_test
     
     - MACRO='FEATURE_TEST_MODE'
     - MACRO_VAL='TEST_BLE_PHY'
     - MACRO_PATH='./b80_ble_sdk/vendor/feature_test/feature_config.h'
-    - $TC32_ECLIPSE_BUILD  -data ${CI_PIPELINE_ID}_WS  -import ./b80_ble_sdk/  -cleanBuild tc_ble_simple_sdk_8208/8208_feature_test
-    - $TC32_ECLIPSE_BUILD  -data ${CI_PIPELINE_ID}_WS  -import ./b80_ble_sdk/  -cleanBuild tc_ble_simple_sdk_8208/8208B_feature_test
+    - sed  -i "/#define\s\+${MACRO}/c#define ${MACRO}\t\t${MACRO_VAL}" $MACRO_PATH
+    - $TELINK_IDE_BUILD  -data ${CI_PIPELINE_ID}_WS  -import ./b80_ble_sdk/  -cleanBuild tc_ble_simple_sdk_8208/8208_feature_test
+    - $TELINK_IDE_BUILD  -data ${CI_PIPELINE_ID}_WS  -import ./b80_ble_sdk/  -cleanBuild tc_ble_simple_sdk_8208/8208B_feature_test
     
     - MACRO='FEATURE_TEST_MODE'
     - MACRO_VAL='TEST_MD_MASTER'
     - MACRO_PATH='./b80_ble_sdk/vendor/feature_test/feature_config.h'
-    - $TC32_ECLIPSE_BUILD  -data ${CI_PIPELINE_ID}_WS  -import ./b80_ble_sdk/  -cleanBuild tc_ble_simple_sdk_8208/8208_feature_test
-    - $TC32_ECLIPSE_BUILD  -data ${CI_PIPELINE_ID}_WS  -import ./b80_ble_sdk/  -cleanBuild tc_ble_simple_sdk_8208/8208B_feature_test
+    - sed  -i "/#define\s\+${MACRO}/c#define ${MACRO}\t\t${MACRO_VAL}" $MACRO_PATH
+    - $TELINK_IDE_BUILD  -data ${CI_PIPELINE_ID}_WS  -import ./b80_ble_sdk/  -cleanBuild tc_ble_simple_sdk_8208/8208_feature_test
+    - $TELINK_IDE_BUILD  -data ${CI_PIPELINE_ID}_WS  -import ./b80_ble_sdk/  -cleanBuild tc_ble_simple_sdk_8208/8208B_feature_test
     
     - MACRO='FEATURE_TEST_MODE'
     - MACRO_VAL='TEST_MD_SLAVE'
     - MACRO_PATH='./b80_ble_sdk/vendor/feature_test/feature_config.h'
-    - $TC32_ECLIPSE_BUILD  -data ${CI_PIPELINE_ID}_WS  -import ./b80_ble_sdk/  -cleanBuild tc_ble_simple_sdk_8208/8208_feature_test
-    - $TC32_ECLIPSE_BUILD  -data ${CI_PIPELINE_ID}_WS  -import ./b80_ble_sdk/  -cleanBuild tc_ble_simple_sdk_8208/8208B_feature_test
+    - sed  -i "/#define\s\+${MACRO}/c#define ${MACRO}\t\t${MACRO_VAL}" $MACRO_PATH
+    - $TELINK_IDE_BUILD  -data ${CI_PIPELINE_ID}_WS  -import ./b80_ble_sdk/  -cleanBuild tc_ble_simple_sdk_8208/8208_feature_test
+    - $TELINK_IDE_BUILD  -data ${CI_PIPELINE_ID}_WS  -import ./b80_ble_sdk/  -cleanBuild tc_ble_simple_sdk_8208/8208B_feature_test
     
     - MACRO='FEATURE_TEST_MODE'
     - MACRO_VAL='TEST_PHY_CONN'
     - MACRO_PATH='./b80_ble_sdk/vendor/feature_test/feature_config.h'
-    - $TC32_ECLIPSE_BUILD  -data ${CI_PIPELINE_ID}_WS  -import ./b80_ble_sdk/  -cleanBuild tc_ble_simple_sdk_8208/8208_feature_test
-    - $TC32_ECLIPSE_BUILD  -data ${CI_PIPELINE_ID}_WS  -import ./b80_ble_sdk/  -cleanBuild tc_ble_simple_sdk_8208/8208B_feature_test
+    - sed  -i "/#define\s\+${MACRO}/c#define ${MACRO}\t\t${MACRO_VAL}" $MACRO_PATH
+    - $TELINK_IDE_BUILD  -data ${CI_PIPELINE_ID}_WS  -import ./b80_ble_sdk/  -cleanBuild tc_ble_simple_sdk_8208/8208_feature_test
+    - $TELINK_IDE_BUILD  -data ${CI_PIPELINE_ID}_WS  -import ./b80_ble_sdk/  -cleanBuild tc_ble_simple_sdk_8208/8208B_feature_test
     
     - MACRO='FEATURE_TEST_MODE'
     - MACRO_VAL='TEST_USER_BLT_SOFT_TIMER'
     - MACRO_PATH='./b80_ble_sdk/vendor/feature_test/feature_config.h'
-    - $TC32_ECLIPSE_BUILD  -data ${CI_PIPELINE_ID}_WS  -import ./b80_ble_sdk/  -cleanBuild tc_ble_simple_sdk_8208/8208_feature_test
-    - $TC32_ECLIPSE_BUILD  -data ${CI_PIPELINE_ID}_WS  -import ./b80_ble_sdk/  -cleanBuild tc_ble_simple_sdk_8208/8208B_feature_test
+    - sed  -i "/#define\s\+${MACRO}/c#define ${MACRO}\t\t${MACRO_VAL}" $MACRO_PATH
+    - $TELINK_IDE_BUILD  -data ${CI_PIPELINE_ID}_WS  -import ./b80_ble_sdk/  -cleanBuild tc_ble_simple_sdk_8208/8208_feature_test
+    - $TELINK_IDE_BUILD  -data ${CI_PIPELINE_ID}_WS  -import ./b80_ble_sdk/  -cleanBuild tc_ble_simple_sdk_8208/8208B_feature_test
     
     - MACRO='FEATURE_TEST_MODE'
     - MACRO_VAL='TEST_USER_BLT_SOFT_UART'
     - MACRO_PATH='./b80_ble_sdk/vendor/feature_test/feature_config.h'
-    - $TC32_ECLIPSE_BUILD  -data ${CI_PIPELINE_ID}_WS  -import ./b80_ble_sdk/  -cleanBuild tc_ble_simple_sdk_8208/8208_feature_test
-    - $TC32_ECLIPSE_BUILD  -data ${CI_PIPELINE_ID}_WS  -import ./b80_ble_sdk/  -cleanBuild tc_ble_simple_sdk_8208/8208B_feature_test
+    - sed  -i "/#define\s\+${MACRO}/c#define ${MACRO}\t\t${MACRO_VAL}" $MACRO_PATH
+    - $TELINK_IDE_BUILD  -data ${CI_PIPELINE_ID}_WS  -import ./b80_ble_sdk/  -cleanBuild tc_ble_simple_sdk_8208/8208_feature_test
+    - $TELINK_IDE_BUILD  -data ${CI_PIPELINE_ID}_WS  -import ./b80_ble_sdk/  -cleanBuild tc_ble_simple_sdk_8208/8208B_feature_test
     
     - MACRO='FEATURE_TEST_MODE'
     - MACRO_VAL='TEST_FEATURE_BACKUP'
     - MACRO_PATH='./b80_ble_sdk/vendor/feature_test/feature_config.h'
-    - $TC32_ECLIPSE_BUILD  -data ${CI_PIPELINE_ID}_WS  -import ./b80_ble_sdk/  -cleanBuild tc_ble_simple_sdk_8208/8208_feature_test
-    - $TC32_ECLIPSE_BUILD  -data ${CI_PIPELINE_ID}_WS  -import ./b80_ble_sdk/  -cleanBuild tc_ble_simple_sdk_8208/8208B_feature_test
+    - sed  -i "/#define\s\+${MACRO}/c#define ${MACRO}\t\t${MACRO_VAL}" $MACRO_PATH
+    - $TELINK_IDE_BUILD  -data ${CI_PIPELINE_ID}_WS  -import ./b80_ble_sdk/  -cleanBuild tc_ble_simple_sdk_8208/8208_feature_test
+    - $TELINK_IDE_BUILD  -data ${CI_PIPELINE_ID}_WS  -import ./b80_ble_sdk/  -cleanBuild tc_ble_simple_sdk_8208/8208B_feature_test
     
     - date
   when: manual
@@ -258,8 +271,25 @@ fossid:
   stage: release_customize_sdk	
   tags:
     - windows_tc32_test
+  before_script:
+    - echo "get ci release sdk shell"
+    - >
+      if [ ${#PRIVATE_TOKEN_SELF} != 0 ]; then
+        clone_url="http://oauth2:${PRIVATE_TOKEN_SELF}@192.168.48.36/training_zone/ci_common_shell"
+      elif [ ${#PRIVATE_TOKEN} != 0 ]; then
+        clone_url="http://oauth2:${PRIVATE_TOKEN}@192.168.48.36/training_zone/ci_common_shell"
+      else
+        echo "have no find token."
+        exit 1
+      fi
+
+    - git clone $clone_url
+    - ls ci_common_shell
+    - cp ci_common_shell/sdk_release_customize-2.0.sh ./
+    - ls
   script:
-    - sdk_release_customize.sh ./release_sdk_config
+    - chmod +x ./sdk_release_customize-2.0.sh
+    - ./sdk_release_customize-2.0.sh ./release_sdk_config
   artifacts:
     name: "$PACK_NAME"
     expire_in: '3 yrs'
@@ -272,70 +302,70 @@ fossid:
 release_sdk_P5_B80:
   <<: *release_sdk_template
   variables:
-    PACK_NAME: "tc_ble_simple_sdk_B80_V3.4.2.0_P5"
+    PACK_NAME: "tc_ble_simple_sdk_B80_V3.4.2.1_P5"
 
 release_sdk_P10_B80:
   <<: *release_sdk_template
   variables:
-    PACK_NAME: "tc_ble_simple_sdk_B80_V3.4.2.0_P10"
+    PACK_NAME: "tc_ble_simple_sdk_B80_V3.4.2.1_P10"
 
 release_sdk_P12_B80:
   <<: *release_sdk_template
   variables:
-    PACK_NAME: "tc_ble_simple_sdk_B80_V3.4.2.0_P12"
+    PACK_NAME: "tc_ble_simple_sdk_B80_V3.4.2.1_P12"
 
 release_sdk_custom_made_P0_B80:
   <<: *release_sdk_template
   variables:
-    PACK_NAME: "tc_ble_simple_sdk_B80_V3.4.2.0_custom_made_P0"
+    PACK_NAME: "tc_ble_simple_sdk_B80_V3.4.2.1_custom_made_P0"
 
 release_sdk_custom_made_P5_B80:
   <<: *release_sdk_template
   variables:
-    PACK_NAME: "tc_ble_simple_sdk_B80_V3.4.2.0_custom_made_P5"
+    PACK_NAME: "tc_ble_simple_sdk_B80_V3.4.2.1_custom_made_P5"
 
 release_sdk_custom_made_P10_B80:
   <<: *release_sdk_template
   variables:
-    PACK_NAME: "tc_ble_simple_sdk_B80_V3.4.2.0_custom_made_P10"
+    PACK_NAME: "tc_ble_simple_sdk_B80_V3.4.2.1_custom_made_P10"
 
 release_sdk_custom_made_P12_B80:
   <<: *release_sdk_template
   variables:
-    PACK_NAME: "tc_ble_simple_sdk_B80_V3.4.2.0_custom_made_P12"
+    PACK_NAME: "tc_ble_simple_sdk_B80_V3.4.2.1_custom_made_P12"
 
 release_sdk_P5_B80B:
   <<: *release_sdk_template
   variables:
-    PACK_NAME: "tc_ble_simple_sdk_B80B_V3.4.2.0_P5"
+    PACK_NAME: "tc_ble_simple_sdk_B80B_V3.4.2.1_P5"
 
 release_sdk_P10_B80B:
   <<: *release_sdk_template
   variables:
-    PACK_NAME: "tc_ble_simple_sdk_B80B_V3.4.2.0_P10"
+    PACK_NAME: "tc_ble_simple_sdk_B80B_V3.4.2.1_P10"
 
 release_sdk_P12_B80B:
   <<: *release_sdk_template
   variables:
-    PACK_NAME: "tc_ble_simple_sdk_B80B_V3.4.2.0_P12"
+    PACK_NAME: "tc_ble_simple_sdk_B80B_V3.4.2.1_P12"
 
 release_sdk_custom_made_P0_B80B:
   <<: *release_sdk_template
   variables:
-    PACK_NAME: "tc_ble_simple_sdk_B80B_V3.4.2.0_custom_made_P0"
+    PACK_NAME: "tc_ble_simple_sdk_B80B_V3.4.2.1_custom_made_P0"
 
 release_sdk_custom_made_P5_B80B:
   <<: *release_sdk_template
   variables:
-    PACK_NAME: "tc_ble_simple_sdk_B80B_V3.4.2.0_custom_made_P5"
+    PACK_NAME: "tc_ble_simple_sdk_B80B_V3.4.2.1_custom_made_P5"
 
 release_sdk_custom_made_P10_B80B:
   <<: *release_sdk_template
   variables:
-    PACK_NAME: "tc_ble_simple_sdk_B80B_V3.4.2.0_custom_made_P10"
+    PACK_NAME: "tc_ble_simple_sdk_B80B_V3.4.2.1_custom_made_P10"
 
 release_sdk_custom_made_P12_B80B:
   <<: *release_sdk_template
   variables:
-    PACK_NAME: "tc_ble_simple_sdk_B80B_V3.4.2.0_custom_made_P12"
+    PACK_NAME: "tc_ble_simple_sdk_B80B_V3.4.2.1_custom_made_P12"
 

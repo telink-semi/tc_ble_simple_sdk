@@ -60,6 +60,7 @@ SECTIONS
 	. = _start_text_;
 	
 	.text :
+		AT (_start_text_)
 	    {
 	    *(.text)
 	    *(.text.*)
@@ -88,10 +89,10 @@ SECTIONS
 	    }
 		PROVIDE(_end_bss_ = .); 
 
+	. = (((. + 3) / 4)*4);
 	.data_reload :
 	      AT ( _rstored_ )
 	    {
-	    . = (((. + 3) / 4)*4);
 	    PROVIDE(_data_reload_start_ = . );
 	    *(.data_reload)
 	    *(.data_reload.*)

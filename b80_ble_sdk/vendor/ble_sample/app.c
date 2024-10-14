@@ -504,7 +504,11 @@ _attribute_no_inline_ void user_init_normal(void)
 			#endif
 			bls_pm_setSuspendMask (SUSPEND_ADV | DEEPSLEEP_RETENTION_ADV | SUSPEND_CONN | DEEPSLEEP_RETENTION_CONN);
 			blc_pm_setDeepsleepRetentionThreshold(95, 95);
-			blc_pm_setDeepsleepRetentionEarlyWakeupTiming(750);
+			#if (MCU_CORE_B80)
+				blc_pm_setDeepsleepRetentionEarlyWakeupTiming(650);
+			#elif (MCU_CORE_B80B)
+				blc_pm_setDeepsleepRetentionEarlyWakeupTiming(550);
+			#endif
 		#else
 			bls_pm_setSuspendMask (SUSPEND_ADV | SUSPEND_CONN);
 		#endif

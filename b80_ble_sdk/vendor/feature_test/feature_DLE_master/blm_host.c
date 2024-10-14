@@ -164,10 +164,8 @@ int blm_le_adv_report_event_handle(u8 *p)
 	int adv_unpair_en = !memcmp(pa->data, telink_adv_trigger_unpair, sizeof(telink_adv_trigger_unpair));
 	if(adv_unpair_en)
 	{
-		int device_is_bond;
-
 		#if (BLE_HOST_SMP_ENABLE)
-			device_is_bond = tbl_bond_slave_search(pa->adr_type, pa->mac);
+			int device_is_bond = tbl_bond_slave_search(pa->adr_type, pa->mac);
 			if(device_is_bond){ //this ADV mac is bonded in master
 				tbl_bond_slave_delete_by_adr(pa->adr_type, pa->mac);  //by telink stack host smp
 			}

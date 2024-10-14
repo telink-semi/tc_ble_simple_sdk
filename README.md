@@ -1,3 +1,182 @@
+# V3.4.2.1 (PR)
+
+### Version
+* SDK version: tc_ble_simple_sdk V3.4.2.1
+* Chip Version
+  - TLSR8208 (B80) (A1/A4)
+  - TLSR8208 B (B80B) (A0/A1)
+* Hardware EVK Version
+  - B80: C1T261A30_V1_1
+  - B80B: C1T321A30_V1_0
+* Platform Version
+  - tc_platform_sdk V2.0.0
+* Toolchain Version
+  - TC32 ELF GCC4.3 ( IDE: [Telink IDE](https://wiki.telink-semi.cn/wiki/IDE-and-Tools/IDE-for-TLSR8-Chips/)/ [TelinkIoTStudio_V2024.8](https://wiki.telink-semi.cn/tools_and_sdk/Tools/IoTStudio/TelinkIoTStudio_V2024.8.zip) )
+
+### Features
+* N/A.
+
+### Bug Fixes
+* **Controller**
+   - Fixed: When the local device sets the ADV type as "ADV_TYPE_NONCONNECTABLE_UNDIRECTED", only the "ADV_NONCONN_IND" PDU at channel 37 can be sent successfully.
+   - Fixed: In the BLE connection state, when the local device uses the Flash "GD25WD10EGIG", frequent write operations may cause the received packet MIC check failure, leading to disconnection.
+
+* **ATT**
+   - Fixed: ATT TX Buffer could overflow when the exchanged effective MTU size exceeds the default MTU size 23.
+
+* **Link**
+   - Fixed: The "data_reload" section is not aligned by 4 bytes, which may cause the data in the "data_reload" section to be accessed by mistake.
+
+* **Others**
+   - Fixed: (B80) When the local device's external 24M crystal uses external capacitors, that is "EXTERNAL_CAP_XTAL24M", the MCU crashes.
+
+### Refactoring
+* **Link**
+   - Clean the link warning "warning: dot moved backwards before '.text'".
+
+* **Application**
+   - Adjust the early wake-up tick for deepsleep retention mode.
+   - Adjust the location of the definition of the structure "cur_conn_device".
+
+* **Others**
+   - Adjust the location of the following functions to save SRAM size.
+      - otp_set_auto_mode_clk
+      - otp_set_clk
+      - otp_read_data
+
+### BREAKING CHANGES
+* N/A.
+
+### Flash
+* **8208**
+   - GD25LD10C
+   - GD25LD40C
+   - ZG25WD40B
+   - P25Q40SU
+	- P25D09U
+	- GD25WD10EGIG
+
+* **8208B**
+   - P25Q40SU
+	- P25D09U
+	- GD25WD10EGIG
+
+### CodeSize
+* **BLE Sample**
+   * Flash
+      - B80: 42.6k Byte
+      - B80B: 41.6k Byte
+   * RAM
+      - B80: 13.94k Byte
+      - B80B: 13.94k Byte
+   * The values above are obtained using the default configuration.
+   
+   * Flash
+      - B80: 41.7k Byte
+      - B80B: 41.1k Byte
+   * RAM
+      - B80: 10.7k Byte
+      - B80B: 10.7k Byte
+   * The values above are obtained by calling APIs to save RAM and disabling deepsleep retention.
+
+* **BLE Master**
+   * Flash
+      - B80: 30.7k Byte
+      - B80B: 29.8k Byte
+   * RAM
+      - B80: 10.6k Byte
+      - B80B: 10.7k Byte
+
+
+### Version
+* SDK 版本： tc_ble_simple_sdk V3.4.2.1
+* Chip 版本
+  - TLSR8208 (B80) (A1/A4)
+  - TLSR8208 B (B80B) (A0/A1)
+* Hardware EVK 版本
+  - B80: C1T261A30_V1_1
+  - B80B: C1T321A30_V1_0
+* Platform 版本
+  - tc_platform_sdk V2.0.0
+* Toolchain 版本
+  - TC32 ELF GCC4.3 ( IDE: [Telink IDE](https://wiki.telink-semi.cn/wiki/IDE-and-Tools/IDE-for-TLSR8-Chips/)/ [TelinkIoTStudio_V2024.8](https://wiki.telink-semi.cn/tools_and_sdk/Tools/IoTStudio/TelinkIoTStudio_V2024.8.zip) )
+
+### Features
+* N/A.
+
+### Bug Fixes
+* **Controller**
+   - 修复：当本地设备设置广播类型为“ADV_TYPE_NONCONNECTABLE_UNDIRECTED”时，只有37通道的“ADV_NONCONN_IND”广播包可以成功发送。
+   - 修复：BLE连接状态下，当本地设备使用Flash “GD25WD10EGIG”时，频繁的写操作可能会导致收到的包MIC校验错误而断开连接。
+
+* **ATT**
+   - 修复：当有效MTU值大于默认MTU值23时，ATT TX Buffer会溢出。
+
+* **Link**
+   - 修复：“data_reload”段没有4字节对齐，这可能导致“data_reload”段中的数据被误访问。
+
+* **Others**
+   - 修复：（B80）当本地设备的外部24M晶振使用外部电容时，即“EXTERNAL_CAP_XTAL24M”，MCU会死机。
+
+### Refactoring
+* **Link**
+   - 清理link警告“warning: dot moved backwards before '.text'”。
+
+* **Application**
+   - 调整从deepsleep retention模式的提前唤醒时间。
+   - 调整结构体“cur_conn_device”定义的位置。
+
+* **Others**
+   - 调整以下函数的位置以节省SRAM空间。
+      - otp_set_auto_mode_clk
+      - otp_set_clk
+      - otp_read_data
+
+### BREAKING CHANGES
+* N/A.
+
+### Flash
+* **8208**
+   - GD25LD10C
+   - GD25LD40C
+   - ZG25WD40B
+   - P25Q40SU
+	- P25D09U
+	- GD25WD10EGIG
+
+* **8208B**
+   - P25Q40SU
+	- P25D09U
+	- GD25WD10EGIG
+
+### CodeSize
+* **BLE Sample**
+   * Flash
+      - B80: 42.6k Byte
+      - B80B: 41.6k Byte
+   * RAM
+      - B80: 13.94k Byte
+      - B80B: 13.94k Byte
+   * 以上大小使用默认配置得到
+   
+   * Flash
+      - B80: 41.7k Byte
+      - B80B: 41.1k Byte
+   * RAM
+      - B80: 10.7k Byte
+      - B80B: 10.7k Byte
+   * 以上大小时是调用节省ram的API和关闭deepsleep retention后得到。
+
+* **BLE Master**
+   * Flash
+      - B80: 30.7k Byte
+      - B80: 29.8k Byte
+   * RAM
+      - B80: 10.6k Byte
+      - B80B: 10.7k Byte
+
+
+
 # V3.4.2.0 (PR)
 
 ### Version

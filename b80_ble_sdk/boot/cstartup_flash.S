@@ -43,7 +43,7 @@
 #define  GPIO_DEBUG_EN           		0
 #define  ZERO_IC_TAG_EN		  			1
 #define  IC_TAG_CACHE_ADDR_EQU_EN    	0
-@The design of the eaglet chip is to power off the flash when the chip goes to sleep,
+@The design of the B80 chip is to power off the flash when the chip goes to sleep,
 @and then power on the flash again after waking up, so there is no need to perform the flash wake-up action.
 #define  FLASH_WAKEUP_EN                0
 #define  WD_SET_AND_START_EN            0 /* default 0; 1: Set and Start the watchdog in advance. */
@@ -251,7 +251,7 @@ __reset:
  	tstorerb	r1, [r3, #1]	  @pdstb = 0  pldo = 0
 #endif
 
-@The design of the eaglet chip is to power off the flash when the chip goes to sleep,
+@The design of the B80 chip is to power off the flash when the chip goes to sleep,
 @and then power on the flash again after waking up, so there is no need to perform the flash wake-up action.
 #if FLASH_WAKEUP_EN
 

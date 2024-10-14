@@ -69,7 +69,7 @@
 #define 	LE_SECURITY_MODE_1_LEVEL_4			SMP_TEST_SC_PASSKEY_ENTRY_SDMI
 
 
-#define     SMP_TEST_MODE						LE_SECURITY_MODE_1_LEVEL_2
+#define     SMP_TEST_MODE						LE_SECURITY_MODE_1_LEVEL_4
 
 //use app, after connected, enable notify, write some data into characteristic Telink SPP:Phone->Module
 

@@ -38,6 +38,9 @@ main_service_t	main_service = 0;
 
 sdp_get_handle_callback_t  sdp_get_handle_cb = NULL;
 
+/* connection device information, for Central(master) project only
+ * No need to be placed in retention SRAM area, will not be compiled to Peripheral(Slave) project */
+dev_info_t 	cur_conn_device;
 
 #define				ATT_DB_UUID16_NUM		20
 #define				ATT_DB_UUID128_NUM		8

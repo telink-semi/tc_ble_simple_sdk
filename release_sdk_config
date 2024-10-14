@@ -1,7 +1,7 @@
 [release_sdk_P5_B80]
 
-TAG_NAME            V3.4.2.0
-PACKAGE_NAME        tc_ble_simple_sdk_B80_V3.4.2.0_P5
+TAG_NAME            V3.4.2.1
+PACKAGE_NAME        tc_ble_simple_sdk_B80_V3.4.2.1_P5
 SRC_GIT_URL         http://192.168.48.36/src/ble/telink_b80_ble_single_connection_src.git
 
 #                   .cproject                                project_name                    			module
@@ -20,8 +20,8 @@ REPLACED_LIB_PATH   ./b80_ble_sdk/proj_lib/liblt_8208.a
 
 [release_sdk_P10_B80]
 
-TAG_NAME            V3.4.2.0
-PACKAGE_NAME        tc_ble_simple_sdk_B80_V3.4.2.0_P10
+TAG_NAME            V3.4.2.1
+PACKAGE_NAME        tc_ble_simple_sdk_B80_V3.4.2.1_P10
 SRC_GIT_URL         http://192.168.48.36/src/ble/telink_b80_ble_single_connection_src.git
 
 #                   .cproject                                project_name                    			module
@@ -41,8 +41,8 @@ REPLACED_LIB_PATH   ./b80_ble_sdk/proj_lib/liblt_8208.a
 
 [release_sdk_P12_B80]
 
-TAG_NAME            V3.4.2.0
-PACKAGE_NAME        tc_ble_simple_sdk_B80_V3.4.2.0_P12
+TAG_NAME            V3.4.2.1
+PACKAGE_NAME        tc_ble_simple_sdk_B80_V3.4.2.1_P12
 SRC_GIT_URL         http://192.168.48.36/src/ble/telink_b80_ble_single_connection_src.git
 
 #                   .cproject                                project_name                    			module
@@ -62,8 +62,8 @@ REPLACED_LIB_PATH   ./b80_ble_sdk/proj_lib/liblt_8208.a
 
 [release_sdk_custom_made_P0_B80]
 
-TAG_NAME            V3.4.2.0
-PACKAGE_NAME        tc_ble_simple_sdk_B80_V3.4.2.0_custom_made_P0
+TAG_NAME            V3.4.2.1
+PACKAGE_NAME        tc_ble_simple_sdk_B80_V3.4.2.1_custom_made_P0
 SRC_GIT_URL         http://192.168.48.36/src/ble/telink_b80_ble_single_connection_src.git
 
 #                   .cproject                                project_name                    			module
@@ -84,8 +84,8 @@ REPLACED_LIB_PATH   ./b80_ble_sdk/proj_lib/liblt_8208.a
 
 [release_sdk_custom_made_P5_B80]
 
-TAG_NAME            V3.4.2.0
-PACKAGE_NAME        tc_ble_simple_sdk_B80_V3.4.2.0_custom_made_P5
+TAG_NAME            V3.4.2.1
+PACKAGE_NAME        tc_ble_simple_sdk_B80_V3.4.2.1_custom_made_P5
 SRC_GIT_URL         http://192.168.48.36/src/ble/telink_b80_ble_single_connection_src.git
 
 #                   .cproject                                project_name                    			module
@@ -106,8 +106,8 @@ REPLACED_LIB_PATH   ./b80_ble_sdk/proj_lib/liblt_8208.a
 
 [release_sdk_custom_made_P10_B80]
 
-TAG_NAME            V3.4.2.0
-PACKAGE_NAME        tc_ble_simple_sdk_B80_V3.4.2.0_custom_made_P10
+TAG_NAME            V3.4.2.1
+PACKAGE_NAME        tc_ble_simple_sdk_B80_V3.4.2.1_custom_made_P10
 SRC_GIT_URL         http://192.168.48.36/src/ble/telink_b80_ble_single_connection_src.git
 
 #                   .cproject                                project_name                    			module
@@ -128,8 +128,8 @@ REPLACED_LIB_PATH   ./b80_ble_sdk/proj_lib/liblt_8208.a
 
 [release_sdk_custom_made_P12_B80]
 
-TAG_NAME            V3.4.2.0
-PACKAGE_NAME        tc_ble_simple_sdk_B80_V3.4.2.0_custom_made_P12
+TAG_NAME            V3.4.2.1
+PACKAGE_NAME        tc_ble_simple_sdk_B80_V3.4.2.1_custom_made_P12
 SRC_GIT_URL         http://192.168.48.36/src/ble/telink_b80_ble_single_connection_src.git
 
 #                   .cproject                                project_name                    			module
@@ -152,8 +152,8 @@ REPLACED_LIB_PATH   ./b80_ble_sdk/proj_lib/liblt_8208.a
 
 [release_sdk_P5_B80B]
 
-TAG_NAME            V3.4.2.0
-PACKAGE_NAME        tc_ble_simple_sdk_B80B_V3.4.2.0_P5
+TAG_NAME            V3.4.2.1
+PACKAGE_NAME        tc_ble_simple_sdk_B80B_V3.4.2.1_P5
 SRC_GIT_URL         http://192.168.48.36/src/ble/telink_b80_ble_single_connection_src.git
 
 #                   .cproject                                project_name                    			module
@@ -174,8 +174,8 @@ REPLACED_LIB_PATH   ./b80_ble_sdk/proj_lib/liblt_8208B.a
 
 [release_sdk_P10_B80B]
 
-TAG_NAME            V3.4.2.0
-PACKAGE_NAME        tc_ble_simple_sdk_B80B_V3.4.2.0_P10
+TAG_NAME            V3.4.2.1
+PACKAGE_NAME        tc_ble_simple_sdk_B80B_V3.4.2.1_P10
 SRC_GIT_URL         http://192.168.48.36/src/ble/telink_b80_ble_single_connection_src.git
 
 #                   .cproject                                project_name                    			module
@@ -195,8 +195,8 @@ REPLACED_LIB_PATH   ./b80_ble_sdk/proj_lib/liblt_8208B.a
 
 [release_sdk_P12_B80B]
 
-TAG_NAME            V3.4.2.0
-PACKAGE_NAME        tc_ble_simple_sdk_B80B_V3.4.2.0_P12
+TAG_NAME            V3.4.2.1
+PACKAGE_NAME        tc_ble_simple_sdk_B80B_V3.4.2.1_P12
 SRC_GIT_URL         http://192.168.48.36/src/ble/telink_b80_ble_single_connection_src.git
 
 #                   .cproject                                project_name                    			module
@@ -216,8 +216,8 @@ REPLACED_LIB_PATH   ./b80_ble_sdk/proj_lib/liblt_8208B.a
 
 [release_sdk_custom_made_P0_B80B]
 
-TAG_NAME            V3.4.2.0
-PACKAGE_NAME        tc_ble_simple_sdk_B80B_V3.4.2.0_custom_made_P0
+TAG_NAME            V3.4.2.1
+PACKAGE_NAME        tc_ble_simple_sdk_B80B_V3.4.2.1_custom_made_P0
 SRC_GIT_URL         http://192.168.48.36/src/ble/telink_b80_ble_single_connection_src.git
 
 #                   .cproject                                project_name                    			module
@@ -237,8 +237,8 @@ REPLACED_LIB_PATH   ./b80_ble_sdk/proj_lib/liblt_8208B.a
 
 [release_sdk_custom_made_P5_B80B]
 
-TAG_NAME            V3.4.2.0
-PACKAGE_NAME        tc_ble_simple_sdk_B80B_V3.4.2.0_custom_made_P5
+TAG_NAME            V3.4.2.1
+PACKAGE_NAME        tc_ble_simple_sdk_B80B_V3.4.2.1_custom_made_P5
 SRC_GIT_URL         http://192.168.48.36/src/ble/telink_b80_ble_single_connection_src.git
 
 #                   .cproject                                project_name                    			module
@@ -259,8 +259,8 @@ REPLACED_LIB_PATH   ./b80_ble_sdk/proj_lib/liblt_8208B.a
 
 [release_sdk_custom_made_P10_B80B]
 
-TAG_NAME            V3.4.2.0
-PACKAGE_NAME        tc_ble_simple_sdk_B80B_V3.4.2.0_custom_made_P10
+TAG_NAME            V3.4.2.1
+PACKAGE_NAME        tc_ble_simple_sdk_B80B_V3.4.2.1_custom_made_P10
 SRC_GIT_URL         http://192.168.48.36/src/ble/telink_b80_ble_single_connection_src.git
 
 #                   .cproject                                project_name                    			module
@@ -281,8 +281,8 @@ REPLACED_LIB_PATH   ./b80_ble_sdk/proj_lib/liblt_8208B.a
 
 [release_sdk_custom_made_P12_B80B]
 
-TAG_NAME            V3.4.2.0
-PACKAGE_NAME        tc_ble_simple_sdk_B80B_V3.4.2.0_custom_made_P12
+TAG_NAME            V3.4.2.1
+PACKAGE_NAME        tc_ble_simple_sdk_B80B_V3.4.2.1_custom_made_P12
 SRC_GIT_URL         http://192.168.48.36/src/ble/telink_b80_ble_single_connection_src.git
 
 #                   .cproject                                project_name                    			module
