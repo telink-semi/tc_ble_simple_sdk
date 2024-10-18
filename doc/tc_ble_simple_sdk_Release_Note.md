@@ -17,6 +17,9 @@
 * N/A.
 
 ### Bug Fixes
+* **PM**
+   - Fixed: In the BLE connection state, when enabling the macro "SAVE_RAM_CODE_ENABLE", the local device may not trigger the system timer interrupt after waking up from SUSPEND sleep mode, leading to disconnection.
+
 * **Controller**
    - Fixed: When the local device sets the ADV type as "ADV_TYPE_NONCONNECTABLE_UNDIRECTED", only the "ADV_NONCONN_IND" PDU at channel 37 can be sent successfully.
    - Fixed: In the BLE connection state, when the local device uses the Flash "GD25WD10EGIG", frequent write operations may cause the received packet MIC check failure, leading to disconnection.
@@ -28,7 +31,7 @@
    - Fixed: The "data_reload" section is not aligned by 4 bytes, which may cause the data in the "data_reload" section to be accessed by mistake.
 
 * **Others**
-   - Fixed: (B80) When the local device's external 24M crystal uses external capacitors, that is "EXTERNAL_CAP_XTAL24M", the MCU crashes.
+   - Fixed: (B80) When the external 24M crystal uses external capacitors, the MCU crashes.
 
 ### Refactoring
 * **Link**
@@ -105,6 +108,9 @@
 * N/A.
 
 ### Bug Fixes
+* **PM**
+   - 修复：BLE连接状态下，当使能宏“SAVE_RAM_CODE_ENABLE”时，本地设备从SUSPEND睡眠模式唤醒后可能不会触发system timer中断，导致连接断开。
+
 * **Controller**
    - 修复：当本地设备设置广播类型为“ADV_TYPE_NONCONNECTABLE_UNDIRECTED”时，只有37通道的“ADV_NONCONN_IND”广播包可以成功发送。
    - 修复：BLE连接状态下，当本地设备使用Flash “GD25WD10EGIG”时，频繁的写操作可能会导致收到的包MIC校验错误而断开连接。
@@ -116,7 +122,7 @@
    - 修复：“data_reload”段没有4字节对齐，这可能导致“data_reload”段中的数据被误访问。
 
 * **Others**
-   - 修复：（B80）当本地设备的外部24M晶振使用外部电容时，即“EXTERNAL_CAP_XTAL24M”，MCU会死机。
+   - 修复：（B80）当外部24M晶振使用外部电容时，MCU会死机。
 
 ### Refactoring
 * **Link**
@@ -165,7 +171,7 @@
    * RAM
       - B80: 10.7k Byte
       - B80B: 10.7k Byte
-   * 以上大小时是调用节省ram的API和关闭deepsleep retention后得到。
+   * 以上大小是调用节省ram的API和关闭deepsleep retention后得到。
 
 * **BLE Master**
    * Flash
