@@ -70,8 +70,8 @@
       - B80: 42.6k Byte
       - B80B: 41.6k Byte
    * RAM
-      - B80: 13.94k Byte
-      - B80B: 13.94k Byte
+      - B80: 13.9k Byte
+      - B80B: 13.9k Byte
    * The values above are obtained using the default configuration.
    
    * Flash
@@ -161,8 +161,8 @@
       - B80: 42.6k Byte
       - B80B: 41.6k Byte
    * RAM
-      - B80: 13.94k Byte
-      - B80B: 13.94k Byte
+      - B80: 13.9k Byte
+      - B80B: 13.9k Byte
    * 以上大小使用默认配置得到
    
    * Flash
