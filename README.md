@@ -17,10 +17,11 @@
 ### Features
 
 - **2.4G**
-  - support 2.4G demo.
+  - Add 2.4G demo.
     - 2_4g_tpll
     - 2_4g_genfsk
     - 2.4g_tpsll
+
 
 * **2.4G&BLE concurrent**
   - Add 2.4G&BLE concurrent demo.
@@ -36,7 +37,7 @@
 ### Refactoring
 
 * **ATT**
-  - Adjust the type of parameter of Effective MTU Size to u16 in blc_att_setEffectiveMtuSize.
+  - Adjust the type of parameter of Effective MTU Size to unsigned short in blc_att_setEffectiveMtuSize.
 * **Others**
   * Change the structure of the project. Split it into two independent projects:
     - tc_ble_simple_b80B_sdk
@@ -47,24 +48,10 @@
     - Disable PM during OTA updates.
     - Increase the OTA timeout from 15s to 30s.
 
+
 ### BREAKING CHANGES
 
 * N/A.
-
-### Flash
-
-* **8208**
-  - GD25LD10C
-  - GD25LD40C
-  - ZG25WD40B
-  - P25D40SU
-  - P25D09U
-  - GD25WD10EGIG
-
-* **8208B**
-  - P25D40SU
-  - P25D09U
-  - GD25WD10EGIG
 
 ### CodeSize
 
@@ -148,7 +135,7 @@ The following data are obtained using default configurations unless otherwise sp
 ### Features
 
 * **2.4G**
-  - 支持2.4G demo。
+  - 添加2.4G demo。
     - 2_4g_tpll
     - 2_4g_genfsk
     - 2.4g_tpsll
@@ -166,7 +153,7 @@ The following data are obtained using default configurations unless otherwise sp
 ### Refactoring
 
 * **ATT**
-  - 调整blc_att_setEffectiveMtuSize函数中Effective MTU Size参数类型为u16。
+  - 调整blc_att_setEffectiveMtuSize函数中Effective MTU Size参数类型为unsigned short。
 
 
 * **Others**
@@ -180,24 +167,10 @@ The following data are obtained using default configurations unless otherwise sp
     - 进行OTA时关闭PM。
     - 增大OTA超时时间，从15s增大到30s。
 
+
 ### BREAKING CHANGES
 
 * N/A.
-
-### Flash
-
-* **8208**
-  - GD25LD10C
-  - GD25LD40C
-  - ZG25WD40B
-  - P25D40SU
-  - P25D09U
-  - GD25WD10EGIG
-
-* **8208B**
-  - P25D40SU
-  - P25D09U
-  - GD25WD10EGIG
 
 ### CodeSize
 
