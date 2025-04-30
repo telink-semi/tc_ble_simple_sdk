@@ -406,7 +406,7 @@ typedef enum {
 	DT_BROADCAST_CODE						= 0x2D,		// 	Broadcast_Code
 	DT_3D_INFORMATION_DATA					= 0x3D,		//	3D Information Data
 
-	DATA_TYPE_MANUFACTURER_SPECIFIC_DATA 	= 0xFF,     //	Manufacturer Specific Data
+	DT_MANUFACTURER_SPECIFIC_DATA 	= 0xFF,     //	Manufacturer Specific Data
 }data_type_t;
 
 

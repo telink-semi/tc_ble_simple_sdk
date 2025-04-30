@@ -45,5 +45,6 @@
 #include "vendor/common/flash_prot.h"
 #include "vendor/common/simple_sdp.h"
 #include "vendor/common/custom_pair.h"
+#include "vendor/common/software_uart.h"
 
 #include "application/application.h"

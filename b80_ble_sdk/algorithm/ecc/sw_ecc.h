@@ -26,7 +26,6 @@
 #ifndef SW_ECC_H_
 #define SW_ECC_H_
 
-#include "config.h"
 #include "algorithm/ecc/ecc_curve.h"
 
 /* sECC_RNG_Function type

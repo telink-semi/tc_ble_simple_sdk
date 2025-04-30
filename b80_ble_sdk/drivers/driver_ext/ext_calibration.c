@@ -60,8 +60,8 @@ int user_calib_adc_vref(void)
 	u8 adc_vref_ft_calib_value[4] = {0};
 	u8 adc_vref_cp_calib_value[4] = {0};
 	otp_set_active_mode();
-	otp_read(0x3fcc, 1, (u32*)adc_vref_ft_calib_value);
-	otp_read(0x3fd0, 1, (u32*)adc_vref_cp_calib_value);
+	otp_read(OTP_ADC_VREF_FT_CALIB_ADDR, 1, (u32*)adc_vref_ft_calib_value);
+	otp_read(OTP_ADC_VREF_CP_CALIB_ADDR, 1, (u32*)adc_vref_cp_calib_value);
 	otp_set_deep_standby_mode();
 	if(!adc_update_vref_calib_value_ft_cp(adc_vref_ft_calib_value[0],(signed char)adc_vref_ft_calib_value[1],adc_set_gpio_calib_vref))//gpio_ft
 	{
@@ -74,5 +74,69 @@ int user_calib_adc_vref(void)
 	return 0;
 }
 
+/**
+ * @brief      This function serves to update rf frequency offset.
+ * @param[in]  velfrom - the calibration value from flash or otp.
+ * @param[in]  addr - the frequency offset value address of flash or otp.
+ * @return 	   1 - the frequency offset update, 0 - the frequency offset is not update.
+ */
+unsigned char user_calib_freq_offset(unsigned int addr)
+{
+	unsigned char frequency_offset_value = 0xff;
+	flash_read_page(addr, 1, &frequency_offset_value);
+	if(0xff != (0xff&frequency_offset_value))
+	{
+		rf_update_internal_cap(frequency_offset_value);
+		return 1;
+	}
+	return 0;
+}
 
+/**
+ * @brief		This function is used to calibrate the user's parameters.
+ * 				This function is to read the calibration value stored in flash,
+ * 				and use the calibration value to configure the chip to improve chip performance.
+ * 				(reduce adc measurement error, reduce frequency offset, etc.)
+ * @return		none.
+ */
+void user_read_flash_value_calib(void)
+{
+	unsigned char flash_mid[4];
+	unsigned char flash_uid[16];
+	unsigned char flash_mid_sure = 0;
+#if (MCU_CORE_B80)
+	unsigned int *flash_mid_check;
+#endif
+	/******check for flash mid********/
+	flash_mid_sure = flash_read_mid_uid_with_check((unsigned int *)flash_mid, flash_uid);
+	if (1 == flash_mid_sure)
+	{
+		user_calib_adc_vref();
+		switch (flash_mid[2])
+		{
+			case FLASH_SIZE_128K:
+				user_calib_freq_offset(FLASH_CAP_VALUE_ADDR_128K);
+				break;
+			case FLASH_SIZE_512K:
+				user_calib_freq_offset(FLASH_CAP_VALUE_ADDR_512K);
+				break;
+			default:
 
+				break;
+		}
+#if (MCU_CORE_B80)
+/* If the flash is ZG25WD40B, the flash voltage(VDD_F) will be trim to 2.25V(2b'111 the max).
+ * Reason for trim VDD_F voltage: BLE group requires 16byte write time to be less than 200us, the test found that flash voltage is maintained above 1.85V during flash write (VDD_F voltage with load 10mA max), and 16bytes write time is below 200us.
+ * Reason for not trimming voltage for all ZB flash: For the subsequent addition of ZB flash, flash vendors may fix the problem of slow flash write speed, so currently only for this flash ZG25WD40B trim VDD_F voltage.(added by xiaobin.huang 20240802)
+ */
+    flash_mid_check = (unsigned int *)flash_mid;
+	if(*flash_mid_check == 0x13325e)
+	{
+		pm_set_vdd_f(FLASH_VOLTAGE_2V25);
+	}
+#endif
+	}
+	else{
+		user_calib_adc_vref();
+	}
+}

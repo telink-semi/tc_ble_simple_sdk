@@ -66,3 +66,4 @@
 #include "flash/flash_common.h"
 #include "stimer.h"
 #include "sdk_version.h"
+#include "driver_ext/driver_ext.h"

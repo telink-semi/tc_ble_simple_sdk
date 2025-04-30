@@ -294,8 +294,8 @@ typedef enum {
 */
 static inline void reset_baseband(void)
 {
-	REG_ADDR8(0x61) = BIT(0);		//reset_baseband
-	REG_ADDR8(0x61) = 0;			//release reset signal
+	REG_ADDR8(0x61) |= BIT(0);		//reset_baseband
+	REG_ADDR8(0x61) &= ~BIT(0);		//release reset signal
 }
 
 /**
@@ -568,21 +568,12 @@ static inline void rf_set_txmode (void)
  * @return  none.
  * @note	   Attention:It is not necessary to call this function to adjust the settling time in the normal sending state.
  */
-static inline void 	tx_settle_adjust(unsigned short tx_stl_us)
+static inline void 	rf_set_tx_settle_time(unsigned short tx_stl_us)
 {
 	 tx_stl_us &= 0x0fff;
 	 write_reg16(0xf04,(tx_stl_us - 1));
 }
 
-/**
- * @brief   This function serves to set pipe for RF Tx.
- * @param   pipe - RF Optional range .
- * @return  none
- */
-static inline void rf_set_tx_pipe (unsigned char pipe)
-{
-	write_reg8 (0x800f15, 0xf0 | pipe);
-}
 /**
 *	@brief	  	This function serves to set RF Tx packet.
 *	@param[in]	rf_txaddr - the address RF to send packet.

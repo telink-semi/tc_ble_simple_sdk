@@ -86,9 +86,9 @@ const u8	tbl_scanRsp [] = {
 };
 
 
-u8 	ui_ota_is_working = 0;
+_attribute_data_retention_ u8 	ui_ota_is_working = 0;
 
-#if (BLE_MODULE_OTA_ENABLE)
+#if (BLE_OTA_SERVER_ENABLE)
 
 /**
  * @brief		callback function of ota start
@@ -97,8 +97,8 @@ u8 	ui_ota_is_working = 0;
  */
 void entry_ota_mode(void)
 {
-	bls_ota_setTimeout(15 * 1000 * 1000); //set OTA timeout  15 seconds
-
+	bls_ota_setTimeout(30 * 1000 * 1000); //set OTA timeout  30 seconds
+	ui_ota_is_working = 1;
 	#if(UI_LED_ENABLE)
 		gpio_set_output_en(GPIO_LED_BLUE, 1);  //output enable
 		gpio_write(GPIO_LED_BLUE, 1);  //LED on for indicate OTA mode
@@ -253,6 +253,13 @@ void app_power_management ()
 		GPIO_WAKEUP_MODULE_LOW;
 		tick_wakeup = 0;
 	}
+
+#if (BLE_OTA_SERVER_ENABLE)
+	if(ui_ota_is_working)
+	{
+		bls_pm_setSuspendMask(SUSPEND_DISABLE);
+	}
+#endif
 
 #endif
 }
@@ -534,7 +541,7 @@ void user_init_normal(void)
 
 
 
-#if (BLE_MODULE_OTA_ENABLE)
+#if (BLE_OTA_SERVER_ENABLE)
 	// OTA init
 	blc_ota_initOtaServer_module(); //must
 	bls_ota_registerStartCmdCb(entry_ota_mode);

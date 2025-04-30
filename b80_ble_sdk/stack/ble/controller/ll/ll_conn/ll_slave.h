@@ -74,6 +74,13 @@ u16			bls_ll_getConnectionLatency(void);
  */
 u16			bls_ll_getConnectionTimeout(void);
 
+/**
+ * @brief     for user to send LL_VERSION_IND.
+ * @param[in] connHandle: BLS_CONN_HANDLE indicate slave role;
+ * @return    status, 0x00 : succeed
+ * 					  other: failed
+ */
+ble_sts_t	bls_ll_readRemoteVersion(u16 connHandle);
 
 
 
@@ -104,6 +111,12 @@ void		bls_ll_restoreConnBrxEvent(void);
 
 
 
+/**
+ * @brief      Reset the most recently recorded average RSSI.
+ * @param	   none
+ * @return     none
+ */
+void blc_ll_resetInfoRSSI(void);
 
 
 #endif /* LL_SLAVE_H_ */

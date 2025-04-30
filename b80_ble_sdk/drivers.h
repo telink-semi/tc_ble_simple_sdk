@@ -25,7 +25,6 @@
 
 #include "config.h"
 
-
 #include "drivers/driver.h"
 #include "drivers/driver_ext/driver_ext.h"
 

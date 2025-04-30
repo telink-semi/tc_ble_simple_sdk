@@ -23,7 +23,7 @@
  *******************************************************************************************************/
 #pragma once
 #include "driver_func_cfg.h"
-#include "../../common/config/user_config.h"
+#include "config/user_config.h"
 
 #ifndef NULL
 #define NULL 	0

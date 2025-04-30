@@ -149,8 +149,26 @@ void 		blc_pm_setDeepsleepRetentionEarlyWakeupTiming(u32 earlyWakeup_us);
 
 
 
+/**
+ * @brief	for user to initialize concurrent mode
+ * @param	none
+ * @return	none
+ */
+void blc_ll_init_concurrent_module(void);
 
+/**
+ * @brief	for user to enable concurrent mode
+ * @param	none
+ * @return	none
+ */
+void blc_ll_disableConcurrentMode(void);
 
+/**
+ * @brief	for user to disable concurrent mode
+ * @param	none
+ * @return	none
+ */
+void blc_ll_enableConcurrentMode(void);
 
 
 #endif /* LL_PM_H_ */

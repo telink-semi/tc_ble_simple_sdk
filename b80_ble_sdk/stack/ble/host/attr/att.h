@@ -58,7 +58,7 @@
 
 
 #define ATT_PERMISSIONS_AUTHOR_READ          (ATT_PERMISSIONS_READ | ATT_PERMISSIONS_AUTHOR) 		//!< Read requires Authorization
-#define ATT_PERMISSIONS_AUTHOR_WRITE         (ATT_PERMISSIONS_WRITE | ATT_PERMISSIONS_AUTHEN) 		//!< Write requires Authorization
+#define ATT_PERMISSIONS_AUTHOR_WRITE         (ATT_PERMISSIONS_WRITE | ATT_PERMISSIONS_AUTHOR) 		//!< Write requires Authorization
 #define ATT_PERMISSIONS_AUTHOR_RDWR          (ATT_PERMISSIONS_RDWR | ATT_PERMISSIONS_AUTHOR) 		//!< Read & Write requires Authorization
 
 /** @End GAP_ATT_PERMISSIONS_BITMAPS */
@@ -173,7 +173,7 @@ ble_sts_t	 blc_att_requestMtuSizeExchange (u16 connHandle, u16 mtu_size);
  * @param	effective_mtu - bltAtt.effective_MTU
  * @return	none.
  */
-void  		blc_att_setEffectiveMtuSize(u16 connHandle, u8 effective_mtu);
+void  		blc_att_setEffectiveMtuSize(u16 connHandle, u16 effective_mtu);
 
 /**
  * @brief	   This function is used to reset effective ATT MTU size

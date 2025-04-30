@@ -52,7 +52,7 @@
  */
 typedef void (*rf_pa_callback_t)(int type);
 extern rf_pa_callback_t  blc_rf_pa_cb;
-
+#define rf_pa_cb blc_rf_pa_cb
 
 /**
  * @brief	RF software PA initialization

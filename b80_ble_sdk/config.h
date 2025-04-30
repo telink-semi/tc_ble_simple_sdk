@@ -27,8 +27,16 @@
 
 #pragma once
 
+#if(MCU_CORE_B80)
+	#define MCU_CORE_TYPE	MCU_CORE_B80
+#elif(MCU_CORE_B80B)
+	#define MCU_CORE_TYPE	MCU_CORE_B80B
+#else
+	#error "IC is not supported!!!"
+#endif
+
 #if (!(MCU_CORE_B80^MCU_CORE_B80B))
-#error "Only one IC type must be enable!!!"
+	#error "Only one IC type must be enable!!!"
 #endif
 
 

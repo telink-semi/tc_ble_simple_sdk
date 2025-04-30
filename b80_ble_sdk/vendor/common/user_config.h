@@ -27,12 +27,25 @@
 #if(__PROJECT_B80_BLE_SAMPLE__)
 	#include "vendor/ble_sample/app_config.h"
 #elif(__PROJECT_B80_BLE_FEATURE__)
-	#include "vendor/feature_test/app_config.h"
+	#include "vendor/ble_feature_test/app_config.h"
 #elif(__PROJECT_B80_MODULE__)
 	#include "vendor/ble_module/app_config.h"
 #elif(__PROJECT_B80_MASTER__)
 	#include "vendor/ble_master/app_config.h"
+
+#elif(__PROJECT_B80_BLE_SLAVE_2_4G__)
+	#include "vendor/ble_slave_2_4g/app_config.h"
+#elif(__PROJECT_B80_2_4G_GENFSK__)
+	#include "vendor/2_4g_genfsk/app_config.h"
+#elif(__PROJECT_B80_2_4G_TPSLL__)
+	#include "vendor/2_4g_tpsll/app_config.h"
+#elif(__PROJECT_B80_2_4G_TPLL__)
+	#include "vendor/2_4g_tpll/app_config.h"
+#elif(__PROJECT_B80_2_4G_FEATURE__)
+	#include "vendor/2_4g_feature/app_config.h"
+#elif(__PROJECT_B80_2_4G_FEATURE_TEST__)
+    #include "vendor/2_4g_feature_test/app_config.h"
 #else
-	#include "../common/default_config.h"
+	#include "default_config.h"
 #endif
 

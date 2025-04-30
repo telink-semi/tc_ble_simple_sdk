@@ -60,6 +60,20 @@ typedef u8 bool;
 
 #endif
 
+/*********************** PKE RELATED **************************************/
+typedef signed char int8_t;
+typedef unsigned char uint8_t;
+typedef signed short int16_t;
+typedef unsigned short uint16_t;
+typedef signed int	int32_t;
+typedef unsigned int uint32_t;
+
+typedef struct
+{
+	unsigned int high;
+	unsigned int low;
+}double_uint32_t;
+
 // There is no way to directly recognise whether a typedef is defined
 // http://stackoverflow.com/questions/3517174/how-to-check-if-a-datatype-is-defined-with-typedef
 #ifdef __GNUC__

@@ -56,6 +56,8 @@ typedef void (*blt_event_callback_t)(u8 e, u8 *p, int n);
 #define			BLT_EV_FLAG_SUSPEND_EXIT						15
 #define			BLT_EV_FLAG_VERSION_IND_REV						16
 
+#define			BLT_EV_FLAG_STANDBY_ENTER							BLT_EV_FLAG_SUSPEND_ENTER
+#define			BLT_EV_FLAG_STANDBY_EXIT							BLT_EV_FLAG_SUSPEND_EXIT
 
 
 

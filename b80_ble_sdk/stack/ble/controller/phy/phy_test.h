@@ -27,6 +27,7 @@
 #include "tl_common.h"
 
 
+
 /**
  * @brief	PHY test mode
  */
@@ -74,7 +75,7 @@ void 	  blc_phy_initPhyTest_module(void);
 /**
  * @brief      for user to set PHY test enable or disable
  * @param[in]  en - 1: enable; 0:disable
- * @return     status: 0x00 command OK, no other rvalue
+ * @return     status: 0x00 command OK, no other value
  */
 ble_sts_t blc_phy_setPhyTestEnable (u8 en);
 
@@ -85,6 +86,7 @@ ble_sts_t blc_phy_setPhyTestEnable (u8 en);
  * @return     1: PHY test is enable; 0: PHY test is disable
  */
 bool 	  blc_phy_isPhyTestEnable(void);
+
 
 /**
  * @brief      uart RX data process for PHY test 2 wire UART mode
@@ -112,22 +114,25 @@ void 	blc_phyTest_Uart_num_Set (uart_num_e uart_num);
 #endif
 
 /**
- * @brief      This function is used to start a test where the DUT receives test reference
- *				packets at a fixed interval. The tester generates the test reference packets.
- * @param[in]     rx_chn  	specify the RF channel to be used by the receiver
- * @param[in]	  phy_mode 	specify the RF PHT to be used by the receiver
- * @param[in]	  modulation_index  specifies whether or not the Controller should assume the receiver has a stable modulation index
+ * @brief      This function is used to start a test where the DUT receives test reference packets at a fixed interval. The tester generates the test reference packets.
+ * 			   Please refer to BLE Core Specification: Vol 4, Part E, 7.8.28 for more information to understand the meaning of each parameters and
+ * 			   the return values.
+ * @param[in]  rx_chn -	specify the RF channel to be used by the receiver
+ * @param[in]  phy_mode - specify the RF PHT to be used by the receiver
+ * @param[in]  modulation_index - specifies whether or not the Controller should assume the receiver has a stable modulation index
  * @return     ble_sts_t
  */
 ble_sts_t blc_phy_setEnhancedReceiverTest (u8 rx_chn,u8 phy_mode,u8 modulation_index);
 
 /**
  * @brief       This function is used to start a test where the DUT generates test reference packets at a fixed interval
- * @param[in]     tx_chn  	specify the RF channel to be used by the transmitter
- * @param[in]	  length 	Length in bytes of payload data in each packet
- * @param[in]	  pkt_type  specify contents of the payload of the test reference packets
- * @param[in]	  phy_mode  specify the RF PHT to be used by the transmitter
- * @return       ble_sts_t
+ * 			    Please refer to BLE Core Specification: Vol 4, Part E, 7.8.29 for more information to understand the meaning of each parameters and
+ * 			    the return values.
+ * @param[in]   tx_chn - specify the RF channel to be used by the transmitter
+ * @param[in]	length - Length in bytes of payload data in each packet
+ * @param[in]	pkt_type - specify contents of the payload of the test reference packets
+ * @param[in]	phy_mode - specify the RF PHT to be used by the transmitter
+ * @return      ble_sts_t
  */
 ble_sts_t blc_phy_setEnhancedTransmitterTest (u8 tx_chn, u8 length, u8 pkt_type,u8 phy_mode);
 

@@ -38,7 +38,6 @@ typedef enum{
 
 typedef int (*l2cap_handler_t) (u16 conn, u8 * p);
 
-/******************************* User Interface  ************************************/
 /**
  * @brief	This function is used to set connect request parameter for updating connect parameter
  * @param	min_interval - connect interval minimum
@@ -57,14 +56,6 @@ void		bls_l2cap_requestConnParamUpdate (u16 min_interval, u16 max_interval, u16 
  */
 void        bls_l2cap_setMinimalUpdateReqSendingTime_after_connCreate(int time_ms);
 
-//GaoQiu add. use for register the function of user customize l2cap data packet process(CID == 0x0004).
-/**
- * @Brief  : use for register user customize function of l2cap data handle
- * @Param  : p->
- * @Return : 1-> l2cap data has been handled by user
- *           0-> l2cap data will be handle by BLE stack
- */
-void        blc_l2cap_register_customize_handler(l2cap_handler_t p);
 
 /**
  * @brief	This function is used to register the function for handler L2CAP data

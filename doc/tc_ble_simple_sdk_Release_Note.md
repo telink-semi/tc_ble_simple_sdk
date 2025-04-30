@@ -1,3 +1,253 @@
+# V3.4.2.2 (PR)
+
+### Version
+
+* SDK version: tc_ble_simple_sdk V3.4.2.2
+* Chip Version
+  - TLSR8208 (B80) (A1/A4)
+  - TLSR8208 B (B80B) (A0/A1)
+* Hardware EVK Version
+  - B80: C1T261A30_V1_1
+  - B80B: C1T321A30_V1_0
+* Platform Version
+  - tc_platform_sdk V3.1.0
+* Toolchain Version
+  - TC32 ELF GCC4.3 ( IDE: [Telink IDE](https://wiki.telink-semi.cn/wiki/IDE-and-Tools/IDE-for-TLSR8-Chips/)/ [TelinkIoTStudio_V2025.02](https://doc.telink-semi.cn/tools/telink_iot_studio/TelinkIoTStudio_V2025.2.zip) )
+
+### Features
+
+- **2.4G**
+  - Add 2.4G demo.
+    - 2_4g_tpll
+    - 2_4g_genfsk
+    - 2.4g_tpsll
+
+
+* **2.4G&BLE concurrent**
+  - Add 2.4G&BLE concurrent demo.
+    - ble_slave_2_4g
+
+### Bug Fixes
+
+* **ATT**
+  - Fixed: Fix handling of invalid "ATT_OP_FIND_INFO_REQ" parameter. When the peripheral device receives "ATT_OP_FIND_INFO_REQ" that the start handle is zero or the start handle exceeds the end handle, the ATT server needs to send "ATT_ERROR_RSP", rather than sending an invalid "ATT_OP_FIND_INFO_RSP" packet.
+* **Application**
+  - Fixed: The last byte of SPP service data can't be printed via simulated UART.
+
+### Refactoring
+
+* **ATT**
+  - Adjust the type of parameter of Effective MTU Size to unsigned short in blc_att_setEffectiveMtuSize.
+* **Others**
+  * Change the structure of the project. Split it into two independent projects:
+    - tc_ble_simple_b80B_sdk
+    - tc_ble_simple_b80_sdk
+  * Rename feature_test to ble_feature_test.
+  * Optimize module demo:
+    - Rename BLE_MODULE_OTA_ENABLE to BLE_OTA_SERVER_ENABLE.
+    - Disable PM during OTA updates.
+    - Increase the OTA timeout from 15s to 30s.
+
+
+### BREAKING CHANGES
+
+* N/A.
+
+### CodeSize
+
+The following data are obtained using default configurations unless otherwise specified.
+
+* **BLE Sample**
+  * Flash
+    - B80: 42.6k Byte
+    - B80B: 41.6k Byte
+  * RAM
+    - B80: 14.0k Byte
+    - B80B: 14.0k Byte
+  * The values above are obtained using the default configuration.
+
+  * Flash
+    - B80: 41.7k Byte
+    - B80B: 40.7k Byte
+  * RAM
+    - B80: 10.7k Byte
+    - B80B: 10.7k Byte
+  * The values above are obtained by calling APIs to save RAM and disabling deepsleep retention.
+
+* **BLE Master**
+  * Flash
+    - B80: 30.7k Byte
+    - B80B: 29.8k Byte
+  * RAM
+    - B80: 10.6k Byte
+    - B80B: 10.6k Byte
+* **BLE Module**
+  * Flash
+    - B80: 46.5k Byte
+    - B80B: 45.9k Byte
+  * RAM
+    - B80: 13.9k Byte
+    - B80B: 13.9k Byte
+* **2.4G BLE concurrent**
+  * Flash
+    - B80: 46.0k Byte
+    - B80B: 44.9k Byte
+  * RAM
+    - B80: 13.9k Byte
+    - B80B: 13.9k Byte
+* **2.4G genfsk**
+  * Flash
+    - B80: 13.5k Byte
+    - B80B: 12.6k Byte
+  * RAM
+    - B80: 8.8k Byte
+    - B80B: 8.8k Byte
+* **2.4G tpll**
+  * Flash
+    - B80: 12.8k Byte
+    - B80B: 11.9k Byte
+  * RAM
+    - B80: 9.9k Byte
+    - B80B: 9.9k Byte
+* **2.4G tpsll**
+  * Flash
+    - B80: 11.8k Byte
+    - B80B: 11.0k Byte
+  * RAM
+    - B80: 8.2k Byte
+    - B80B: 8.2k Byte
+
+
+### Version
+
+* SDK 版本： tc_ble_simple_sdk V3.4.2.2
+* Chip 版本
+  - TLSR8208 (B80) (A1/A4)
+  - TLSR8208 B (B80B) (A0/A1)
+* Hardware EVK 版本
+  - B80: C1T261A30_V1_1
+  - B80B: C1T321A30_V1_0
+* Platform 版本
+  - tc_platform_sdk V3.1.0
+* Toolchain 版本
+  - TC32 ELF GCC4.3 ( IDE: [Telink IDE](https://wiki.telink-semi.cn/wiki/IDE-and-Tools/IDE-for-TLSR8-Chips/)/ [TelinkIoTStudio_V2025.02](https://doc.telink-semi.cn/tools/telink_iot_studio/TelinkIoTStudio_V2025.2.zip) )
+
+### Features
+
+* **2.4G**
+  - 添加2.4G demo。
+    - 2_4g_tpll
+    - 2_4g_genfsk
+    - 2.4g_tpsll
+* **2.4G&BLE双模**
+  - 添加 2.4G&BLE 双模 demo。
+    - ble_slave_2_4g
+
+### Bug Fixes
+
+* **ATT**
+  - 修复: 修复对无效“ATT_OP_FIND_INFO_REQ”请求参数的处理，当peripheral设备接收到的“ATT_OP_FIND_INFO_REQ”的开始句柄为零或开始句柄超过结束句柄时，应当回复“ATT_ERROR_RSP”，而不是发送一个无效的“ATT_OP_FIND_INFO_RSP”报文。
+* **Others**
+  - 修复：通过模拟串口打印module接收的SPP服务数据时，最后1 byte无法打印。
+
+### Refactoring
+
+* **ATT**
+  - 调整blc_att_setEffectiveMtuSize函数中Effective MTU Size参数类型为unsigned short。
+
+
+* **Others**
+
+  * 修改工程结构，将其分成两个独立的工程。
+    - tc_ble_simple_b80B_sdk
+    - tc_ble_simple_b80_sdk
+  * 重命名feature_test为ble_feature_test。
+  * 优化module demo:
+    - 重命名BLE_MODULE_OTA_ENABLE为BLE_OTA_SERVER_ENABLE。
+    - 进行OTA时关闭PM。
+    - 增大OTA超时时间，从15s增大到30s。
+
+
+### BREAKING CHANGES
+
+* N/A.
+
+### CodeSize
+
+以下数据未做特殊说明均使用默认配置获得。
+
+* **BLE Sample**
+  
+  * Flash
+    - B80: 42.6k Byte
+    - B80B: 41.6k Byte
+  * RAM
+    - B80: 14.0k Byte
+    - B80B: 14.0k Byte
+
+  * 以上大小使用默认配置得到
+  * Flash
+    - B80: 41.6k Byte
+    - B80B: 41.2k Byte
+  * RAM
+    - B80: 12.7k Byte
+    - B80B: 11.4k Byte
+  * 以上大小是调用节省ram的API和关闭deepsleep retention后得到。
+  
+* **BLE Master**
+  
+  * Flash
+    - B80: 30.7k Byte
+    - B80B: 29.8k Byte
+  * RAM
+    - B80: 10.6k Byte
+    - B80B: 10.6k Byte
+  
+* **BLE Module**
+
+  * Flash
+    - B80: 46.5k Byte
+    - B80B: 45.9k Byte
+  * RAM
+    - B80: 13.9k Byte
+    - B80B: 13.9k Byte
+
+* **2.4G BLE concurrent**
+
+  * Flash
+    - B80: 46.0k Byte
+    - B80B: 44.9k Byte
+  * RAM
+    - B80: 13.9k Byte
+    - B80B: 13.9k Byte
+
+* **2.4G genfsk**
+
+  * Flash
+    - B80: 13.5k Byte
+    - B80B: 12.6k Byte
+  * RAM
+    - B80: 8.8k Byte
+    - B80B: 8.8k Byte
+
+* **2.4G tpll**
+
+  * Flash
+    - B80: 12.8k Byte
+    - B80B: 11.9k Byte
+  * RAM
+    - B80: 9.9k Byte
+    - B80B: 9.9k Byte
+
+* **2.4G tpsll**
+
+  * Flash
+    - B80: 11.8k Byte
+    - B80B: 11.0k Byte
+  * RAM
+    - B80: 8.2k Byte
+    - B80B: 8.2k Byte
+
 # V3.4.2.1 (PR)
 
 ### Version
@@ -247,7 +497,7 @@
 		- Split function "blc_app_loadCustomizedParameters" into two functions "blc_app_loadCustomizedParameters_normal"	and "blc_app_loadCustomizedParameters_deepRetn".
 		The first one is used when the MCU is powered on or wakes up from deepsleep mode. The second one is used when MCU wakes up from deepsleep retention mode.
 		- Add API "blc_flash_read_mid_get_vendor_set_capacity" in "blc_readFlashSize_autoConfigCustomFlashSector" to get Flash mid, vendor and capacity information.
-   
+  
 * **Others** 
 	- Correct some spelling errors.
 	- Remove ext_pm.h and ext_rf.h, and the API open to users has been moved to ext_misc.h
@@ -724,7 +974,7 @@
 
 ### Features
    * Normalizes the naming of content related to private schemas
-   
+
 ### BREAKING CHANGES
    * N/A
 
@@ -744,10 +994,10 @@
       - Disable deepsleep retention: 10.5k Byte
       - Enable deepsleep retention: 11.2k Byte
    * The values above are obtained by compiling 8208_ble_sample with calling APIs of saving RAM
-   
+
 ### Features
    * 规范化与私有模式相关内容的命名
-   
+
 ### BREAKING CHANGES
    * N/A
 
@@ -775,7 +1025,7 @@
 
 ### BREAKING CHANGES
    * N/A
-   
+
 ### Bug Fixes
    * Fix the bug that the value of T_IFS is inaccurate when 48M is used.
 	
@@ -795,15 +1045,15 @@
       - Disable deepsleep retention: 10.4k Byte
       - Enable deepsleep retention: 11.2k Byte
    * The values above are obtained by compiling 8208_ble_sample with calling APIs of saving RAM
+
    
-   
-   
+
 ### Features
    * N/A
 
 ### BREAKING CHANGES
    * N/A
-   
+
 ### Bug Fixes
    * 修复使用48M时T_IFS值不准确的问题。
 	
@@ -822,7 +1072,7 @@
    * RAM:
       - 关闭deepsleep retention: 10.4k Byte
       - 打开deepsleep retention: 11.2k Byte
-    * 以上大小使用调用节省RAM的API编译8208_ble_sample得到
+        * 以上大小使用调用节省RAM的API编译8208_ble_sample得到
 
 ## V3.4.1.1_Patch_0001
 
@@ -833,7 +1083,7 @@
 
 ### BREAKING CHANGES
    * N/A
-   
+
 ### Bug Fixes
    * Solve the problem of crystal oscillator stability flag failure
 	
@@ -853,9 +1103,9 @@
       - Disable deepsleep retention: 10.4k Byte
       - Enable deepsleep retention: 11.2k Byte
    * The values above are obtained by compiling 8208_ble_sample with calling APIs of saving RAM
+
    
-   
-   
+
 ### Features
    * SDK 版本：telink_b80_ble_single_connection_sdk_v3.4.1.1_patch_0001
    * 增加API,当在广播事件里收到SCAN_REQ时，可以选择是否继续当前广播事件
@@ -863,7 +1113,7 @@
 
 ### BREAKING CHANGES
    * N/A
-   
+
 ### Bug Fixes
    * 解决晶振起振失败的问题。
 	
@@ -882,7 +1132,7 @@
    * RAM:
       - 关闭deepsleep retention: 10.4k Byte
       - 打开deepsleep retention: 11.2k Byte
-    * 以上大小使用调用节省RAM的API编译8208_ble_sample得到
+        * 以上大小使用调用节省RAM的API编译8208_ble_sample得到
 	
 
 ## V3.4.1.1
@@ -896,7 +1146,7 @@
    * Fix the issue that the pointer to packet is null when callback of BLT_EV_FLAG_CONNECT is triggered
    * Add Puya Flash
    * Add version information at the end of bin file.
-   
+
 ### BREAKING CHANGES
    * N/A
 
@@ -925,7 +1175,7 @@
    * 修复了触发BLT_EV_FLAG_CONNECT事件回调时指向数据包的指针为空的问题
    * 适配Puya Flash
    * bin文件末尾增加版本信息
-   
+
 ### BREAKING CHANGES
    * N/A
 

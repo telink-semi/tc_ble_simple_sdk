@@ -34,6 +34,10 @@
 typedef void (*rf_1m_init_t)(void);
 extern rf_1m_init_t rf_ble_1m_param_init; ///This function serves to set RF  ble 1m Register initialization.
 #define rf_drv_ble_init rf_ble_1m_param_init
+
+void rf_ble_state_reset(void);
+
+void rf_2_4g_state_reset(void);
 /******************************* rf end  **********************************************************************/
 
 

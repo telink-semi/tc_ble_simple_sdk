@@ -26,6 +26,7 @@
 
 
 #include "drivers.h"
+#include "types.h"
 #include "vendor/common/user_config.h"
 
 

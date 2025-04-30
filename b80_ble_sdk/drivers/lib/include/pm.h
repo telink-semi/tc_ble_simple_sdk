@@ -36,38 +36,7 @@ volatile unsigned int ana_32k_tick;
 
 #define PM_LONG_SUSPEND_EN					1
 
-#define XTAL_READY_CHECK_TIMING_OPTIMIZE	1
-
 #define RAM_CRC_EN							0		//if use RAM_CRC func, retention ldo will turn down to 0.6V in A1, A0 is 0.8V.
-
-/**
- * @brief	When timer wakeup,the DCDC delay time is accurate,but other wake-up sources wake up,
- * 			this time is ((PM_DCDC_DELAY_CYCLE+1)*2-1)*32us ~ (PM_DCDC_DELAY_CYCLE+1)*2*32us
- * @note	Eaglet does not have nvt ldo, flash will be powered off when chip sleeps.
- * 			Therefore, sleep wake up flash's power on timing needs to meet the spec requirements, and the time of rdly is required to meet the requirements.
- */
-#define PM_DCDC_DELAY_DURATION     					500   // delay_time_us = (PM_DCDC_DELAY_CYCLE+1)*2*32us
-												  	  	  // 2 * 1/16k = 125 uS, 3 * 1/16k = 187.5 uS  4*1/16k = 250 uS	 8*1/16k = 500 uS
-
-#define PM_XTAL_MANUAL_MODE_DELAY		    200  //150  200
-
-#if(PM_DCDC_DELAY_DURATION == 62)
-#define PM_DCDC_DELAY_CYCLE		0
-#elif(PM_DCDC_DELAY_DURATION == 125)
-#define PM_DCDC_DELAY_CYCLE		1
-#elif(PM_DCDC_DELAY_DURATION == 187)
-#define PM_DCDC_DELAY_CYCLE		2
-#elif(PM_DCDC_DELAY_DURATION == 250)
-#define PM_DCDC_DELAY_CYCLE		3
-#elif(PM_DCDC_DELAY_DURATION == 500)
-#define PM_DCDC_DELAY_CYCLE		7
-#endif
-
-#define EARLYWAKEUP_TIME_US_SUSPEND 		(PM_DCDC_DELAY_DURATION + PM_XTAL_MANUAL_MODE_DELAY + 200)  //100: code running time margin//154  //175
-#define EARLYWAKEUP_TIME_US_DEEP_RET    	(PM_DCDC_DELAY_DURATION + 90)//(PM_DCDC_DELAY_DURATION + 32)
-//#define EARLYWAKEUP_TIME_US_DEEP	    	(PM_DCDC_DELAY_DURATION + 32 + ((SOFT_START_DLY)*62))
-#define EMPTYRUN_TIME_US       	    		(EARLYWAKEUP_TIME_US_SUSPEND + 200)
-
 
 #define EARLYWAKEUP_TIME			19
 #define	tick_32k_tick_per_ms		32
@@ -152,6 +121,8 @@ enum {
 	 WAKEUP_STATUS_PAD  			= BIT(0),
 	 WAKEUP_STATUS_CORE  			= BIT(1),
 	 WAKEUP_STATUS_TIMER 			= BIT(2),
+
+	 WAKEUP_STATUS_INUSE_ALL        = 0x07,
 
 	 STATUS_GPIO_ERR_NO_ENTER_PM  	= BIT(8), /**<Bit8 is used to determine whether the wake source is normal.*/
 	 STATUS_ENTER_SUSPEND  			= BIT(30),
@@ -253,20 +224,6 @@ static inline void ram_crc_en_timing(unsigned int RAM_CRC_16K_Timing, unsigned i
 {
 	RAM_CRC_EN_16KRAM_TIME = RAM_CRC_16K_Timing;
 	RAM_CRC_EN_32KRAM_TIME = RAM_CRC_32K_Timing;
-}
-
-
-/**
- * @brief      This function serves to change the timing of soft start delay.
- * @param[in]  none.
- * @return     none.
- */
-extern unsigned char SOFT_START_DLY;
-extern unsigned int EARLYWAKEUP_TIME_US_DEEP;
-static inline void soft_start_dly_time(unsigned char soft_start_time)
-{
-	SOFT_START_DLY = soft_start_time;
-	EARLYWAKEUP_TIME_US_DEEP = PM_DCDC_DELAY_DURATION + 90 + ((SOFT_START_DLY)*62);
 }
 
 /**
@@ -374,7 +331,16 @@ extern unsigned int pm_get_32k_tick(void);
  * 			3. When this function called after power on or deep sleep wakeup, it will cost about 6~7ms for perform 32k RC calibration. 
  * 				If do not want this logic, you can check the usage and precautions of cpu_wakeup_init_calib_32k_rc_cfg().
  */
-void cpu_wakeup_init(cap_typedef_e cap) ;
+void cpu_wakeup_init(cap_typedef_e cap);
+
+/**
+ * @brief 	  This function performs to configure whether to calibrate the 32k rc in the cpu_wakeup_init() when power-on or wakeup from deep sleep mode.If wakeup from deep retention sleep mode will not calibrate.
+ * @param[in] calib_flag - Choose whether to calibrate the 32k rc or not.
+ * 						1 - calibrate; 0 - not calibrate
+ * @return	  none
+ * @note	  This function will not take effect until it is called before cpu_wakeup_init(). 
+ */
+void cpu_wakeup_init_calib_32k_rc_cfg(char calib_flag);
 
 /**
  * @brief   This function serves to recover system timer from tick of internal 32k RC.
@@ -519,4 +485,36 @@ void cpu_set_32k_tick(unsigned int tick);
 
 void soft_reboot_dly13ms_use24mRC(void);
 
+/**
+ * @brief	  This function serves to clear cache tag.
+ * @param[in] none.
+ * @return    none.
+ */
+_attribute_ram_code_sec_noinline_ void cache_tag_clr();
 
+#if SRAM_OTP_FLASH_HANDLE
+#include "lib/include/otp/otp_base.h"
+/**
+ * @brief   This function services to power on flash and OTP and indicates that the program is not an OTP program.
+ * @return  none
+ * @note
+ *          - When compile source code for SRAM program, this function does not call.
+ *          - When compile SDK code for SRAM program, this function is called in cpu_wakeup_init().
+ */
+extern unsigned char otp_program_flag;
+static inline void sram_program_handler(void)
+{
+    analog_write(0x05, analog_read(0x05) & ~(BIT(5))); /* <5>:Power down of Flash LDO, 1: Power down  0: Power up */
+    otp_set_active_mode();
+    otp_program_flag = 0; /* Indicates the program is not an OTP program */
+}
+#else
+/**
+ * @brief   This function services to power on flash and OTP and indicates that the program is not an OTP program.
+ * @return  none
+ * @note
+ *          - When compile source code for SRAM program, this function does not call.
+ *          - When compile SDK code for SRAM program, this function is called in cpu_wakeup_init().
+ */
+__attribute__((weak)) void sram_program_handler(void);
+#endif

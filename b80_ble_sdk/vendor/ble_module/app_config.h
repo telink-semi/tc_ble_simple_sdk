@@ -30,7 +30,7 @@
  */
 #define FLASH_SIZE_OPTION							FLASH_SIZE_OPTION_512K //very important, user need confirm !!!
 #define BLE_MODULE_SECURITY_ENABLE      					1
-#define BLE_MODULE_OTA_ENABLE				1
+#define BLE_OTA_SERVER_ENABLE				1
 
 /* firmware signature check */
 #define FIRMWARES_SIGNATURE_ENABLE     		 		0

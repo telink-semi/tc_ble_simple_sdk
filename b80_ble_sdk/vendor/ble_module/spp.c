@@ -446,14 +446,14 @@ int spp_send_data (u32 header, spp_event_t * pEvt)
 	#endif
 
 
-	int sppEvt_len = pEvt->paramLen + 2;
+	int sppEvt_len = pEvt->paramLen + 3;
 	if (header & HCI_FLAG_EVENT_TLK_MODULE)
 	{
 		*p++ = sppEvt_len;
 		*p++ = sppEvt_len >> 8;
 		#if 1
-			memcpy (p, (u8 *)pEvt, pEvt->paramLen + 2);
-			p += pEvt->paramLen + 2;
+			memcpy (p, (u8 *)pEvt, pEvt->paramLen + 3);
+			p += pEvt->paramLen + 3;
 		#else
 			*p++ = pEvt->token;
 			*p++ = pEvt->paramLen;

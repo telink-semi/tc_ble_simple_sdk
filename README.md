@@ -1,3 +1,280 @@
+# V3.4.2.2 (PR)
+
+### Version
+
+* SDK version: tc_ble_simple_sdk V3.4.2.2
+* Chip Version
+  - TLSR8208 (B80) (A1/A4)
+  - TLSR8208 B (B80B) (A0/A1)
+* Hardware EVK Version
+  - B80: C1T261A30_V1_1
+  - B80B: C1T321A30_V1_0
+* Platform Version
+  - tc_platform_sdk V3.1.0
+* Toolchain Version
+  - TC32 ELF GCC4.3 ( IDE: [Telink IDE](https://wiki.telink-semi.cn/wiki/IDE-and-Tools/IDE-for-TLSR8-Chips/)/ [TelinkIoTStudio_V2025.02](https://doc.telink-semi.cn/tools/telink_iot_studio/TelinkIoTStudio_V2025.2.zip) )
+
+### Features
+
+- **2.4G**
+  - support 2.4G demo.
+    - 2_4g_tpll
+    - 2_4g_genfsk
+    - 2.4g_tpsll
+
+* **2.4G&BLE concurrent**
+  - Add 2.4G&BLE concurrent demo.
+    - ble_slave_2_4g
+
+### Bug Fixes
+
+* **ATT**
+  - Fixed: Fix handling of invalid "ATT_OP_FIND_INFO_REQ" parameter. When the peripheral device receives "ATT_OP_FIND_INFO_REQ" that the start handle is zero or the start handle exceeds the end handle, the ATT server needs to send "ATT_ERROR_RSP", rather than sending an invalid "ATT_OP_FIND_INFO_RSP" packet.
+* **Application**
+  - Fixed: The last byte of SPP service data can't be printed via simulated UART.
+
+### Refactoring
+
+* **ATT**
+  - Adjust the type of parameter of Effective MTU Size to u16 in blc_att_setEffectiveMtuSize.
+* **Others**
+  * Change the structure of the project. Split it into two independent projects:
+    - tc_ble_simple_b80B_sdk
+    - tc_ble_simple_b80_sdk
+  * Rename feature_test to ble_feature_test.
+  * Optimize module demo:
+    - Rename BLE_MODULE_OTA_ENABLE to BLE_OTA_SERVER_ENABLE.
+    - Disable PM during OTA updates.
+    - Increase the OTA timeout from 15s to 30s.
+
+### BREAKING CHANGES
+
+* N/A.
+
+### Flash
+
+* **8208**
+  - GD25LD10C
+  - GD25LD40C
+  - ZG25WD40B
+  - P25D40SU
+  - P25D09U
+  - GD25WD10EGIG
+
+* **8208B**
+  - P25D40SU
+  - P25D09U
+  - GD25WD10EGIG
+
+### CodeSize
+
+The following data are obtained using default configurations unless otherwise specified.
+
+* **BLE Sample**
+  * Flash
+    - B80: 42.6k Byte
+    - B80B: 41.6k Byte
+  * RAM
+    - B80: 14.0k Byte
+    - B80B: 14.0k Byte
+  * The values above are obtained using the default configuration.
+
+  * Flash
+    - B80: 41.7k Byte
+    - B80B: 40.7k Byte
+  * RAM
+    - B80: 10.7k Byte
+    - B80B: 10.7k Byte
+  * The values above are obtained by calling APIs to save RAM and disabling deepsleep retention.
+
+* **BLE Master**
+  * Flash
+    - B80: 30.7k Byte
+    - B80B: 29.8k Byte
+  * RAM
+    - B80: 10.6k Byte
+    - B80B: 10.6k Byte
+* **BLE Module**
+  * Flash
+    - B80: 46.5k Byte
+    - B80B: 45.9k Byte
+  * RAM
+    - B80: 13.9k Byte
+    - B80B: 13.9k Byte
+* **2.4G BLE concurrent**
+  * Flash
+    - B80: 46.0k Byte
+    - B80B: 44.9k Byte
+  * RAM
+    - B80: 13.9k Byte
+    - B80B: 13.9k Byte
+* **2.4G genfsk**
+  * Flash
+    - B80: 13.5k Byte
+    - B80B: 12.6k Byte
+  * RAM
+    - B80: 8.8k Byte
+    - B80B: 8.8k Byte
+* **2.4G tpll**
+  * Flash
+    - B80: 12.8k Byte
+    - B80B: 11.9k Byte
+  * RAM
+    - B80: 9.9k Byte
+    - B80B: 9.9k Byte
+* **2.4G tpsll**
+  * Flash
+    - B80: 11.8k Byte
+    - B80B: 11.0k Byte
+  * RAM
+    - B80: 8.2k Byte
+    - B80B: 8.2k Byte
+
+
+### Version
+
+* SDK 版本： tc_ble_simple_sdk V3.4.2.2
+* Chip 版本
+  - TLSR8208 (B80) (A1/A4)
+  - TLSR8208 B (B80B) (A0/A1)
+* Hardware EVK 版本
+  - B80: C1T261A30_V1_1
+  - B80B: C1T321A30_V1_0
+* Platform 版本
+  - tc_platform_sdk V3.1.0
+* Toolchain 版本
+  - TC32 ELF GCC4.3 ( IDE: [Telink IDE](https://wiki.telink-semi.cn/wiki/IDE-and-Tools/IDE-for-TLSR8-Chips/)/ [TelinkIoTStudio_V2025.02](https://doc.telink-semi.cn/tools/telink_iot_studio/TelinkIoTStudio_V2025.2.zip) )
+
+### Features
+
+* **2.4G**
+  - 支持2.4G demo。
+    - 2_4g_tpll
+    - 2_4g_genfsk
+    - 2.4g_tpsll
+* **2.4G&BLE双模**
+  - 添加 2.4G&BLE 双模 demo。
+    - ble_slave_2_4g
+
+### Bug Fixes
+
+* **ATT**
+  - 修复: 修复对无效“ATT_OP_FIND_INFO_REQ”请求参数的处理，当peripheral设备接收到的“ATT_OP_FIND_INFO_REQ”的开始句柄为零或开始句柄超过结束句柄时，应当回复“ATT_ERROR_RSP”，而不是发送一个无效的“ATT_OP_FIND_INFO_RSP”报文。
+* **Others**
+  - 修复：通过模拟串口打印module接收的SPP服务数据时，最后1 byte无法打印。
+
+### Refactoring
+
+* **ATT**
+  - 调整blc_att_setEffectiveMtuSize函数中Effective MTU Size参数类型为u16。
+
+
+* **Others**
+
+  * 修改工程结构，将其分成两个独立的工程。
+    - tc_ble_simple_b80B_sdk
+    - tc_ble_simple_b80_sdk
+  * 重命名feature_test为ble_feature_test。
+  * 优化module demo:
+    - 重命名BLE_MODULE_OTA_ENABLE为BLE_OTA_SERVER_ENABLE。
+    - 进行OTA时关闭PM。
+    - 增大OTA超时时间，从15s增大到30s。
+
+### BREAKING CHANGES
+
+* N/A.
+
+### Flash
+
+* **8208**
+  - GD25LD10C
+  - GD25LD40C
+  - ZG25WD40B
+  - P25D40SU
+  - P25D09U
+  - GD25WD10EGIG
+
+* **8208B**
+  - P25D40SU
+  - P25D09U
+  - GD25WD10EGIG
+
+### CodeSize
+
+以下数据未做特殊说明均使用默认配置获得。
+
+* **BLE Sample**
+
+  * Flash
+    - B80: 42.6k Byte
+    - B80B: 41.6k Byte
+  * RAM
+    - B80: 14.0k Byte
+    - B80B: 14.0k Byte
+
+  * 以上大小使用默认配置得到
+  * Flash
+    - B80: 41.6k Byte
+    - B80B: 41.2k Byte
+  * RAM
+    - B80: 12.7k Byte
+    - B80B: 11.4k Byte
+  * 以上大小是调用节省ram的API和关闭deepsleep retention后得到。
+
+* **BLE Master**
+
+  * Flash
+    - B80: 30.7k Byte
+    - B80B: 29.8k Byte
+  * RAM
+    - B80: 10.6k Byte
+    - B80B: 10.6k Byte
+
+* **BLE Module**
+
+  * Flash
+    - B80: 46.5k Byte
+    - B80B: 45.9k Byte
+  * RAM
+    - B80: 13.9k Byte
+    - B80B: 13.9k Byte
+
+* **2.4G BLE concurrent**
+
+  * Flash
+    - B80: 46.0k Byte
+    - B80B: 44.9k Byte
+  * RAM
+    - B80: 13.9k Byte
+    - B80B: 13.9k Byte
+
+* **2.4G genfsk**
+
+  * Flash
+    - B80: 13.5k Byte
+    - B80B: 12.6k Byte
+  * RAM
+    - B80: 8.8k Byte
+    - B80B: 8.8k Byte
+
+* **2.4G tpll**
+
+  * Flash
+    - B80: 12.8k Byte
+    - B80B: 11.9k Byte
+  * RAM
+    - B80: 9.9k Byte
+    - B80B: 9.9k Byte
+
+* **2.4G tpsll**
+
+  * Flash
+    - B80: 11.8k Byte
+    - B80B: 11.0k Byte
+  * RAM
+    - B80: 8.2k Byte
+    - B80B: 8.2k Byte
+
 # V3.4.2.1 (PR)
 
 ### Version

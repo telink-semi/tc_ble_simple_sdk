@@ -21,10 +21,9 @@
  *          limitations under the License.
  *
  *******************************************************************************************************/
-#include "../tl_common.h"
 #include "drivers.h"
 #include "utility.h"
-
+#include "string.h"
 
 
 
