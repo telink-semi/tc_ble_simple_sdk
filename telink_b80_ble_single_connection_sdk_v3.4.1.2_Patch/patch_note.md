@@ -6,7 +6,8 @@
 * N/A.
 
 ### BREAKING CHANGES
-* The criteria for determining the stability of the PLL have become more stringent. Previously, it was considered passed if detected once; now, it is only considered passed if it is detected three times consecutively.
+* **PLL**
+   - (B80/B80B)The criteria for determining the stability of the PLL have become more stringent. Previously, it was considered passed if detected once; now, it is only considered passed if it is detected three times consecutively.
 
 ### Features
 * N/A.
@@ -15,7 +16,8 @@
 * N/A.
 
 ### BREAKING CHANGES
-* 确定锁相环稳定性的标准变得更加严格了。以前只要检测到一次就认为合格；而现在只有连续检测到三次才被视为合格。
+* **PLL**
+   - （B80/B80B）确定锁相环稳定性的标准变得更加严格了。以前只要检测到一次就认为合格；而现在只有连续检测到三次才被视为合格。
 
 
 
