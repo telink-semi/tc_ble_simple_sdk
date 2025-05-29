@@ -7,7 +7,8 @@
 
 ### BREAKING CHANGES
 * **PLL**
-   - (B80/B80B)The criteria for determining the stability of the PLL have become more stringent. Previously, it was considered passed if detected once; now, it is only considered passed if it is detected three times consecutively.
+   - (B80/B80B) Customers cannot use the bit that uses the DEEP_ANA_REG0[bit2] (0x3a[2]) flag to indicate whether a restart caused by a PLL exception occurred.
+   - (B80/B80B) The criteria for determining the stability of the PLL have become more stringent. Previously, it was considered passed if detected once; now, it is only considered passed if it is detected three times consecutively.
 
 ### Features
 * N/A.
@@ -17,7 +18,8 @@
 
 ### BREAKING CHANGES
 * **PLL**
-   - （B80/B80B）确定锁相环稳定性的标准变得更加严格了。以前只要检测到一次就认为合格；而现在只有连续检测到三次才被视为合格。
+   - （B80/B80B）占用DEEP_ANA_REG0[bit2]（0x3a[2]）标志是否发生过PLL异常导致的重启，客户不能使用这个bit。
+   - （B80/B80B）判断PLL稳定的标志位的标准更加严格，以前检测到一次就通过，改为连续三次检测到才算通过。
 
 
 
