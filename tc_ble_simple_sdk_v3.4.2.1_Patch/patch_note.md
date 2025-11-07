@@ -12,9 +12,9 @@
 
 * **ATT**
   - For B80/B80B
-    - Fix handling of invalid "ATT_OP_FIND_INFO_REQ" parameter. When the peripheral device receives "ATT_OP_FIND_INFO_REQ" that the start handle is zero or the start handle exceeds the end handle, the ATT server needs to send "ATT_ERROR_RSP", rather than sending an invalid "ATT_OP_FIND_INFO_RSP" packet.
-      - Detailed Description: when receive ATT_OP_FIND_INFO_REQ that start handle is zero or start handle exceeds to end handle, the ATT server will send an invaluable packet that the opcode is error.
-      - After Fix: when receive ATT_OP_FIND_INFO_REQ that start handle is zero or start handle exceeds to end handle, the ATT server will send ATT_ERROR_RSP.
+    - Fix handling of invalid ATT_FIND_INFORMATION_REQ parameter. When the peripheral device receives ATT_FIND_INFORMATION_REQ that the start handle is zero or the start handle exceeds the end handle, the ATT server needs to send ATT_ERROR_RSP, rather than sending an invalid ATT_FIND_INFORMATION_RSP packet.
+      - Detailed Description: when receive ATT_FIND_INFORMATION_REQ that start handle is zero or start handle exceeds to end handle, the ATT server will send an invaluable packet that the opcode is error.
+      - After Fix: when receive ATT_FIND_INFORMATION_REQ that start handle is zero or start handle exceeds to end handle, the ATT server will send ATT_ERROR_RSP.
       - Update Recommendation: Evaluate if needed.
 
     - Fix the issue where ATT_ERROR_RSP is not responded normally due to incorrect permission judgment during the ATT service process.
@@ -57,13 +57,13 @@
 
 * **ATT**
   - For B80/B80B
-    - 修复对无效“ATT_OP_FIND_INFO_REQ”请求参数的处理，当peripheral设备接收到的“ATT_OP_FIND_INFO_REQ”的开始句柄为零或开始句柄超过结束句柄时，应当回复“ATT_ERROR_RSP”，而不是发送一个无效的“ATT_OP_FIND_INFO_RSP”报文。
-      - 详细描述：当接收到“ATT_OP_FIND_INFO_REQ”且起始句柄为零或起始句柄超出结束句柄范围时，ATT 服务器将发送一个opcode错误的数据包。
-      - 修复效果：当接收到“ATT_OP_FIND_INFO_REQ”且起始句柄为零或起始句柄超出结束句柄范围时，ATT 服务器将发送“ATT_ERROR_RSP”。
+    - 修复对无效 ATT_FIND_INFORMATION_REQ 请求参数的处理，当peripheral设备接收到的 ATT_FIND_INFORMATION_REQ 的开始句柄为零或开始句柄超过结束句柄时，应当回复 ATT_ERROR_RSP，而不是发送一个无效的ATT_FIND_INFORMATION_RSP 报文。
+      - 详细描述：当接收到 ATT_FIND_INFORMATION_REQ 且起始句柄为零或起始句柄超出结束句柄范围时，ATT 服务器将发送一个opcode错误的数据包。
+      - 修复效果：当接收到 ATT_FIND_INFORMATION_REQ 且起始句柄为零或起始句柄超出结束句柄范围时，ATT 服务器将发送“ATT_ERROR_RSP”。
       - 更新建议：自行评估。
 
     - 修复 ATT 服务过程中的权限判断错误时未正常回复 ATT_ERROR_RSP。
-      - 详细描述：当ATT Central端对ATT peripheral 端发送ATT request包时，如果此时权限不足，ATT peripheral 端应该回复ATT_ERROR_RSP，但由于底层逻辑错误，会导致ATT_ERROR_RSP无法正常发出，ATT流程异常。
+      - 详细描述：当ATT Central端对ATT peripheral 端发送ATT request包时，如果此时权限不足，ATT peripheral 端应该回复ATT_ERROR_RSP，但由于底层逻辑错误，会导致 ATT_ERROR_RSP 无法正常发出，ATT流程异常。
       - 修复效果：可正常回复 ATT_ERROR_RSP。
       - 更新建议：自行评估。
 
