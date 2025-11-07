@@ -1,0 +1,15 @@
+**************************************************************************
+                                                                        
+                       Telink SDK Patch Guide                              
+                                                                            
+                                                                        
+**************************************************************************
+
+1. 0001_20251107
+	replace file "b80_ble_sdk/common/sdk_version.h" with "patch_0001_20251107/common/sdk_version.h",
+	replace file "b80_ble_sdk/drivers/lib/include/pm.h" with "patch_0001_20251107/drivers/lib/include/pm.h",
+	replace file "b80_ble_sdk/drivers/flash.c" with "patch_0001_20251107/drivers/flash.c",
+	replace file "b80_ble_sdk/drivers/flash.h" with "patch_0001_20251107/drivers/flash.h",
+	replace file "b80_ble_sdk/proj_lib/liblt_8208.a" with "patch_0001_20251107/proj_lib/liblt_8208.a",
+	replace file "b80_ble_sdk/proj_lib/liblt_8208B.a" with "patch_0001_20251107/proj_lib/liblt_8208B.a".
+	
