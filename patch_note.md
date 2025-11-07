@@ -17,8 +17,8 @@
       - After Fix: when receive ATT_OP_FIND_INFO_REQ that start handle is zero or start handle exceeds to end handle, the ATT server will send ATT_ERROR_RSP.
       - Update Recommendation: Evaluate if needed.
 
-    - Fix the permission judgment error during the ATT service process.
-      - Detailed Description: Before completing the pairing process, if the permission of a specific ATT service requires encryption or authentication, ATT_ERROR_RSP will not be responded normally.
+    - Fix the issue where ATT_ERROR_RSP is not responded normally due to incorrect permission judgment during the ATT service process.
+      - Detailed Description: When the ATT Central sends an ATT request packet to the ATT peripheral, if there is insufficient permission at this time, the ATT peripheral should respond with an ATT_ERROR_RSP. However, due to an underlying logic error, the ATT_ERROR_RSP fails to be sent normally, resulting in an abnormality in the ATT process.
       - After Fix: ATT_ERROR_RSP can be responded normally.
       - Update Recommendation: Evaluate if needed.
 
@@ -31,7 +31,7 @@
 
 * **USB**
   - For B80/B80B
-    - Fix the issue where USB fails to detect the PC's (Personal Computer) sleep state.
+    - Fix the issue where USB fails to detect the PC's sleep state.
       - Detailed Description: When PM is enabled and the BLE is in the connection state, the USB will fail to detect the PC's sleep state if the PC enters sleep mode.
       - After Fix: The USB will detect the PC's sleep state if the PC enters sleep mode.
       - Update Recommendation: Evaluate if needed.
@@ -62,8 +62,8 @@
       - 修复效果：当接收到“ATT_OP_FIND_INFO_REQ”且起始句柄为零或起始句柄超出结束句柄范围时，ATT 服务器将发送“ATT_ERROR_RSP”。
       - 更新建议：自行评估。
 
-    - 修复 ATT 服务过程中的权限判断错误。
-      - 详细描述：在完成配对流程之前，若某特定 ATT 服务的权限需要加密或认证，未正常回复 ATT_ERROR_RSP。
+    - 修复 ATT 服务过程中的权限判断错误时未正常回复 ATT_ERROR_RSP。
+      - 详细描述：当ATT Central端对ATT peripheral 端发送ATT request包时，如果此时权限不足，ATT peripheral 端应该回复ATT_ERROR_RSP，但由于底层逻辑错误，会导致ATT_ERROR_RSP无法正常发出，ATT流程异常。
       - 修复效果：可正常回复 ATT_ERROR_RSP。
       - 更新建议：自行评估。
 
@@ -76,7 +76,7 @@
 
 * **USB**
   - For B80/B80B
-    - 修复 USB 无法检测 PC（个人电脑）睡眠状态的问题。
+    - 修复 USB 无法检测 PC 睡眠状态的问题。
       - 详细描述：当开启 PM 且 BLE 处于连接状态时，若 PC 进入睡眠模式，USB 将无法检测到 PC 的睡眠状态。
       - 修复效果：当 PC 进入睡眠模式时，USB 将能检测到 PC 的睡眠状态。
       - 更新建议：自行评估。
