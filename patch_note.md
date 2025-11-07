@@ -7,14 +7,14 @@
   - For B80/B80B
     - Fix the issue where pmParam.wakeup_src was not updated after the suspend was wakeuped.
       - Detailed Description: When the MCU is in the suspend state, the pmParam.wakeup_src is not updated after the MCU is wakeuped.
-      - After Fix: The pmParam.wakeup_src is updated after the MCU is wakeuped from suspend state.
+      - After Fix: After the MCU wakes up from the suspend state, the pmParam.wakeup_src can correctly update the wake-up source information.
       - Update Recommendation: Evaluate if needed.
 
 * **PLL**
   - For B80/B80B
     - The criteria for determining the stability of the PLL have become more stringent.
     - Detailed Description: Previously, the criteria for determining the stability of the PLL was considered passed if detected once.
-    - After Fix: The criteria for determining the stability of the PLL is only considered passed if it is detected three times consecutively.
+    - After Fix: The criteria for determining the stability of the PLL is only considered passed if it is detected three times consecutively (to improve reliability).
     - Update Recommendation: Recommended update.
 
 * **Flash**
@@ -62,14 +62,14 @@
   - For B80/B80B
     - 修复pmParam.wakeup_src在suspend被唤醒后未被更新的问题。
       - 详细描述：MCU处于suspend状态时，pmParam.wakeup_src未在MCU被唤醒后更新。
-      - 修复效果：MCU从suspend状态唤醒后，pmParam.wakeup_src将被更新。
+      - 修复效果：MCU从suspend状态唤醒后，pmParam.wakeup_src能正确更新唤醒源信息。
       - 更新建议：自行评估。
 
 * **PLL**
   - For B80/B80B
     - 将PLL稳定性判断的标准变得更严格。
       - 详细描述：之前，判断PLL稳定性的标准是只要检测到一次就认为通过了。
-      - 修复效果：判断PLL稳定性的标准仅在连续检测到三次时才认为通过了。
+      - 修复效果：判断PLL稳定性的标准仅在连续检测到三次时才认为通过了（提高可靠性）。
       - 更新建议：建议更新。
 
 * **Flash**
