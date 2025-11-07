@@ -10,6 +10,20 @@
       - After Fix: The pmParam.wakeup_src is updated after the MCU is wakeuped from suspend state.
       - Update Recommendation: Evaluate if needed.
 
+* **PLL**
+  - For B80/B80B
+    - The criteria for determining the stability of the PLL have become more stringent.
+    - Detailed Description: Previously, the criteria for determining the stability of the PLL was considered passed if detected once.
+    - After Fix: The criteria for determining the stability of the PLL is only considered passed if it is detected three times consecutively.
+    - Update Recommendation: Recommended update.
+
+* **Flash**
+  - For B80/B80B
+    - Fix data access error in API flash_page_program when passed in a const buffer pointer.
+      - Detailed Description: Buffer pointer passed in should be a sram address, otherwise a data access error will occurred in spi transfer stage, because xip function was disabled during spi flash access.
+      - After Fix: A sram moving operation was added if the buffer pointer passed in is flash address, and the stack cost was defined by STACK_SIZE_FOR_FLASH_DATA. Once the passed buffer length is larger than STACK_SIZE_FOR_FLASH_DATA, the program stalled for user debug.
+      - Update Recommendation: Evaluate if needed.
+
 * **ATT**
   - For B80/B80B
     - Fix handling of invalid ATT_FIND_INFORMATION_REQ parameter. When the peripheral device receives ATT_FIND_INFORMATION_REQ that the start handle is zero or the start handle exceeds the end handle, the ATT server needs to send ATT_ERROR_RSP, rather than sending an invalid ATT_FIND_INFORMATION_RSP packet.
@@ -39,10 +53,6 @@
 ### BREAKING CHANGES
 * **PLL**
    - (B80/B80B) Customers cannot use the bit that uses the DEEP_ANA_REG0[bit2] (0x3a[2]) flag to indicate whether a restart caused by a PLL exception occurred.
-   - (B80/B80B) The criteria for determining the stability of the PLL have become more stringent. Previously, it was considered passed if detected once; now, it is only considered passed if it is detected three times consecutively.
-
-* **flash** 
-   - (B80/B80B) Fix data access error in flash write API when passed in a const buffer pointer.
 
 ### Features
 * N/A.
@@ -55,11 +65,25 @@
       - 修复效果：MCU从suspend状态唤醒后，pmParam.wakeup_src将被更新。
       - 更新建议：自行评估。
 
+* **PLL**
+  - For B80/B80B
+    - 将PLL稳定性判断的标准变得更严格。
+      - 详细描述：之前，判断PLL稳定性的标准是只要检测到一次就认为通过了。
+      - 修复效果：判断PLL稳定性的标准仅在连续检测到三次时才认为通过了。
+      - 更新建议：建议更新。
+
+* **Flash**
+  - For B80/B80B
+    - 修复API flash_page_program在传入const buffer指针时数据访问错误的问题。
+      - 详细描述：传入的buffer指针应该为sram地址，否则在spi传输阶段会出现数据访问错误，因为spi flash访问时xip功能被禁用。
+      - 修复效果：如果传入的buffer指针为flash地址，则添加了一个sram移动操作，并定义了STACK_SIZE_FOR_FLASH_DATA的栈成本。一旦传入的buffer长度大于STACK_SIZE_FOR_FLASH_DATA，程序将被用户调试挂起。
+      - 更新建议：自行评估。
+
 * **ATT**
   - For B80/B80B
     - 修复对无效 ATT_FIND_INFORMATION_REQ 请求参数的处理，当peripheral设备接收到的 ATT_FIND_INFORMATION_REQ 的开始句柄为零或开始句柄超过结束句柄时，应当回复 ATT_ERROR_RSP，而不是发送一个无效的ATT_FIND_INFORMATION_RSP 报文。
       - 详细描述：当接收到 ATT_FIND_INFORMATION_REQ 且起始句柄为零或起始句柄超出结束句柄范围时，ATT 服务器将发送一个opcode错误的数据包。
-      - 修复效果：当接收到 ATT_FIND_INFORMATION_REQ 且起始句柄为零或起始句柄超出结束句柄范围时，ATT 服务器将发送“ATT_ERROR_RSP”。
+      - 修复效果：当接收到 ATT_FIND_INFORMATION_REQ 且起始句柄为零或起始句柄超出结束句柄范围时，ATT 服务器将发送 ATT_ERROR_RSP。
       - 更新建议：自行评估。
 
     - 修复 ATT 服务过程中的权限判断错误时未正常回复 ATT_ERROR_RSP。
@@ -84,7 +108,4 @@
 ### BREAKING CHANGES
 * **PLL**
    - （B80/B80B）占用DEEP_ANA_REG0[bit2]（0x3a[2]）标志是否发生过PLL异常导致的重启，客户不能使用这个bit。
-   - （B80/B80B）判断PLL稳定的标志位的标准更加严格，以前检测到一次就通过，改为连续三次检测到才算通过。
 
-* **flash** 
-   - （B80/B80B）解决了写flash API在传入常量buffer指针时的数据访问出错的问题。
