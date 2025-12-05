@@ -1,0 +1,24 @@
+**************************************************************************
+                                                                        
+                       Telink SDK Patch Guide                              
+                                                                            
+                                                                        
+**************************************************************************
+
+1. 0001_20251205
+	replace file "b80_ble_sdk/common/sdk_version.h" with "patch_0001_20251205/common/sdk_version.h",
+	replace file "b80_ble_sdk/drivers/driver_ext/driver_ext.h" with "patch_0001_20251205/drivers/driver_ext/driver_ext.h",
+	replace file "b80_ble_sdk/drivers/driver_ext/rf_pa.c" with "patch_0001_20251205/drivers/driver_ext/rf_pa.c",
+	replace file "b80_ble_sdk/drivers/driver_ext/rf_pa.h" with "patch_0001_20251205/drivers/driver_ext/rf_pa.h",
+	delete file   "b80_ble_sdk/drivers/driver_ext/rf__private_pa.c "
+	delete file   "b80_ble_sdk/drivers/driver_ext/rf__private_pa.h "
+	replace file "b80_ble_sdk/drivers/lib/include/pm.h" with "patch_0001_20251205/drivers/lib/include/pm.h",
+	replace file "b80_ble_sdk/drivers/flash.c" with "patch_0001_20251205/drivers/flash.c",
+	replace file "b80_ble_sdk/drivers/flash.h" with "patch_0001_20251205/drivers/flash.h",
+	replace file "b80_ble_sdk/proj_lib/liblt_8208.a" with "patch_0001_20251205/proj_lib/liblt_8208.a",
+	replace file "b80_ble_sdk/proj_lib/liblt_8208B.a" with "patch_0001_20251205/proj_lib/liblt_8208B.a".
+	replace file "b80_ble_sdk/project/tlsr_tc32/B80/boot.link" with "patch_0001_20251205/project/tlsr_tc32/B80/boot.link",
+	replace file "b80_ble_sdk/project/tlsr_tc32/B80B/boot.link" with "patch_0001_20251205/project/tlsr_tc32/B80B/boot.link",
+	replace file "b80_ble_sdk/vendor/2_4g_genfsk/app_config.h" with "patch_0001_20251205/vender/2_4g_genfsk/app_config.h".
+	replace file "b80_ble_sdk/vendor/ble_module/app.c" with "patch_0001_20251205/vendor/ble_module/app.c".
+	replace file "b80_ble_sdk/vendor/ble_slave_2_4g/app_ui.c" with "patch_0001_20251205/vendor/ble_slave_2_4g/app_ui.c".

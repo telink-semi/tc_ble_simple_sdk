@@ -352,75 +352,77 @@ fossid:
     - "./b80_ble_sdk"
     - "./README.md"
     - "./doc"
+    - "./tc_ble_simple_v3.4.2.2_Patch"
+    - "./patch_mote.md"
   when: manual
 
 release_sdk_P5_B80:
   <<: *release_sdk_template
   variables:
-    PACK_NAME: "tc_ble_simple_sdk_B80_V3.4.2.2_P5"
+    PACK_NAME: "tc_ble_simple_sdk_B80_V3.4.2.2_patch_0001_P5"
 
 release_sdk_P10_B80:
   <<: *release_sdk_template
   variables:
-    PACK_NAME: "tc_ble_simple_sdk_B80_V3.4.2.2_P10"
+    PACK_NAME: "tc_ble_simple_sdk_B80_V3.4.2.2_patch_0001_P10"
 
 release_sdk_P12_B80:
   <<: *release_sdk_template
   variables:
-    PACK_NAME: "tc_ble_simple_sdk_B80_V3.4.2.2_P12"
+    PACK_NAME: "tc_ble_simple_sdk_B80_V3.4.2.2_patch_0001_P12"
 
 release_sdk_custom_made_P0_B80:
   <<: *release_sdk_template
   variables:
-    PACK_NAME: "tc_ble_simple_sdk_B80_V3.4.2.2_custom_made_P0"
+    PACK_NAME: "tc_ble_simple_sdk_B80_V3.4.2.2_patch_0001_custom_made_P0"
 
 release_sdk_custom_made_P5_B80:
   <<: *release_sdk_template
   variables:
-    PACK_NAME: "tc_ble_simple_sdk_B80_V3.4.2.2_custom_made_P5"
+    PACK_NAME: "tc_ble_simple_sdk_B80_V3.4.2.2_patch_0001_custom_made_P5"
 
 release_sdk_custom_made_P10_B80:
   <<: *release_sdk_template
   variables:
-    PACK_NAME: "tc_ble_simple_sdk_B80_V3.4.2.2_custom_made_P10"
+    PACK_NAME: "tc_ble_simple_sdk_B80_V3.4.2.2_patch_0001_custom_made_P10"
 
 release_sdk_custom_made_P12_B80:
   <<: *release_sdk_template
   variables:
-    PACK_NAME: "tc_ble_simple_sdk_B80_V3.4.2.2_custom_made_P12"
+    PACK_NAME: "tc_ble_simple_sdk_B80_V3.4.2.2_patch_0001_custom_made_P12"
 
 release_sdk_P5_B80B:
   <<: *release_sdk_template
   variables:
-    PACK_NAME: "tc_ble_simple_sdk_B80B_V3.4.2.2_P5"
+    PACK_NAME: "tc_ble_simple_sdk_B80B_V3.4.2.2_patch_0001_P5"
 
 release_sdk_P10_B80B:
   <<: *release_sdk_template
   variables:
-    PACK_NAME: "tc_ble_simple_sdk_B80B_V3.4.2.2_P10"
+    PACK_NAME: "tc_ble_simple_sdk_B80B_V3.4.2.2_patch_0001_P10"
 
 release_sdk_P12_B80B:
   <<: *release_sdk_template
   variables:
-    PACK_NAME: "tc_ble_simple_sdk_B80B_V3.4.2.2_P12"
+    PACK_NAME: "tc_ble_simple_sdk_B80B_V3.4.2.2_patch_0001_P12"
 
 release_sdk_custom_made_P0_B80B:
   <<: *release_sdk_template
   variables:
-    PACK_NAME: "tc_ble_simple_sdk_B80B_V3.4.2.2_custom_made_P0"
+    PACK_NAME: "tc_ble_simple_sdk_B80B_V3.4.2.2_patch_0001_custom_made_P0"
 
 release_sdk_custom_made_P5_B80B:
   <<: *release_sdk_template
   variables:
-    PACK_NAME: "tc_ble_simple_sdk_B80B_V3.4.2.2_custom_made_P5"
+    PACK_NAME: "tc_ble_simple_sdk_B80B_V3.4.2.2_patch_0001_custom_made_P5"
 
 release_sdk_custom_made_P10_B80B:
   <<: *release_sdk_template
   variables:
-    PACK_NAME: "tc_ble_simple_sdk_B80B_V3.4.2.2_custom_made_P10"
+    PACK_NAME: "tc_ble_simple_sdk_B80B_V3.4.2.2_patch_0001_custom_made_P10"
 
 release_sdk_custom_made_P12_B80B:
   <<: *release_sdk_template
   variables:
-    PACK_NAME: "tc_ble_simple_sdk_B80B_V3.4.2.2_custom_made_P12"
+    PACK_NAME: "tc_ble_simple_sdk_B80B_V3.4.2.2_patch_0001_custom_made_P12"
 
