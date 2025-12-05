@@ -15,7 +15,7 @@ LIB_OBJ             ./project/tlsr_tc32/B80/b80_ble_sample/drivers/lib
 LIB_OBJ             ./project/tlsr_tc32/B80/b80_ble_sample/drivers/driver_ext/driver_lib
 LIB_OBJ             ./project/tlsr_tc32/B80/b80_ble_sample/stack
 LIB_OBJ             ./project/tlsr_tc32/B80/b80_ble_sample/algorithm
-REPLACED_LIB_PATH   ./tc_ble_simple_v3.4.2.2_Patch/patch_0001_20251113/proj_lib/liblt_8208.a
+REPLACED_LIB_PATH   ./tc_ble_simple_v3.4.2.2_Patch/patch_0001_20251205/proj_lib/liblt_8208.a
 [release_sdk_P5_B80_end]
 
 [release_sdk_P10_B80]
@@ -35,7 +35,7 @@ LIB_OBJ             ./project/tlsr_tc32/B80/b80_ble_sample/drivers/lib
 LIB_OBJ             ./project/tlsr_tc32/B80/b80_ble_sample/drivers/driver_ext/driver_lib
 LIB_OBJ             ./project/tlsr_tc32/B80/b80_ble_sample/stack
 LIB_OBJ             ./project/tlsr_tc32/B80/b80_ble_sample/algorithm
-REPLACED_LIB_PATH   ./tc_ble_simple_v3.4.2.2_Patch/patch_0001_20251113/proj_lib/liblt_8208.a
+REPLACED_LIB_PATH   ./tc_ble_simple_v3.4.2.2_Patch/patch_0001_20251205/proj_lib/liblt_8208.a
 
 [release_sdk_P10_B80_end]
 
@@ -56,7 +56,7 @@ LIB_OBJ             ./project/tlsr_tc32/B80/b80_ble_sample/drivers/lib
 LIB_OBJ             ./project/tlsr_tc32/B80/b80_ble_sample/drivers/driver_ext/driver_lib
 LIB_OBJ             ./project/tlsr_tc32/B80/b80_ble_sample/stack
 LIB_OBJ             ./project/tlsr_tc32/B80/b80_ble_sample/algorithm
-REPLACED_LIB_PATH   ./tc_ble_simple_v3.4.2.2_Patch/patch_0001_20251113/proj_lib/liblt_8208.a
+REPLACED_LIB_PATH   ./tc_ble_simple_v3.4.2.2_Patch/patch_0001_20251205/proj_lib/liblt_8208.a
 
 [release_sdk_P12_B80_end]
 
@@ -78,7 +78,7 @@ LIB_OBJ             ./project/tlsr_tc32/B80/b80_ble_sample/drivers/lib
 LIB_OBJ             ./project/tlsr_tc32/B80/b80_ble_sample/drivers/driver_ext/driver_lib
 LIB_OBJ             ./project/tlsr_tc32/B80/b80_ble_sample/stack
 LIB_OBJ             ./project/tlsr_tc32/B80/b80_ble_sample/algorithm
-REPLACED_LIB_PATH   ./tc_ble_simple_v3.4.2.2_Patch/patch_0001_20251113/proj_lib/liblt_8208.a
+REPLACED_LIB_PATH   ./tc_ble_simple_v3.4.2.2_Patch/patch_0001_20251205/proj_lib/liblt_8208.a
 
 [release_sdk_custom_made_P0_B80_end]
 
@@ -100,7 +100,7 @@ LIB_OBJ             ./project/tlsr_tc32/B80/b80_ble_sample/drivers/lib
 LIB_OBJ             ./project/tlsr_tc32/B80/b80_ble_sample/drivers/driver_ext/driver_lib
 LIB_OBJ             ./project/tlsr_tc32/B80/b80_ble_sample/stack
 LIB_OBJ             ./project/tlsr_tc32/B80/b80_ble_sample/algorithm
-REPLACED_LIB_PATH   ./tc_ble_simple_v3.4.2.2_Patch/patch_0001_20251113/proj_lib/liblt_8208.a
+REPLACED_LIB_PATH   ./tc_ble_simple_v3.4.2.2_Patch/patch_0001_20251205/proj_lib/liblt_8208.a
 
 [release_sdk_custom_made_P5_B80_end]
 
@@ -122,7 +122,7 @@ LIB_OBJ             ./project/tlsr_tc32/B80/b80_ble_sample/drivers/lib
 LIB_OBJ             ./project/tlsr_tc32/B80/b80_ble_sample/drivers/driver_ext/driver_lib
 LIB_OBJ             ./project/tlsr_tc32/B80/b80_ble_sample/stack
 LIB_OBJ             ./project/tlsr_tc32/B80/b80_ble_sample/algorithm
-REPLACED_LIB_PATH   ./tc_ble_simple_v3.4.2.2_Patch/patch_0001_20251113/proj_lib/liblt_8208.a
+REPLACED_LIB_PATH   ./tc_ble_simple_v3.4.2.2_Patch/patch_0001_20251205/proj_lib/liblt_8208.a
 
 [release_sdk_custom_made_P10_B80_end]
 
@@ -144,7 +144,7 @@ LIB_OBJ             ./project/tlsr_tc32/B80/b80_ble_sample/drivers/lib
 LIB_OBJ             ./project/tlsr_tc32/B80/b80_ble_sample/drivers/driver_ext/driver_lib
 LIB_OBJ             ./project/tlsr_tc32/B80/b80_ble_sample/stack
 LIB_OBJ             ./project/tlsr_tc32/B80/b80_ble_sample/algorithm
-REPLACED_LIB_PATH   ./tc_ble_simple_v3.4.2.2_Patch/patch_0001_20251113/proj_lib/liblt_8208.a
+REPLACED_LIB_PATH   ./tc_ble_simple_v3.4.2.2_Patch/patch_0001_20251205/proj_lib/liblt_8208.a
 
 [release_sdk_custom_made_P12_B80_end]
 
@@ -167,7 +167,7 @@ LIB_OBJ             ./project/tlsr_tc32/B80B/b80B_ble_sample/drivers/lib
 LIB_OBJ             ./project/tlsr_tc32/B80B/b80B_ble_sample/drivers/driver_ext/driver_lib
 LIB_OBJ             ./project/tlsr_tc32/B80B/b80B_ble_sample/stack
 LIB_OBJ             ./project/tlsr_tc32/B80B/b80B_ble_sample/algorithm
-REPLACED_LIB_PATH   ./tc_ble_simple_v3.4.2.2_Patch/patch_0001_20251113/proj_lib/liblt_8208B.a
+REPLACED_LIB_PATH   ./tc_ble_simple_v3.4.2.2_Patch/patch_0001_20251205/proj_lib/liblt_8208B.a
 
 
 [release_sdk_P5_B80B_end]
@@ -189,7 +189,7 @@ LIB_OBJ             ./project/tlsr_tc32/B80B/b80B_ble_sample/drivers/lib
 LIB_OBJ             ./project/tlsr_tc32/B80B/b80B_ble_sample/drivers/driver_ext/driver_lib
 LIB_OBJ             ./project/tlsr_tc32/B80B/b80B_ble_sample/stack
 LIB_OBJ             ./project/tlsr_tc32/B80B/b80B_ble_sample/algorithm
-REPLACED_LIB_PATH   ./tc_ble_simple_v3.4.2.2_Patch/patch_0001_20251113/proj_lib/liblt_8208B.a
+REPLACED_LIB_PATH   ./tc_ble_simple_v3.4.2.2_Patch/patch_0001_20251205/proj_lib/liblt_8208B.a
 
 [release_sdk_P10_B80B_end]
 
@@ -210,7 +210,7 @@ LIB_OBJ             ./project/tlsr_tc32/B80B/b80B_ble_sample/drivers/lib
 LIB_OBJ             ./project/tlsr_tc32/B80B/b80B_ble_sample/drivers/driver_ext/driver_lib
 LIB_OBJ             ./project/tlsr_tc32/B80B/b80B_ble_sample/stack
 LIB_OBJ             ./project/tlsr_tc32/B80B/b80B_ble_sample/algorithm
-REPLACED_LIB_PATH   ./tc_ble_simple_v3.4.2.2_Patch/patch_0001_20251113/proj_lib/liblt_8208B.a
+REPLACED_LIB_PATH   ./tc_ble_simple_v3.4.2.2_Patch/patch_0001_20251205/proj_lib/liblt_8208B.a
 
 [release_sdk_P12_B80B_end]
 
@@ -231,7 +231,7 @@ LIB_OBJ             ./project/tlsr_tc32/B80B/b80B_ble_sample/drivers/lib
 LIB_OBJ             ./project/tlsr_tc32/B80B/b80B_ble_sample/drivers/driver_ext/driver_lib
 LIB_OBJ             ./project/tlsr_tc32/B80B/b80B_ble_sample/stack
 LIB_OBJ             ./project/tlsr_tc32/B80B/b80B_ble_sample/algorithm
-REPLACED_LIB_PATH   ./tc_ble_simple_v3.4.2.2_Patch/patch_0001_20251113/proj_lib/liblt_8208B.a
+REPLACED_LIB_PATH   ./tc_ble_simple_v3.4.2.2_Patch/patch_0001_20251205/proj_lib/liblt_8208B.a
 
 [release_sdk_custom_made_P0_B80B_end]
 
@@ -253,7 +253,7 @@ LIB_OBJ             ./project/tlsr_tc32/B80B/b80B_ble_sample/drivers/lib
 LIB_OBJ             ./project/tlsr_tc32/B80B/b80B_ble_sample/drivers/driver_ext/driver_lib
 LIB_OBJ             ./project/tlsr_tc32/B80B/b80B_ble_sample/stack
 LIB_OBJ             ./project/tlsr_tc32/B80B/b80B_ble_sample/algorithm
-REPLACED_LIB_PATH   ./tc_ble_simple_v3.4.2.2_Patch/patch_0001_20251113/proj_lib/liblt_8208B.a
+REPLACED_LIB_PATH   ./tc_ble_simple_v3.4.2.2_Patch/patch_0001_20251205/proj_lib/liblt_8208B.a
 
 [release_sdk_custom_made_P5_B80B_end]
 
@@ -275,7 +275,7 @@ LIB_OBJ             ./project/tlsr_tc32/B80B/b80B_ble_sample/drivers/lib
 LIB_OBJ             ./project/tlsr_tc32/B80B/b80B_ble_sample/drivers/driver_ext/driver_lib
 LIB_OBJ             ./project/tlsr_tc32/B80B/b80B_ble_sample/stack
 LIB_OBJ             ./project/tlsr_tc32/B80B/b80B_ble_sample/algorithm
-REPLACED_LIB_PATH   ./tc_ble_simple_v3.4.2.2_Patch/patch_0001_20251113/proj_lib/liblt_8208B.a
+REPLACED_LIB_PATH   ./tc_ble_simple_v3.4.2.2_Patch/patch_0001_20251205/proj_lib/liblt_8208B.a
 
 [release_sdk_custom_made_P10_B80B_end]
 
@@ -297,6 +297,6 @@ LIB_OBJ             ./project/tlsr_tc32/B80B/b80B_ble_sample/drivers/lib
 LIB_OBJ             ./project/tlsr_tc32/B80B/b80B_ble_sample/drivers/driver_ext/driver_lib
 LIB_OBJ             ./project/tlsr_tc32/B80B/b80B_ble_sample/stack
 LIB_OBJ             ./project/tlsr_tc32/B80B/b80B_ble_sample/algorithm
-REPLACED_LIB_PATH   ./tc_ble_simple_v3.4.2.2_Patch/patch_0001_20251113/proj_lib/liblt_8208B.a
+REPLACED_LIB_PATH   ./tc_ble_simple_v3.4.2.2_Patch/patch_0001_20251205/proj_lib/liblt_8208B.a
 
 [release_sdk_custom_made_P12_B80B_end]
